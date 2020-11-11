@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">FatManCosmetic</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="happy_women_s_day">Happy Women\'s Day</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    //Slogan
+    <string name="powered_by">Powered By Fat Mat Group</string>
+    <string name="todo">TODO</string>
+</resources>

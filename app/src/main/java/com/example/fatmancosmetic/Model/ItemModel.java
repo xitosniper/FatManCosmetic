@@ -1,0 +1,93 @@
+package com.example.fatmancosmetic.Model;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+import androidx.annotation.Nullable;
+
+import com.example.fatmancosmetic.DBManager.DBManager;
+import com.example.fatmancosmetic.Info.BrandInfo;
+import com.example.fatmancosmetic.Info.ItemInfo;
+
+import java.util.ArrayList;
+
+public class ItemModel extends DBManager {
+    //Items table 8 columns
+    private static final String TABLE_ITEM_NAME = "Items";
+    private static final String ID = "ID";
+    private static final String ITEM_ID = "itemID";
+    private static final String ITEM_BRAND_ID = "brandID";
+    private static final String ITEM_CATEGORY_ID = "categoryID";
+    private static final String ITEM_NAME = "Name";
+    private static final String ITEM_IMAGE = "Image";
+    private static final String ITEM_PRICE = "Price";
+    private static final String ITEM_DESCRIPTION = "Description";
+    private static final String ITEM_STATUS = "Status";
+
+    public ItemModel(@Nullable Context context) {
+        super(context);
+    }
+
+    public ArrayList<ItemInfo> getAllItem(){
+        ArrayList<ItemInfo> listItem = new ArrayList<>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                ItemInfo itemInfo = new ItemInfo();
+                itemInfo.setID(cursor.getInt(0));
+                itemInfo.setItemID(cursor.getString(1));
+                itemInfo.setBrandID(cursor.getString(2));
+                itemInfo.setCategoryID(cursor.getString(3));
+                itemInfo.setName(cursor.getString(4));
+                itemInfo.setImage(cursor.getBlob(5));
+                itemInfo.setPrice(cursor.getInt(6));
+                itemInfo.setDescription(cursor.getString(7));
+                itemInfo.setStatus(cursor.getInt(8));
+                listItem.add(itemInfo);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return listItem;
+    }
+    public void addItem(ItemInfo itemInfo){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ITEM_ID, itemInfo.getItemID());
+        contentValues.put(ITEM_BRAND_ID, itemInfo.getBrandID());
+        contentValues.put(ITEM_CATEGORY_ID, itemInfo.getCategoryID());
+        contentValues.put(ITEM_NAME, itemInfo.getName());
+        contentValues.put(ITEM_IMAGE, itemInfo.getImage());
+        contentValues.put(ITEM_PRICE, itemInfo.getPrice());
+        contentValues.put(ITEM_DESCRIPTION, itemInfo.getDescription());
+        contentValues.put(ITEM_STATUS, itemInfo.getStatus());
+
+        db.insert(TABLE_ITEM_NAME, null, contentValues);
+        db.close();
+    }
+    public int updateItem(ItemInfo itemInfo){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ITEM_ID, itemInfo.getItemID());
+        contentValues.put(ITEM_BRAND_ID, itemInfo.getBrandID());
+        contentValues.put(ITEM_CATEGORY_ID, itemInfo.getCategoryID());
+        contentValues.put(ITEM_NAME, itemInfo.getName());
+        contentValues.put(ITEM_IMAGE, itemInfo.getImage());
+        contentValues.put(ITEM_PRICE, itemInfo.getPrice());
+        contentValues.put(ITEM_DESCRIPTION, itemInfo.getDescription());
+        contentValues.put(ITEM_STATUS, itemInfo.getStatus());
+        return db.update(TABLE_ITEM_NAME,contentValues,ID +"=?",new String[] { String.valueOf(itemInfo.getID())});
+    }
+    public int deleteBrand(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_ITEM_NAME,ID+"=?", new String[]{String.valueOf(String.valueOf(id))});
+    }
+
+}

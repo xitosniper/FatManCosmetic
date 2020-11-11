@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/control_nav"
+    app:startDestination="@id/home">
+    <fragment
+        android:id="@+id/home"
+        android:name="com.example.fatmancosmetic.Controller.Home"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/search"
+        android:name="com.example.fatmancosmetic.Controller.Search"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/shoppingCart"
+        android:name="com.example.fatmancosmetic.Controller.ShoppingCart"
+        android:label="fragment_shopping_cart"
+        tools:layout="@layout/fragment_shopping_cart" />
+    <fragment
+        android:id="@+id/account"
+        android:name="com.example.fatmancosmetic.Controller.Account"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account" />
+    <fragment
+        android:id="@+id/introdure"
+        android:name="com.example.fatmancosmetic.Controller.Introdure"
+        android:label="fragment_introdure"
+        tools:layout="@layout/fragment_introdure" />
+</navigation>

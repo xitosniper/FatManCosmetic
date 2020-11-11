@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/introduce"
+            android:title="GIỚI THIỆU"></item>
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item android:title="FATMAN BEAUTY">
+            <menu>
+                <group android:checkableBehavior="single">
+                    <item
+                        android:id="@+id/facial_skin_care"
+                        android:title="Chăm Sóc Da Mặt"></item>
+                    <item
+                        android:id="@+id/body_care"
+                        android:title="Chăm Sóc Cơ Thể"></item>
+                    <item
+                        android:id="@+id/make_up"
+                        android:title="Trang Điểm"></item>
+                </group>
+            </menu>
+        </item>
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/new_items"
+            android:title="SẢN PHẨM MỚI"></item>
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/sale_off"
+            android:title="SẢN PHẨM KHUYẾN MÃI"></item>
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/transport"
+            android:title="VẬN CHUYỂN"></item>
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/return_policy"
+            android:title="CHÍNH SÁCH ĐỔI TRẢ"></item>
+    </group>
+</menu>
