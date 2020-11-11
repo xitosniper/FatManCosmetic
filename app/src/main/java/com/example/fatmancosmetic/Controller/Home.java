@@ -181,15 +181,15 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         flashsafe_recyclerView.setLayoutManager(new LinearLayoutManager(this.mainActivity, LinearLayoutManager.HORIZONTAL, false));
         ArrayList<FlashSaleInfo> flashSaleLocation = new ArrayList<>();
         ItemModel itemModel = new ItemModel(this.mainActivity);
-        ArrayList<ItemInfo> listItem = new ArrayList<>();
-        listItem = itemModel.getAllItem();
-        for (ItemInfo itemInfo: listItem) {
-            flashSaleLocation.add(new FlashSaleInfo(itemInfo.getImage(), itemInfo.getName(), itemInfo.getPrice()));
-        }
-//        flashSaleLocation.add(new FlashSaleInfo(R.drawable.phan_nuoc, "Phấn Nước Che Phủ Chống Nắng M ...", "139,000đ"));
-//        flashSaleLocation.add(new FlashSaleInfo(R.drawable.son_li, "Son Kem Lì Merzy Velvet Tint Season 3", "129,000đ"));
-//        flashSaleLocation.add(new FlashSaleInfo(R.drawable.kem_lot_duong, "Kem Lót Dưỡng Ẩm Nâng Tông ...", "159,000đ"));
-//        flashSaleLocation.add(new FlashSaleInfo(R.drawable.but_ke_soi_mai, "Bút Kẻ Sợi Mày Vacosi ...", "159,000đ"));
+//        ArrayList<ItemInfo> listItem = new ArrayList<>();
+//        listItem = itemModel.getAllItem();
+//        for (ItemInfo itemInfo: listItem) {
+//            flashSaleLocation.add(new FlashSaleInfo(itemInfo.getImage(), itemInfo.getName(), itemInfo.getPrice()));
+//        }
+        flashSaleLocation.add(new FlashSaleInfo(R.drawable.phan_nuoc, "Phấn Nước Che Phủ Chống Nắng M ...", "139,000đ"));
+        flashSaleLocation.add(new FlashSaleInfo(R.drawable.son_li, "Son Kem Lì Merzy Velvet Tint Season 3", "129,000đ"));
+        flashSaleLocation.add(new FlashSaleInfo(R.drawable.kem_lot_duong, "Kem Lót Dưỡng Ẩm Nâng Tông ...", "159,000đ"));
+        flashSaleLocation.add(new FlashSaleInfo(R.drawable.but_ke_soi_mai, "Bút Kẻ Sợi Mày Vacosi ...", "159,000đ"));
 
         flashsafe_adapter = new FlashSafeAdapter(flashSaleLocation);
         flashsafe_recyclerView.setAdapter(flashsafe_adapter);

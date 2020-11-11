@@ -37,9 +37,7 @@ public class FlashSafeAdapter extends RecyclerView.Adapter<FlashSafeAdapter.Flas
     public void onBindViewHolder(@NonNull FlashSafeViewHolder holder, int position) {
 
         FlashSaleInfo flashSaleInfo = flashSafeLocations.get(position);
-
-        Bitmap bitmap = BitmapFactory.decodeByteArray(flashSaleInfo.getImage(),0, flashSaleInfo.getImage().length);
-        holder.imageView.setImageBitmap(bitmap);
+        holder.imageView.setImageResource(flashSaleInfo.getImage());
         holder.title.setText(flashSaleInfo.getTitle());
         holder.price.setText(flashSaleInfo.getPrice());
     }
