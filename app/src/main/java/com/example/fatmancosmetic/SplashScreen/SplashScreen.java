@@ -16,7 +16,7 @@ import com.example.fatmancosmetic.R;
 
 public class SplashScreen extends AppCompatActivity {
 
-    private static int SPLASH_SCREEN = 5000;
+    private static int SPLASH_SCREEN = 2000;
     //Variable
     Animation topAnimation, bottomAnimation;
     ImageView imageView;

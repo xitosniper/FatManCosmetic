@@ -1,24 +1,24 @@
 package com.example.fatmancosmetic.Info;
 
 public class FlashSaleInfo {
-    private byte[] image;
+    private int image;
     private String title;
     private int price;
 
     public FlashSaleInfo() {
     }
 
-    public FlashSaleInfo(byte[] image, String title, int price) {
+    public FlashSaleInfo(int image, String title, int price) {
         this.image = image;
         this.title = title;
         this.price = price;
     }
 
-    public byte[] getImage() {
+    public int getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(int image) {
         this.image = image;
     }
 

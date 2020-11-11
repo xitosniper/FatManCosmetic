@@ -1,7 +1,10 @@
 package com.example.fatmancosmetic.Controller;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +31,7 @@ import com.example.fatmancosmetic.Model.ItemModel;
 import com.example.fatmancosmetic.R;
 import com.google.android.material.navigation.NavigationView;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 /**
@@ -54,7 +59,6 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
     RecyclerView flashsafe_recyclerView, amazingFatman_recyclerView;
     RecyclerView.Adapter flashsafe_adapter, amazingFatmat_adapter;
     ImageView menuIcon;
-
     public Home() {
         // Required empty public constructor
     }
@@ -179,19 +183,32 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
     private void flashsafe_recyclerView() {
         flashsafe_recyclerView.setHasFixedSize(true);
         flashsafe_recyclerView.setLayoutManager(new LinearLayoutManager(this.mainActivity, LinearLayoutManager.HORIZONTAL, false));
-        ArrayList<FlashSaleInfo> flashSaleLocation = new ArrayList<>();
+        //ArrayList<FlashSaleInfo> flashSaleLocation = new ArrayList<>();
         ItemModel itemModel = new ItemModel(this.mainActivity);
-        ArrayList<ItemInfo> listItem = new ArrayList<>();
-        listItem = itemModel.getAllItem();
-        for (ItemInfo itemInfo: listItem) {
-            flashSaleLocation.add(new FlashSaleInfo(itemInfo.getImage(), itemInfo.getName(), itemInfo.getPrice()));
-        }
+//        ImageView imageView = new ImageView(this.mainActivity);
+//
+//        imageView.setImageDrawable(getContext().getResources().getDrawable(R.drawable.but_ke_soi_mai));
+//
+//
+//        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//        byte[] imageInByte = baos.toByteArray();
+//
+//
+        ArrayList<ItemInfo> listItems = new ArrayList<>();
+        listItems = itemModel.get4SalesItem();
+
+//        for (int i = 0; i < listItems.size(); i++) {
+//            listItems.get(i).setImage(imageInByte);
+//        }
+//        Log.e("Image Home: ",listItems.get(0).getImage()+"");
 //        flashSaleLocation.add(new FlashSaleInfo(R.drawable.phan_nuoc, "Phấn Nước Che Phủ Chống Nắng M ...", "139,000đ"));
 //        flashSaleLocation.add(new FlashSaleInfo(R.drawable.son_li, "Son Kem Lì Merzy Velvet Tint Season 3", "129,000đ"));
 //        flashSaleLocation.add(new FlashSaleInfo(R.drawable.kem_lot_duong, "Kem Lót Dưỡng Ẩm Nâng Tông ...", "159,000đ"));
 //        flashSaleLocation.add(new FlashSaleInfo(R.drawable.but_ke_soi_mai, "Bút Kẻ Sợi Mày Vacosi ...", "159,000đ"));
 
-        flashsafe_adapter = new FlashSafeAdapter(flashSaleLocation);
+        flashsafe_adapter = new FlashSafeAdapter(listItems, this.mainActivity);
         flashsafe_recyclerView.setAdapter(flashsafe_adapter);
     }
 

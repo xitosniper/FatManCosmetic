@@ -31,7 +31,7 @@ public class ItemModel extends DBManager {
     }
 
     public ArrayList<ItemInfo> getAllItem(){
-        ArrayList<ItemInfo> listItem = new ArrayList<>();
+        ArrayList<ItemInfo> listItems = new ArrayList<>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME;
 
@@ -50,13 +50,42 @@ public class ItemModel extends DBManager {
                 itemInfo.setPrice(cursor.getInt(6));
                 itemInfo.setDescription(cursor.getString(7));
                 itemInfo.setStatus(cursor.getInt(8));
-                listItem.add(itemInfo);
+                listItems.add(itemInfo);
             } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
-        return listItem;
+        return listItems;
     }
+
+    public ArrayList<ItemInfo> get4SalesItem(){
+        ArrayList<ItemInfo> listItems = new ArrayList<>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE ID < 5";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                ItemInfo itemInfo = new ItemInfo();
+                itemInfo.setID(cursor.getInt(0));
+                itemInfo.setItemID(cursor.getString(1));
+                itemInfo.setBrandID(cursor.getString(2));
+                itemInfo.setCategoryID(cursor.getString(3));
+                itemInfo.setName(cursor.getString(4));
+                itemInfo.setImage(cursor.getBlob(5));
+                itemInfo.setPrice(cursor.getInt(6));
+                itemInfo.setDescription(cursor.getString(7));
+                itemInfo.setStatus(cursor.getInt(8));
+                listItems.add(itemInfo);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return listItems;
+    }
+
     public void addItem(ItemInfo itemInfo){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
