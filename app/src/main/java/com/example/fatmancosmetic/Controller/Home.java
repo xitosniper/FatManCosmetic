@@ -12,6 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,6 +25,7 @@ import android.widget.ImageView;
 
 import com.example.fatmancosmetic.Adapter.AmazingFatManAdapter;
 import com.example.fatmancosmetic.Adapter.FlashSafeAdapter;
+import com.example.fatmancosmetic.Adapter.NewItemsAdapter;
 import com.example.fatmancosmetic.Info.AmazingFatManInfo;
 import com.example.fatmancosmetic.Info.FlashSaleInfo;
 import com.example.fatmancosmetic.Info.ItemInfo;
@@ -56,8 +58,8 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
     ConstraintLayout contentView;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-    RecyclerView flashsafe_recyclerView, amazingFatman_recyclerView;
-    RecyclerView.Adapter flashsafe_adapter, amazingFatmat_adapter;
+    RecyclerView flashsafe_recyclerView,newitems_recyclerView, amazingFatman_recyclerView;
+    RecyclerView.Adapter flashsafe_adapter, newitems_adapter, amazingFatmat_adapter;
     ImageView menuIcon;
     public Home() {
         // Required empty public constructor
@@ -101,6 +103,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         animationDrawable.start();
         //Hooks
         flashsafe_recyclerView = view.findViewById(R.id.flashsafe_recyclerView);
+        newitems_recyclerView = view.findViewById(R.id.newitems_recyclerView);
         amazingFatman_recyclerView = view.findViewById(R.id.amazing_fatman_recyclerView);
         contentView = view.findViewById(R.id.content);
 
@@ -115,6 +118,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
 
         //Recycle View Function Calls
         amazingFatman_recyclerView();
+        newitems_recyclerView();
         flashsafe_recyclerView();
 
 
@@ -210,6 +214,19 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
 
         flashsafe_adapter = new FlashSafeAdapter(listItems, this.mainActivity);
         flashsafe_recyclerView.setAdapter(flashsafe_adapter);
+    }
+
+    private void newitems_recyclerView() {
+        newitems_recyclerView.setHasFixedSize(true);
+        //newitems_recyclerView.setLayoutManager(new LinearLayoutManager(this.mainActivity, LinearLayoutManager.HORIZONTAL, false));
+        newitems_recyclerView.setLayoutManager(new GridLayoutManager(this.mainActivity, 2, GridLayoutManager.VERTICAL,false));
+        ItemModel itemModel = new ItemModel(this.mainActivity);
+
+        ArrayList<ItemInfo> listItems = new ArrayList<>();
+        listItems = itemModel.get4SalesItem();
+
+        newitems_adapter = new NewItemsAdapter(listItems, this.mainActivity);
+        newitems_recyclerView.setAdapter(newitems_adapter);
     }
 
     private void amazingFatman_recyclerView() {
