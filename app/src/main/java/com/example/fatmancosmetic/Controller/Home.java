@@ -1,10 +1,7 @@
 package com.example.fatmancosmetic.Controller;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,11 +9,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,13 +23,11 @@ import android.widget.ImageView;
 import com.example.fatmancosmetic.Adapter.AmazingFatManAdapter;
 import com.example.fatmancosmetic.Adapter.FlashSafeAdapter;
 import com.example.fatmancosmetic.Info.AmazingFatManInfo;
-import com.example.fatmancosmetic.Info.FlashSaleInfo;
 import com.example.fatmancosmetic.Info.ItemInfo;
 import com.example.fatmancosmetic.Model.ItemModel;
 import com.example.fatmancosmetic.R;
 import com.google.android.material.navigation.NavigationView;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 /**
@@ -59,7 +54,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
     NavigationView navigationView;
     RecyclerView flashsafe_recyclerView, amazingFatman_recyclerView, bestsale_recyclerView, newitems_recyclerView;
     RecyclerView.Adapter flashsafe_adapter, amazingFatmat_adapter, bestsale_adapter, newitems_adapter;
-    ImageView menuIcon;
+    ImageView menuIcon, skinCareBtn;
     public Home() {
         // Required empty public constructor
     }
@@ -104,8 +99,10 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         flashsafe_recyclerView = view.findViewById(R.id.flashsafe_recyclerView);
         amazingFatman_recyclerView = view.findViewById(R.id.amazing_fatman_recyclerView);
         newitems_recyclerView = view.findViewById(R.id.newitems_recyclerView);
+
         bestsale_recyclerView = view.findViewById(R.id.bestsale_fatman_recyclerView);
         contentView = view.findViewById(R.id.content);
+        skinCareBtn = view.findViewById(R.id.nav_all_skincare);
 
         //Menu Hooks
         drawerLayout = view.findViewById(R.id.draw_layout);
@@ -118,9 +115,22 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
 
         //Recycle View Function Calls
         amazingFatman_recyclerView();
+
         newitems_recyclerView();
         flashsafe_recyclerView();
         bestsale_recyclerView();
+
+
+        //Set Handel
+        skinCareBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SkinCareItems skinCareItems = new SkinCareItems();
+                FragmentManager manager = getFragmentManager();
+                manager.beginTransaction().replace(R.id.fragment, skinCareItems, skinCareItems.getTag()).commit();
+            }
+        });
+
 
         return view;
     }

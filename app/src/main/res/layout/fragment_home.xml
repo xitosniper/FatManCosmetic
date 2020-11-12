@@ -191,6 +191,7 @@
                                 android:layout_height="wrap_content">
 
                                 <ImageView
+                                    android:id="@+id/nav_all_skincare"
                                     android:layout_width="100dp"
                                     android:layout_height="100dp"
                                     android:layout_centerInParent="true"
