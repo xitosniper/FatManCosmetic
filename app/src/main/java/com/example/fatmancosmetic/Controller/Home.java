@@ -12,6 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -56,8 +57,8 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
     ConstraintLayout contentView;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-    RecyclerView flashsafe_recyclerView, amazingFatman_recyclerView;
-    RecyclerView.Adapter flashsafe_adapter, amazingFatmat_adapter;
+    RecyclerView flashsafe_recyclerView, amazingFatman_recyclerView, bestsale_recyclerView;
+    RecyclerView.Adapter flashsafe_adapter, amazingFatmat_adapter, bestsale_adapter;
     ImageView menuIcon;
     public Home() {
         // Required empty public constructor
@@ -102,6 +103,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         //Hooks
         flashsafe_recyclerView = view.findViewById(R.id.flashsafe_recyclerView);
         amazingFatman_recyclerView = view.findViewById(R.id.amazing_fatman_recyclerView);
+        bestsale_recyclerView = view.findViewById(R.id.bestsale_fatman_recyclerView);
         contentView = view.findViewById(R.id.content);
 
         //Menu Hooks
@@ -116,7 +118,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         //Recycle View Function Calls
         amazingFatman_recyclerView();
         flashsafe_recyclerView();
-
+        bestsafe_recyclerView();
 
         return view;
     }
@@ -210,6 +212,22 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
 
         flashsafe_adapter = new FlashSafeAdapter(listItems, this.mainActivity);
         flashsafe_recyclerView.setAdapter(flashsafe_adapter);
+    }
+
+    //Recycle Views Function Of bestsale_recyclerView
+    private void bestsafe_recyclerView() {
+        bestsale_recyclerView.setHasFixedSize(true);
+//        bestsale_recyclerView.setLayoutManager(new LinearLayoutManager(this.mainActivity, LinearLayoutManager.HORIZONTAL, false));
+        bestsale_recyclerView.setLayoutManager(new GridLayoutManager(this.mainActivity, 2, GridLayoutManager.VERTICAL,false));
+        ArrayList<ItemInfo> bestSaleLocation = new ArrayList<>();
+        ItemModel itemModel = new ItemModel(this.mainActivity);
+        ImageView imageView = new ImageView(this.mainActivity);
+
+        ArrayList<ItemInfo> listItems = new ArrayList<>();
+        listItems = itemModel.get4SalesItem();
+
+        bestsale_adapter = new FlashSafeAdapter(listItems, this.mainActivity);
+        bestsale_recyclerView.setAdapter(bestsale_adapter);
     }
 
     private void amazingFatman_recyclerView() {

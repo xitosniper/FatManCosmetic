@@ -13,22 +13,21 @@
         android:padding="10dp"
         android:orientation="vertical">
         <ImageView
-            android:id="@+id/flashsafe_image"
+            android:id="@+id/bestsale_image"
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:src="@drawable/son_li"
             android:scaleType="centerCrop"/>
         <TextView
-            android:id="@+id/flashsafe_title"
+            android:id="@+id/bestsale_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxLength="35"
             android:text="Son Kem Lì Merzy Velvet Tint Season 3"
             android:textSize="15dp"
             android:textColor="#717171"
             android:fontFamily="@font/baloo"/>
         <TextView
-            android:id="@+id/flashsafe_price"
+            android:id="@+id/bestsale_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#FF0000"
