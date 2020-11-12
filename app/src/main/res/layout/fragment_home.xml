@@ -34,6 +34,7 @@
             android:id="@+id/linearLayoutMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="55dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:orientation="horizontal"
@@ -112,7 +113,7 @@
                 <RelativeLayout
                     android:id="@+id/linearLayoutFlashSale"
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
@@ -286,7 +287,7 @@
                 <RelativeLayout
                     android:id="@+id/relativeLayoutNewItems"
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
@@ -312,20 +313,16 @@
                         android:gravity="right"
                         android:text="Xem tất cả >"
                         android:textSize="16sp" />
-                    <GridView
-                        android:id="@+id/new_items_GridView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="16dp"
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/newitems_recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
-                        android:columnWidth="120dp"
-                        android:gravity="center"
-                        android:numColumns="2"/>
-
+                        android:layout_marginTop="25dp"/>
                 </RelativeLayout>
-                //Best seller
 
+                //Best seller
                 <RelativeLayout
                     android:id="@+id/relativeLayoutBestSeller"
                     android:layout_width="match_parent"
