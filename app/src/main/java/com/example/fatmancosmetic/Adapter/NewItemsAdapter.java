@@ -6,8 +6,6 @@ import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,7 +33,7 @@ public class NewItemsAdapter extends RecyclerView.Adapter<NewItemsAdapter.NewIte
     @NonNull
     @Override
     public NewItemsAdapter.NewItemsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.new_items_card_design,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.newitems_card_design,parent,false);
         NewItemsAdapter.NewItemsViewHolder newItemsViewHolder = new NewItemsViewHolder(view);
 
         return newItemsViewHolder;
@@ -47,7 +45,7 @@ public class NewItemsAdapter extends RecyclerView.Adapter<NewItemsAdapter.NewIte
         Bitmap bmp = BitmapFactory.decodeByteArray(itemInfo.getImage(), 0, itemInfo.getImage().length);
         holder.imageView.setImageBitmap(bmp);
         holder.title.setText(itemInfo.getName());
-        //holder.price.setText(itemInfo.getPrice());
+        holder.price.setText(itemInfo.getPrice()+"₫");
     }
 
     @Override
@@ -64,7 +62,6 @@ public class NewItemsAdapter extends RecyclerView.Adapter<NewItemsAdapter.NewIte
             imageView =itemView.findViewById(R.id.new_items_image);
             title =itemView.findViewById(R.id.new_items_title);
             price =itemView.findViewById(R.id.new_items_price);
-
         }
     }
 }

@@ -47,7 +47,7 @@ public class FlashSafeAdapter extends RecyclerView.Adapter<FlashSafeAdapter.Flas
         Bitmap bmp = BitmapFactory.decodeByteArray(itemInfo.getImage(), 0, itemInfo.getImage().length);
         holder.imageView.setImageBitmap(bmp);
         holder.title.setText(itemInfo.getName());
-        //holder.price.setText(itemInfo.getPrice());
+        holder.price.setText(itemInfo.getPrice()+"₫");
     }
 
     @Override
