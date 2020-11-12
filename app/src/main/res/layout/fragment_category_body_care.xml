@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Controller.SkinCareItems">
+    tools:context=".Controller.CategorySkinCare">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -25,6 +25,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <RelativeLayout
+                android:background="@color/colorMenuNavigation"
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize">
 
@@ -41,7 +42,7 @@
                     android:layout_centerInParent="true"
                     android:layout_centerVertical="true"
                     android:fontFamily="@font/baloo"
-                    android:text="Dưỡng Da"
+                    android:text="Dưỡng Thể"
                     android:textSize="20sp" />
             </RelativeLayout>
 
@@ -64,7 +65,7 @@
                     app:layout_constraintStart_toStartOf="parent">
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/skinCareItems_recyclerView"
+                        android:id="@+id/bodyCareItems_recyclerView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"

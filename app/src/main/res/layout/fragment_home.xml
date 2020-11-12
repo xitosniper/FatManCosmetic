@@ -218,6 +218,7 @@
                                 android:layout_height="wrap_content">
 
                                 <ImageView
+                                    android:id="@+id/nav_all_makeUp"
                                     android:layout_width="100dp"
                                     android:layout_height="100dp"
                                     android:layout_centerInParent="true"
@@ -244,6 +245,7 @@
                                 android:layout_height="wrap_content">
 
                                 <ImageView
+                                    android:id="@+id/nav_all_bodyCare"
                                     android:layout_width="100dp"
                                     android:layout_height="100dp"
                                     android:layout_centerInParent="true"

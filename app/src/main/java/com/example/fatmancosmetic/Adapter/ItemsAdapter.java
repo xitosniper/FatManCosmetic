@@ -18,30 +18,30 @@ import com.example.fatmancosmetic.R;
 
 import java.util.ArrayList;
 
-public class SkinCareItemsAdapter extends RecyclerView.Adapter<SkinCareItemsAdapter.AllListItemsViewHolder> {
+public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.SkinCareItemsViewHolder> {
 
-    ArrayList<ItemInfo> allListItemsLocations;
+    ArrayList<ItemInfo> skinCareItemsLocations;
     Context context;
     ItemModel itemModel;
 
 
-    public SkinCareItemsAdapter(ArrayList<ItemInfo> allListItemsLocations, Context context) {
-        this.allListItemsLocations = allListItemsLocations;
+    public ItemsAdapter(ArrayList<ItemInfo> skinCareItemsLocations, Context context) {
+        this.skinCareItemsLocations = skinCareItemsLocations;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public SkinCareItemsAdapter.AllListItemsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ItemsAdapter.SkinCareItemsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.items_card_design,parent,false);
-        AllListItemsViewHolder allListItemsViewHolder = new AllListItemsViewHolder(view);
+        SkinCareItemsViewHolder skinCareItemsViewHolder = new SkinCareItemsViewHolder(view);
 
-        return allListItemsViewHolder;
+        return skinCareItemsViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SkinCareItemsAdapter.AllListItemsViewHolder holder, int position) {
-        ItemInfo itemInfo = allListItemsLocations.get(position);
+    public void onBindViewHolder(@NonNull ItemsAdapter.SkinCareItemsViewHolder holder, int position) {
+        ItemInfo itemInfo = skinCareItemsLocations.get(position);
         Bitmap bmp = BitmapFactory.decodeByteArray(itemInfo.getImage(), 0, itemInfo.getImage().length);
         holder.imageView.setImageBitmap(bmp);
         holder.title.setText(itemInfo.getName());
@@ -52,14 +52,14 @@ public class SkinCareItemsAdapter extends RecyclerView.Adapter<SkinCareItemsAdap
 
     @Override
     public int getItemCount() {
-        return allListItemsLocations.size();
+        return skinCareItemsLocations.size();
     }
 
-    public class AllListItemsViewHolder extends RecyclerView.ViewHolder{
+    public class SkinCareItemsViewHolder extends RecyclerView.ViewHolder{
 
         ImageView imageView;
         TextView title, price;
-        public AllListItemsViewHolder(@NonNull View itemView) {
+        public SkinCareItemsViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.items_image);
             title = itemView.findViewById(R.id.items_title);

@@ -21,7 +21,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.fatmancosmetic.Adapter.AmazingFatManAdapter;
-import com.example.fatmancosmetic.Adapter.FlashSafeAdapter;
+import com.example.fatmancosmetic.Adapter.ItemsAdapter;
 import com.example.fatmancosmetic.Info.AmazingFatManInfo;
 import com.example.fatmancosmetic.Info.ItemInfo;
 import com.example.fatmancosmetic.Model.ItemModel;
@@ -54,7 +54,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
     NavigationView navigationView;
     RecyclerView flashsafe_recyclerView, amazingFatman_recyclerView, bestsale_recyclerView, newitems_recyclerView;
     RecyclerView.Adapter flashsafe_adapter, amazingFatmat_adapter, bestsale_adapter, newitems_adapter;
-    ImageView menuIcon, skinCareBtn;
+    ImageView menuIcon, skinCareBtn, bodyCareBtn, makeUpBtn;
     public Home() {
         // Required empty public constructor
     }
@@ -103,6 +103,8 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         bestsale_recyclerView = view.findViewById(R.id.bestsale_fatman_recyclerView);
         contentView = view.findViewById(R.id.content);
         skinCareBtn = view.findViewById(R.id.nav_all_skincare);
+        bodyCareBtn = view.findViewById(R.id.nav_all_bodyCare);
+        makeUpBtn = view.findViewById(R.id.nav_all_makeUp);
 
         //Menu Hooks
         drawerLayout = view.findViewById(R.id.draw_layout);
@@ -125,9 +127,27 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         skinCareBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SkinCareItems skinCareItems = new SkinCareItems();
+                CategorySkinCare categorySkinCare = new CategorySkinCare();
                 FragmentManager manager = getFragmentManager();
-                manager.beginTransaction().replace(R.id.fragment, skinCareItems, skinCareItems.getTag()).commit();
+                manager.beginTransaction().replace(R.id.fragment, categorySkinCare, categorySkinCare.getTag()).commit();
+            }
+        });
+
+        bodyCareBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CategoryBodyCare categoryBodyCare = new CategoryBodyCare();
+                FragmentManager manager = getFragmentManager();
+                manager.beginTransaction().replace(R.id.fragment, categoryBodyCare, categoryBodyCare.getTag()).commit();
+            }
+        });
+
+        makeUpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CategoryMakeUp categoryMakeUp = new CategoryMakeUp();
+                FragmentManager manager = getFragmentManager();
+                manager.beginTransaction().replace(R.id.fragment, categoryMakeUp, categoryMakeUp.getTag()).commit();
             }
         });
 
@@ -168,7 +188,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         //Add any color or remove it to use the default one!
         //To make it transparent use Color.Transparent in side setScrimColor();
 
-        drawerLayout.setScrimColor(getResources().getColor(R.color.colorMenuBottomNavigation));
+        drawerLayout.setScrimColor(getResources().getColor(R.color.colorMenuNavigation));
         drawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
@@ -203,7 +223,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         listItems = itemModel.get4SaleItems();
 
 
-        flashsafe_adapter = new FlashSafeAdapter(listItems, this.mainActivity);
+        flashsafe_adapter = new ItemsAdapter(listItems, this.mainActivity);
         flashsafe_recyclerView.setAdapter(flashsafe_adapter);
     }
 
@@ -217,7 +237,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         ArrayList<ItemInfo> listItems = new ArrayList<>();
         listItems = itemModel.get4NewItems();
 
-        newitems_adapter = new FlashSafeAdapter(listItems, this.mainActivity);
+        newitems_adapter = new ItemsAdapter(listItems, this.mainActivity);
         newitems_recyclerView.setAdapter(newitems_adapter);
     }
 
@@ -230,7 +250,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         ArrayList<ItemInfo> listItems = new ArrayList<>();
         listItems = itemModel.get4BestSaleItems();
 
-        bestsale_adapter = new FlashSafeAdapter(listItems, this.mainActivity);
+        bestsale_adapter = new ItemsAdapter(listItems, this.mainActivity);
         bestsale_recyclerView.setAdapter(bestsale_adapter);
     }
 
