@@ -57,8 +57,8 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
     ConstraintLayout contentView;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-    RecyclerView flashsafe_recyclerView, amazingFatman_recyclerView, bestsale_recyclerView;
-    RecyclerView.Adapter flashsafe_adapter, amazingFatmat_adapter, bestsale_adapter;
+    RecyclerView flashsafe_recyclerView, amazingFatman_recyclerView, bestsale_recyclerView, newitems_recyclerView;
+    RecyclerView.Adapter flashsafe_adapter, amazingFatmat_adapter, bestsale_adapter, newitems_adapter;
     ImageView menuIcon;
     public Home() {
         // Required empty public constructor
@@ -103,6 +103,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         //Hooks
         flashsafe_recyclerView = view.findViewById(R.id.flashsafe_recyclerView);
         amazingFatman_recyclerView = view.findViewById(R.id.amazing_fatman_recyclerView);
+        newitems_recyclerView = view.findViewById(R.id.newitems_recyclerView);
         bestsale_recyclerView = view.findViewById(R.id.bestsale_fatman_recyclerView);
         contentView = view.findViewById(R.id.content);
 
@@ -117,8 +118,9 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
 
         //Recycle View Function Calls
         amazingFatman_recyclerView();
+        newitems_recyclerView();
         flashsafe_recyclerView();
-        bestsafe_recyclerView();
+        bestsale_recyclerView();
 
         return view;
     }
@@ -185,46 +187,38 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
     private void flashsafe_recyclerView() {
         flashsafe_recyclerView.setHasFixedSize(true);
         flashsafe_recyclerView.setLayoutManager(new LinearLayoutManager(this.mainActivity, LinearLayoutManager.HORIZONTAL, false));
-        //ArrayList<FlashSaleInfo> flashSaleLocation = new ArrayList<>();
         ItemModel itemModel = new ItemModel(this.mainActivity);
-//        ImageView imageView = new ImageView(this.mainActivity);
-//
-//        imageView.setImageDrawable(getContext().getResources().getDrawable(R.drawable.but_ke_soi_mai));
-//
-//
-//        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-//        byte[] imageInByte = baos.toByteArray();
-//
-//
-        ArrayList<ItemInfo> listItems = new ArrayList<>();
-        listItems = itemModel.get4SalesItem();
 
-//        for (int i = 0; i < listItems.size(); i++) {
-//            listItems.get(i).setImage(imageInByte);
-//        }
-//        Log.e("Image Home: ",listItems.get(0).getImage()+"");
-//        flashSaleLocation.add(new FlashSaleInfo(R.drawable.phan_nuoc, "Phấn Nước Che Phủ Chống Nắng M ...", "139,000đ"));
-//        flashSaleLocation.add(new FlashSaleInfo(R.drawable.son_li, "Son Kem Lì Merzy Velvet Tint Season 3", "129,000đ"));
-//        flashSaleLocation.add(new FlashSaleInfo(R.drawable.kem_lot_duong, "Kem Lót Dưỡng Ẩm Nâng Tông ...", "159,000đ"));
-//        flashSaleLocation.add(new FlashSaleInfo(R.drawable.but_ke_soi_mai, "Bút Kẻ Sợi Mày Vacosi ...", "159,000đ"));
+        ArrayList<ItemInfo> listItems = new ArrayList<>();
+        listItems = itemModel.get4SaleItems();
+
 
         flashsafe_adapter = new FlashSafeAdapter(listItems, this.mainActivity);
         flashsafe_recyclerView.setAdapter(flashsafe_adapter);
     }
 
-    //Recycle Views Function Of bestsale_recyclerView
-    private void bestsafe_recyclerView() {
-        bestsale_recyclerView.setHasFixedSize(true);
-//        bestsale_recyclerView.setLayoutManager(new LinearLayoutManager(this.mainActivity, LinearLayoutManager.HORIZONTAL, false));
-        bestsale_recyclerView.setLayoutManager(new GridLayoutManager(this.mainActivity, 2, GridLayoutManager.VERTICAL,false));
+    private void newitems_recyclerView() {
+        newitems_recyclerView.setHasFixedSize(true);
+
+        newitems_recyclerView.setLayoutManager(new GridLayoutManager(this.mainActivity, 2, GridLayoutManager.VERTICAL,false));
         ArrayList<ItemInfo> bestSaleLocation = new ArrayList<>();
         ItemModel itemModel = new ItemModel(this.mainActivity);
-        ImageView imageView = new ImageView(this.mainActivity);
 
         ArrayList<ItemInfo> listItems = new ArrayList<>();
-        listItems = itemModel.get4SalesItem();
+        listItems = itemModel.get4NewItems();
+
+        newitems_adapter = new FlashSafeAdapter(listItems, this.mainActivity);
+        newitems_recyclerView.setAdapter(newitems_adapter);
+    }
+
+    private void bestsale_recyclerView() {
+        bestsale_recyclerView.setHasFixedSize(true);
+
+        bestsale_recyclerView.setLayoutManager(new GridLayoutManager(this.mainActivity, 2, GridLayoutManager.VERTICAL,false));
+        ItemModel itemModel = new ItemModel(this.mainActivity);
+
+        ArrayList<ItemInfo> listItems = new ArrayList<>();
+        listItems = itemModel.get4BestSaleItems();
 
         bestsale_adapter = new FlashSafeAdapter(listItems, this.mainActivity);
         bestsale_recyclerView.setAdapter(bestsale_adapter);
@@ -246,3 +240,22 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
 
 
 }
+
+//        ImageView imageView = new ImageView(this.mainActivity);
+//
+//        imageView.setImageDrawable(getContext().getResources().getDrawable(R.drawable.but_ke_soi_mai));
+//
+//
+//        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//        byte[] imageInByte = baos.toByteArray();
+//
+//        for (int i = 0; i < listItems.size(); i++) {
+//            listItems.get(i).setImage(imageInByte);
+//        }
+//        Log.e("Image Home: ",listItems.get(0).getImage()+"");
+//        flashSaleLocation.add(new FlashSaleInfo(R.drawable.phan_nuoc, "Phấn Nước Che Phủ Chống Nắng M ...", "139,000đ"));
+//        flashSaleLocation.add(new FlashSaleInfo(R.drawable.son_li, "Son Kem Lì Merzy Velvet Tint Season 3", "129,000đ"));
+//        flashSaleLocation.add(new FlashSaleInfo(R.drawable.kem_lot_duong, "Kem Lót Dưỡng Ẩm Nâng Tông ...", "159,000đ"));
+//        flashSaleLocation.add(new FlashSaleInfo(R.drawable.but_ke_soi_mai, "Bút Kẻ Sợi Mày Vacosi ...", "159,000đ"));

@@ -34,4 +34,9 @@
         android:name="com.example.fatmancosmetic.Controller.SkinCare"
         android:label="fragment_skin_care"
         tools:layout="@layout/fragment_skin_care" />
+    <fragment
+        android:id="@+id/allListItems"
+        android:name="com.example.fatmancosmetic.Controller.AllListItems"
+        android:label="fragment_all_list_items"
+        tools:layout="@layout/fragment_all_list_items" />
 </navigation>
