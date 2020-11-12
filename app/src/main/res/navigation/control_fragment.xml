@@ -26,7 +26,7 @@
         tools:layout="@layout/fragment_account" />
     <fragment
         android:id="@+id/introdure"
-        android:name="com.example.fatmancosmetic.Controller.Introdure"
+        android:name="com.example.fatmancosmetic.Controller.MenuIntrodure"
         android:label="fragment_introdure"
         tools:layout="@layout/fragment_introdure" />
     <fragment
@@ -35,18 +35,18 @@
         android:label="fragment_skin_care"
         tools:layout="@layout/fragment_skin_care" />
     <fragment
-        android:id="@+id/skinCareItems"
-        android:name="com.example.fatmancosmetic.Controller.SkinCareItems"
+        android:id="@+id/categorySkinCare"
+        android:name="com.example.fatmancosmetic.Controller.CategorySkinCare"
         android:label="fragment_all_list_items"
-        tools:layout="@layout/fragment_skin_care_items" />
+        tools:layout="@layout/fragment_catgory_skin_care" />
     <fragment
-        android:id="@+id/bodyCareItems"
-        android:name="com.example.fatmancosmetic.BodyCareItems"
+        android:id="@+id/categoryBodyCare"
+        android:name="com.example.fatmancosmetic.Controller.CategoryBodyCare"
         android:label="fragment_body_care_items"
-        tools:layout="@layout/fragment_body_care_items" />
+        tools:layout="@layout/fragment_category_body_care" />
     <fragment
-        android:id="@+id/makeUpItems"
-        android:name="com.example.fatmancosmetic.MakeUpItems"
+        android:id="@+id/categoryMakeUp"
+        android:name="com.example.fatmancosmetic.Controller.CategoryMakeUp"
         android:label="fragment_make_up_items"
-        tools:layout="@layout/fragment_make_up_items" />
+        tools:layout="@layout/fragment_category_make_up" />
 </navigation>
