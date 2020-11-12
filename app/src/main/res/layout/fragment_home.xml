@@ -56,6 +56,7 @@
                 android:src="@drawable/menu" />
 
             <EditText
+                android:focusable="false"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginBottom="10dp"
@@ -132,7 +133,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/lbSeeMore"
+                        android:id="@+id/lbSeeMoreFlashSale"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="16dp"
@@ -348,7 +349,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/lbSeeMoreBestSellerItems"
+                        android:id="@+id/lbSeeMoreBestSeller"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="16dp"

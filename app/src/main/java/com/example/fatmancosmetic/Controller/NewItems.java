@@ -21,10 +21,10 @@ import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link CategorySkinCare#newInstance} factory method to
+ * Use the {@link NewItems#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CategorySkinCare extends Fragment {
+public class NewItems extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,7 +38,7 @@ public class CategorySkinCare extends Fragment {
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
 
-    public CategorySkinCare() {
+    public NewItems() {
         // Required empty public constructor
     }
 
@@ -48,11 +48,11 @@ public class CategorySkinCare extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment AllListItems.
+     * @return A new instance of fragment NewItems.
      */
     // TODO: Rename and change types and number of parameters
-    public static CategorySkinCare newInstance(String param1, String param2) {
-        CategorySkinCare fragment = new CategorySkinCare();
+    public static NewItems newInstance(String param1, String param2) {
+        NewItems fragment = new NewItems();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -73,10 +73,10 @@ public class CategorySkinCare extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_catgory_skin_care, container, false);
+        View view = inflater.inflate(R.layout.fragment_new_items, container, false);
 
         //Hooks
-        recyclerView = view.findViewById(R.id.skinCareItems_recyclerView);
+        recyclerView = view.findViewById(R.id.newItems_recyclerView);
         backBtn = view.findViewById(R.id.back_pressed);
 
 
@@ -103,7 +103,7 @@ public class CategorySkinCare extends Fragment {
         ItemModel itemModel = new ItemModel(getContext());
 
         ArrayList<ItemInfo> listItems = new ArrayList<>();
-        listItems = itemModel.getBodyCareItems();
+        listItems = itemModel.getAllNewItems();
 
         adapter = new ItemsAdapter(listItems, getContext());
         recyclerView.setAdapter(adapter);

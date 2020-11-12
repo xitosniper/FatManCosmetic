@@ -30,11 +30,6 @@
         android:label="fragment_introdure"
         tools:layout="@layout/fragment_introdure" />
     <fragment
-        android:id="@+id/skinCare"
-        android:name="com.example.fatmancosmetic.Controller.SkinCare"
-        android:label="fragment_skin_care"
-        tools:layout="@layout/fragment_skin_care" />
-    <fragment
         android:id="@+id/categorySkinCare"
         android:name="com.example.fatmancosmetic.Controller.CategorySkinCare"
         android:label="fragment_all_list_items"
@@ -49,4 +44,24 @@
         android:name="com.example.fatmancosmetic.Controller.CategoryMakeUp"
         android:label="fragment_make_up_items"
         tools:layout="@layout/fragment_category_make_up" />
+    <fragment
+        android:id="@+id/newItems"
+        android:name="com.example.fatmancosmetic.Controller.NewItems"
+        android:label="fragment_new_items"
+        tools:layout="@layout/fragment_new_items" />
+    <fragment
+        android:id="@+id/flashSaleItems"
+        android:name="com.example.fatmancosmetic.Controller.FlashSaleItems"
+        android:label="fragment_flash_sale_items"
+        tools:layout="@layout/fragment_flash_sale_items" />
+    <fragment
+        android:id="@+id/bestSellerItems"
+        android:name="com.example.fatmancosmetic.Controller.BestSellerItems"
+        android:label="fragment_best_seller_items"
+        tools:layout="@layout/fragment_best_seller_items" />
+    <fragment
+        android:id="@+id/itemDetails"
+        android:name="com.example.fatmancosmetic.Controller.ItemDetails"
+        android:label="fragment_item_details"
+        tools:layout="@layout/fragment_item_details" />
 </navigation>

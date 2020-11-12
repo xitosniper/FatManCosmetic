@@ -39,7 +39,7 @@
                     android:layout_centerInParent="true"
                     android:layout_centerVertical="true"
                     android:fontFamily="@font/baloo"
-                    android:text="Giới Thiệu"
+                    android:text="Sản Phẩm Mới"
                     android:textSize="20sp" />
             </RelativeLayout>
 
@@ -48,59 +48,30 @@
 
         <ScrollView
             android:layout_width="417dp"
-            android:layout_height="560dp"
+            android:layout_height="570dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayoutTitle">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:orientation="vertical">
-                    <TextView
-                        android:layout_margin="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/introdure1"/>
-                    <TextView
-                        android:layout_margin="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/introdure2"/>
+                android:layout_height="wrap_content">
 
-                    <TextView
-                        android:layout_margin="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/introdure3"/>
-                    <TextView
-                        android:layout_margin="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/introdure4"/>
-                    <TextView
-                        android:layout_margin="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/introdure5"/>
-                    <TextView
-                        android:layout_margin="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/introdure6"/>
-                    <TextView
-                        android:layout_margin="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/introdure7"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
 
-                    <TextView
-                        android:layout_margin="10dp"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/newItems_recyclerView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/introdure8"/>
-
-
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"/>
+                </RelativeLayout>
             </LinearLayout>
 
 

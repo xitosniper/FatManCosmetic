@@ -7,5 +7,14 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     //Slogan
     <string name="powered_by">Powered By Fat Mat Group</string>
+    //Introdure
+    <string name="introdure1">FatMan Cosmetics được chính thức đưa vào hoạt động ngày 22/10/2020, đến nay đã trở thành một trong những cửa hàng mỹ phẩm được các bạn trẻ yêu thích nhất.</string>
+    <string name="introdure2">FatMan Cosmetics chuyên phân phối sỉ và lẻ các sản phẩm mỹ phẩm đến từ Hàn, Nhật, Mỹ,... Với sự đảm bảo về chất lượng và nguồn gốc sản phẩm, FatMen Cosmetics cam kết chỉ phân phối các sản phẩm chính hãng, được nhập trực tiếp tại hãng và không qua trung gian.</string>
+    <string name="introdure3">Các sản phẩm tại FatMan Cosmetics đều có hóa đơn, chứng từ từ hãng sản xuất ĐẢM BẢO 100% CHÍNH HÃNG.</string>
+    <string name="introdure4">FatMan Cosmetics hiện đang là đại lý phân phối chính thức của nhiều hãng mỹ phẩm tại Hàn Quốc.</string>
+    <string name="introdure5">Chúng mình mong muốn đem đến cho khách hàng nhiều sự lựa chọn với những sản phẩm hot nhất, liên tục được cập nhật cùng mức giá hợp lý nhất nhằm mang đến cho bạn những trải nghiệm tốt hơn. Đồng thời, FatMan Cosmetics luôn có các chương trình chăm sóc khách hàng diễn ra thường xuyên để tri ân khách hàng đã lựa chọn và đồng hành cùng FatMen Cosmetics.</string>
+    <string name="introdure6">Với đội ngữ tư vấn viên nhiệt tình và chuyên nghiệp, FatMen Cosmetics cam kết mang đến cho bạn không gian mua sắm và những trải nghiệm thật tốt khi đến với chúng mình.</string>
+    <string name="introdure7">Hiện tại, FatMan Cosmetics chỉ có DUY NHẤT 1 cửa hàng tại số 4 đường Trần Hưng Đạo, An Khánh, quận Ninh Kiều, thành phố Cần Người Yêu. Quý khách có thể đến tham quan và mua sắm từ 9h - 21h hằng ngày (bao gồm các ngày lễ).</string>
+    <string name="introdure8">FatMan Cosmetics mong rằng có thể đồng hành cùng bạn trong quá trình chăm sóc và làm đẹp cho bản thân, giúp bạn tự tin và tốt hơn mỗi ngày.</string>
     <string name="todo">TODO</string>
 </resources>

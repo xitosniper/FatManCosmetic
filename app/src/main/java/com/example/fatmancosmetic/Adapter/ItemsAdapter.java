@@ -10,8 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fatmancosmetic.Controller.FlashSaleItems;
+import com.example.fatmancosmetic.Controller.ItemDetails;
 import com.example.fatmancosmetic.Info.ItemInfo;
 import com.example.fatmancosmetic.Model.ItemModel;
 import com.example.fatmancosmetic.R;
@@ -46,6 +49,14 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.SkinCareItem
         holder.imageView.setImageBitmap(bmp);
         holder.title.setText(itemInfo.getName());
         holder.price.setText(itemInfo.getPrice()+"₫");
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                ItemDetails itemDetails = new ItemDetails();
+//                FragmentManager manager = getFragmentManager();
+//                manager.beginTransaction().replace(R.id.fragment, itemDetails, itemDetails.getTag()).commit();
+            }
+        });
 
 
     }

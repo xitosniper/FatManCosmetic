@@ -143,7 +143,7 @@ public class ItemModel extends DBManager {
     public ArrayList<ItemInfo> get4SaleItems(){
         ArrayList<ItemInfo> listItems = new ArrayList<>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE Status = 2";
+        String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE Status = 2 LIMIT 4";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -171,7 +171,7 @@ public class ItemModel extends DBManager {
     public ArrayList<ItemInfo> get4NewItems(){
         ArrayList<ItemInfo> listItems = new ArrayList<>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE Status = 3";
+        String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE Status = 3  LIMIT 4";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -197,6 +197,89 @@ public class ItemModel extends DBManager {
     }
 
     public ArrayList<ItemInfo> get4BestSaleItems(){
+        ArrayList<ItemInfo> listItems = new ArrayList<>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE Status = 4  LIMIT 4";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                ItemInfo itemInfo = new ItemInfo();
+                itemInfo.setID(cursor.getInt(0));
+                itemInfo.setItemID(cursor.getString(1));
+                itemInfo.setBrandID(cursor.getString(2));
+                itemInfo.setCategoryID(cursor.getString(3));
+                itemInfo.setName(cursor.getString(4));
+                itemInfo.setImage(cursor.getBlob(5));
+                itemInfo.setPrice(cursor.getInt(6));
+                itemInfo.setDescription(cursor.getString(7));
+                itemInfo.setStatus(cursor.getInt(8));
+                listItems.add(itemInfo);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return listItems;
+    }
+    public ArrayList<ItemInfo> getAllSaleItems(){
+        ArrayList<ItemInfo> listItems = new ArrayList<>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE Status = 2";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                ItemInfo itemInfo = new ItemInfo();
+                itemInfo.setID(cursor.getInt(0));
+                itemInfo.setItemID(cursor.getString(1));
+                itemInfo.setBrandID(cursor.getString(2));
+                itemInfo.setCategoryID(cursor.getString(3));
+                itemInfo.setName(cursor.getString(4));
+                itemInfo.setImage(cursor.getBlob(5));
+                itemInfo.setPrice(cursor.getInt(6));
+                itemInfo.setDescription(cursor.getString(7));
+                itemInfo.setStatus(cursor.getInt(8));
+                listItems.add(itemInfo);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return listItems;
+    }
+
+    public ArrayList<ItemInfo> getAllNewItems(){
+        ArrayList<ItemInfo> listItems = new ArrayList<>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE Status = 3";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                ItemInfo itemInfo = new ItemInfo();
+                itemInfo.setID(cursor.getInt(0));
+                itemInfo.setItemID(cursor.getString(1));
+                itemInfo.setBrandID(cursor.getString(2));
+                itemInfo.setCategoryID(cursor.getString(3));
+                itemInfo.setName(cursor.getString(4));
+                itemInfo.setImage(cursor.getBlob(5));
+                itemInfo.setPrice(cursor.getInt(6));
+                itemInfo.setDescription(cursor.getString(7));
+                itemInfo.setStatus(cursor.getInt(8));
+                listItems.add(itemInfo);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return listItems;
+    }
+
+    public ArrayList<ItemInfo> getAllBestSaleItems(){
         ArrayList<ItemInfo> listItems = new ArrayList<>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE Status = 4";

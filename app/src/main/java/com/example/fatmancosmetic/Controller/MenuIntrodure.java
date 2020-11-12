@@ -3,6 +3,7 @@ package com.example.fatmancosmetic.Controller;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,7 +71,9 @@ public class MenuIntrodure extends Fragment {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Home home = new Home();
+                FragmentManager manager = getFragmentManager();
+                manager.beginTransaction().replace(R.id.fragment, home, home.getTag()).commit();
             }
         });
         return view;

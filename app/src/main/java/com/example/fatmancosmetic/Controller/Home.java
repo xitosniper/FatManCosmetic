@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.fatmancosmetic.Adapter.AmazingFatManAdapter;
 import com.example.fatmancosmetic.Adapter.ItemsAdapter;
@@ -55,6 +56,9 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
     RecyclerView flashsafe_recyclerView, amazingFatman_recyclerView, bestsale_recyclerView, newitems_recyclerView;
     RecyclerView.Adapter flashsafe_adapter, amazingFatmat_adapter, bestsale_adapter, newitems_adapter;
     ImageView menuIcon, skinCareBtn, bodyCareBtn, makeUpBtn;
+    TextView lbSeeMoreFlashSale, lbSeeMoreNewItems, lbSeeMoreBestSeller;
+
+
     public Home() {
         // Required empty public constructor
     }
@@ -99,7 +103,6 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         flashsafe_recyclerView = view.findViewById(R.id.flashsafe_recyclerView);
         amazingFatman_recyclerView = view.findViewById(R.id.amazing_fatman_recyclerView);
         newitems_recyclerView = view.findViewById(R.id.newitems_recyclerView);
-
         bestsale_recyclerView = view.findViewById(R.id.bestsale_fatman_recyclerView);
         contentView = view.findViewById(R.id.content);
         skinCareBtn = view.findViewById(R.id.nav_all_skincare);
@@ -110,6 +113,9 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         drawerLayout = view.findViewById(R.id.draw_layout);
         navigationView = view.findViewById(R.id.navigation_view);
         menuIcon = view.findViewById(R.id.menuIcon);
+        lbSeeMoreFlashSale = view.findViewById(R.id.lbSeeMoreFlashSale);
+        lbSeeMoreNewItems = view.findViewById(R.id.lbSeeMoreNewItems);
+        lbSeeMoreBestSeller = view.findViewById(R.id.lbSeeMoreBestSeller);
 
         //Navigation Drawer Functions Calls
         navigationDrawer();
@@ -148,6 +154,33 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
                 CategoryMakeUp categoryMakeUp = new CategoryMakeUp();
                 FragmentManager manager = getFragmentManager();
                 manager.beginTransaction().replace(R.id.fragment, categoryMakeUp, categoryMakeUp.getTag()).commit();
+            }
+        });
+
+        lbSeeMoreFlashSale.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FlashSaleItems flashSaleItems = new FlashSaleItems();
+                FragmentManager manager = getFragmentManager();
+                manager.beginTransaction().replace(R.id.fragment, flashSaleItems, flashSaleItems.getTag()).commit();
+            }
+        });
+
+        lbSeeMoreNewItems.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NewItems newItems = new NewItems();
+                FragmentManager manager = getFragmentManager();
+                manager.beginTransaction().replace(R.id.fragment, newItems, newItems.getTag()).commit();
+            }
+        });
+
+        lbSeeMoreBestSeller.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BestSellerItems bestSellerItems = new BestSellerItems();
+                FragmentManager manager = getFragmentManager();
+                manager.beginTransaction().replace(R.id.fragment, bestSellerItems, bestSellerItems.getTag()).commit();
             }
         });
 
@@ -210,6 +243,40 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        FragmentManager manager = getFragmentManager();
+        switch (item.getItemId()){
+            case R.id.introduce:
+                MenuIntrodure menuIntrodure = new MenuIntrodure();
+                manager.beginTransaction().replace(R.id.fragment, menuIntrodure, menuIntrodure.getTag()).commit();
+                break;
+            case R.id.facial_skin_care:
+                CategorySkinCare categorySkinCare = new CategorySkinCare();
+                manager.beginTransaction().replace(R.id.fragment, categorySkinCare, categorySkinCare.getTag()).commit();
+                break;
+            case R.id.body_care:
+                CategoryBodyCare categoryBodyCare = new CategoryBodyCare();
+                manager.beginTransaction().replace(R.id.fragment, categoryBodyCare, categoryBodyCare.getTag()).commit();
+                break;
+            case R.id.make_up:
+                CategoryMakeUp categoryMakeUp = new CategoryMakeUp();
+                manager.beginTransaction().replace(R.id.fragment, categoryMakeUp, categoryMakeUp.getTag()).commit();
+                break;
+            case R.id.new_items:
+                NewItems newItems = new NewItems();
+                manager.beginTransaction().replace(R.id.fragment, newItems, newItems.getTag()).commit();
+                break;
+            case R.id.sale_off:
+                FlashSaleItems flashSaleItems = new FlashSaleItems();
+                manager.beginTransaction().replace(R.id.fragment, flashSaleItems, flashSaleItems.getTag()).commit();
+                break;
+            case R.id.transport:
+
+                break;
+            case R.id.return_policy:
+
+                break;
+
+        }
         return true;
     }
 
