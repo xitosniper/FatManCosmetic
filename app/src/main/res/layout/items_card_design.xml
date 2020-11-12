@@ -16,7 +16,7 @@
             android:id="@+id/items_image"
             android:layout_width="match_parent"
             android:layout_height="140dp"
-            android:src="@drawable/son_li"
+            android:src="@drawable/item_000001"
             android:scaleType="centerCrop"/>
         <TextView
             android:id="@+id/items_title"

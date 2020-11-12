@@ -103,7 +103,7 @@ public class CategoryBodyCare extends Fragment {
         ItemModel itemModel = new ItemModel(getContext());
 
         ArrayList<ItemInfo> listItems = new ArrayList<>();
-        listItems = itemModel.getAllItem();
+        listItems = itemModel.getBodyCareItems();
 
         adapter = new ItemsAdapter(listItems, getContext());
         recyclerView.setAdapter(adapter);

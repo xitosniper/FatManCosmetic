@@ -30,10 +30,92 @@ public class ItemModel extends DBManager {
         super(context);
     }
 
-    public ArrayList<ItemInfo> getAllItem(){
+    public ArrayList<ItemInfo> getAllItems(){
         ArrayList<ItemInfo> listItems = new ArrayList<>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                ItemInfo itemInfo = new ItemInfo();
+                itemInfo.setID(cursor.getInt(0));
+                itemInfo.setItemID(cursor.getString(1));
+                itemInfo.setBrandID(cursor.getString(2));
+                itemInfo.setCategoryID(cursor.getString(3));
+                itemInfo.setName(cursor.getString(4));
+                itemInfo.setImage(cursor.getBlob(5));
+                itemInfo.setPrice(cursor.getInt(6));
+                itemInfo.setDescription(cursor.getString(7));
+                itemInfo.setStatus(cursor.getInt(8));
+                listItems.add(itemInfo);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return listItems;
+    }
+    public ArrayList<ItemInfo> getBodyCareItems(){
+        ArrayList<ItemInfo> listItems = new ArrayList<>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE categoryID = '000001'";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                ItemInfo itemInfo = new ItemInfo();
+                itemInfo.setID(cursor.getInt(0));
+                itemInfo.setItemID(cursor.getString(1));
+                itemInfo.setBrandID(cursor.getString(2));
+                itemInfo.setCategoryID(cursor.getString(3));
+                itemInfo.setName(cursor.getString(4));
+                itemInfo.setImage(cursor.getBlob(5));
+                itemInfo.setPrice(cursor.getInt(6));
+                itemInfo.setDescription(cursor.getString(7));
+                itemInfo.setStatus(cursor.getInt(8));
+                listItems.add(itemInfo);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return listItems;
+    }
+    public ArrayList<ItemInfo> getSkinCareItems(){
+        ArrayList<ItemInfo> listItems = new ArrayList<>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE categoryID = '000003'";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                ItemInfo itemInfo = new ItemInfo();
+                itemInfo.setID(cursor.getInt(0));
+                itemInfo.setItemID(cursor.getString(1));
+                itemInfo.setBrandID(cursor.getString(2));
+                itemInfo.setCategoryID(cursor.getString(3));
+                itemInfo.setName(cursor.getString(4));
+                itemInfo.setImage(cursor.getBlob(5));
+                itemInfo.setPrice(cursor.getInt(6));
+                itemInfo.setDescription(cursor.getString(7));
+                itemInfo.setStatus(cursor.getInt(8));
+                listItems.add(itemInfo);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return listItems;
+    }
+
+    public ArrayList<ItemInfo> getMakeUpItems(){
+        ArrayList<ItemInfo> listItems = new ArrayList<>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE categoryID = '000002'";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -61,7 +143,7 @@ public class ItemModel extends DBManager {
     public ArrayList<ItemInfo> get4SaleItems(){
         ArrayList<ItemInfo> listItems = new ArrayList<>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE ID < 5";
+        String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE Status = 2";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -89,7 +171,7 @@ public class ItemModel extends DBManager {
     public ArrayList<ItemInfo> get4NewItems(){
         ArrayList<ItemInfo> listItems = new ArrayList<>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE ID >= 5 AND ID < 9";
+        String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE Status = 3";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -117,7 +199,7 @@ public class ItemModel extends DBManager {
     public ArrayList<ItemInfo> get4BestSaleItems(){
         ArrayList<ItemInfo> listItems = new ArrayList<>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE ID >= 9 AND ID < 13";
+        String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE Status = 4";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
