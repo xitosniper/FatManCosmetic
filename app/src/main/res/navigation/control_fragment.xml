@@ -29,4 +29,9 @@
         android:name="com.example.fatmancosmetic.Controller.Introdure"
         android:label="fragment_introdure"
         tools:layout="@layout/fragment_introdure" />
+    <fragment
+        android:id="@+id/skinCare"
+        android:name="com.example.fatmancosmetic.Controller.SkinCare"
+        android:label="fragment_skin_care"
+        tools:layout="@layout/fragment_skin_care" />
 </navigation>

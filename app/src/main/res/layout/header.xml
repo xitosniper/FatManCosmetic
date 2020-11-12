@@ -9,12 +9,12 @@
     android:padding="20dp">
 
     <ImageView
-        android:layout_gravity="right|top"
         android:layout_width="111dp"
         android:layout_height="75dp"
-        android:scaleX="2"
-        android:scaleY="2"
-        android:src="@drawable/logo_group" />
+        android:layout_gravity="right|top"
+        android:scaleX=" 1"
+        android:scaleY="1"
+        android:src="@drawable/logo_header" />
 
     <TextView
         android:layout_width="wrap_content"

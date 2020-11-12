@@ -107,8 +107,8 @@
                             android:src="@drawable/animation_baner" />
                     </androidx.cardview.widget.CardView>
                 </LinearLayout>
-                //FlashSafe
 
+                //FlashSafe
                 <RelativeLayout
                     android:id="@+id/linearLayoutFlashSale"
                     android:layout_width="match_parent"
