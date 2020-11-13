@@ -105,7 +105,8 @@ public class NewItems extends Fragment {
         ArrayList<ItemInfo> listItems = new ArrayList<>();
         listItems = itemModel.getAllNewItems();
 
-        adapter = new ItemsAdapter(listItems, getContext());
+        FragmentManager fragmentManager = getFragmentManager();
+        adapter = new ItemsAdapter(listItems, getContext(), fragmentManager);
         recyclerView.setAdapter(adapter);
     }
 }

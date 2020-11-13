@@ -5,14 +5,17 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.example.fatmancosmetic.Adapter.ItemsAdapter;
+import com.example.fatmancosmetic.Adapter.ItemsDetailsAdapter;
 import com.example.fatmancosmetic.Info.ItemInfo;
 import com.example.fatmancosmetic.Model.ItemModel;
 import com.example.fatmancosmetic.R;
@@ -96,13 +99,15 @@ public class ItemDetails extends Fragment {
     private void recyclerView() {
         recyclerView.setHasFixedSize(true);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL,false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL,false));
         ItemModel itemModel = new ItemModel(getContext());
 
         ArrayList<ItemInfo> listItems = new ArrayList<>();
-        listItems = itemModel.getAllBestSaleItems();
+        int itemID = getArguments().getInt("itemID");
+        listItems = itemModel.getItemsByID(itemID);
 
-        adapter = new ItemsAdapter(listItems, getContext());
+        FragmentManager fragmentManager = getFragmentManager();
+        adapter = new ItemsDetailsAdapter(listItems, getContext(), fragmentManager);
         recyclerView.setAdapter(adapter);
     }
 }

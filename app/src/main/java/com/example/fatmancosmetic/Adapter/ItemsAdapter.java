@@ -3,6 +3,7 @@ package com.example.fatmancosmetic.Adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,11 +27,13 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.SkinCareItem
     ArrayList<ItemInfo> skinCareItemsLocations;
     Context context;
     ItemModel itemModel;
+    FragmentManager fragmentManager;
 
 
-    public ItemsAdapter(ArrayList<ItemInfo> skinCareItemsLocations, Context context) {
+    public ItemsAdapter(ArrayList<ItemInfo> skinCareItemsLocations, Context context, FragmentManager fragmentManager) {
         this.skinCareItemsLocations = skinCareItemsLocations;
         this.context = context;
+        this.fragmentManager = fragmentManager;
     }
 
     @NonNull
@@ -49,12 +52,17 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.SkinCareItem
         holder.imageView.setImageBitmap(bmp);
         holder.title.setText(itemInfo.getName());
         holder.price.setText(itemInfo.getPrice()+"₫");
+        int id = itemInfo.getID();
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                ItemDetails itemDetails = new ItemDetails();
-//                FragmentManager manager = getFragmentManager();
-//                manager.beginTransaction().replace(R.id.fragment, itemDetails, itemDetails.getTag()).commit();
+                ItemDetails itemDetails = new ItemDetails();
+                Bundle bundle = new Bundle();
+                bundle.putInt("itemID", id);
+                //set Fragmentclass Arguments
+                itemDetails.setArguments(bundle);
+                fragmentManager.beginTransaction().replace(R.id.fragment, itemDetails, itemDetails.getTag()).commit();
+
             }
         });
 
