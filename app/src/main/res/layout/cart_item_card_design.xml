@@ -15,7 +15,7 @@
         android:padding="10dp">
 
         <ImageView
-            android:id="@+id/new_items_image"
+            android:id="@+id/cart_items_image"
             android:layout_width="129dp"
             android:layout_height="138dp"
             android:scaleType="centerCrop"
@@ -25,7 +25,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <TextView
-                android:id="@+id/new_items_title"
+                android:id="@+id/cart_items_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/baloo"
@@ -49,11 +49,13 @@
                     android:orientation="horizontal">
 
                     <ImageView
+                        android:id="@+id/cart_items_descrease"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:src="@drawable/icon_remove" />
 
                     <TextView
+                        android:id="@+id/cart_items_count"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_margin="5dp"
@@ -62,6 +64,7 @@
                         android:textSize="15dp" />
 
                     <ImageView
+                        android:id="@+id/cart_items_increase"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:src="@drawable/icon_add" />
@@ -70,7 +73,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/new_items_price"
+                android:id="@+id/cart_items_price"
                 android:layout_width="match_parent"
                 android:layout_height="34dp"
                 android:gravity="start|center"
