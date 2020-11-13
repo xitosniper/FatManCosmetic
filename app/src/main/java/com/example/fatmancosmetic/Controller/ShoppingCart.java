@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.fatmancosmetic.Adapter.ItemsAdapter;
 import com.example.fatmancosmetic.Info.ItemInfo;
@@ -33,8 +34,10 @@ public class ShoppingCart extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private ImageView backBtn;
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
+
     public ShoppingCart() {
         // Required empty public constructor
     }
@@ -74,9 +77,22 @@ public class ShoppingCart extends Fragment {
         View view = inflater.inflate(R.layout.fragment_shopping_cart, container, false);
         //Hooks
         recyclerView = view.findViewById(R.id.shoppingCart_recyclerView);
+        backBtn = view.findViewById(R.id.back_pressed);
+
 
         //Recycle View Function Calls
         recyclerView();
+
+        //Set handle
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Home home = new Home();
+                FragmentManager manager = getFragmentManager();
+                manager.beginTransaction().replace(R.id.fragment, home, home.getTag()).commit();
+
+            }
+        });
 
         return view;
     }
@@ -90,8 +106,8 @@ public class ShoppingCart extends Fragment {
 
         ArrayList<ItemInfo> listItems = new ArrayList<>();
 //        listItems = itemModel.getItem;
-
-        adapter = new ItemsAdapter(listItems, getContext());
+        FragmentManager fragmentManager = getFragmentManager();
+        adapter = new ItemsAdapter(listItems, getContext(),fragmentManager);
         recyclerView.setAdapter(adapter);
     }
 }

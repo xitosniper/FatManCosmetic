@@ -2,41 +2,38 @@ package com.example.fatmancosmetic.Info;
 
 public class OrderDetailInfo {
     //OrderDetails table 6 columns
-    private String ID;
+    private int ID;
     private String orderDetailsID;
     private String orderID;
     private String itemID;
     private int Quantity;
-    private Float Price;
-    private int Status;
+    private int Price;
 
     public OrderDetailInfo() {
     }
 
-    public OrderDetailInfo(String ID, String orderDetailsID, String orderID, String itemID, int quantity, Float price, int status) {
+    public OrderDetailInfo(int ID, String orderDetailsID, String orderID, String itemID, int quantity, int price) {
         this.ID = ID;
         this.orderDetailsID = orderDetailsID;
         this.orderID = orderID;
         this.itemID = itemID;
-        Quantity = quantity;
-        Price = price;
-        Status = status;
+        this.Quantity = quantity;
+        this.Price = price;
     }
 
-    public OrderDetailInfo(String orderDetailsID, String orderID, String itemID, int quantity, Float price, int status) {
+    public OrderDetailInfo(String orderDetailsID, String orderID, String itemID, int quantity, int price) {
         this.orderDetailsID = orderDetailsID;
         this.orderID = orderID;
         this.itemID = itemID;
-        Quantity = quantity;
-        Price = price;
-        Status = status;
+        this.Quantity = quantity;
+        this.Price = price;
     }
 
-    public String getID() {
+    public int getID() {
         return ID;
     }
 
-    public void setID(String ID) {
+    public void setID(int ID) {
         this.ID = ID;
     }
 
@@ -72,19 +69,12 @@ public class OrderDetailInfo {
         Quantity = quantity;
     }
 
-    public Float getPrice() {
+    public int getPrice() {
         return Price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(int price) {
         Price = price;
     }
 
-    public int getStatus() {
-        return Status;
-    }
-
-    public void setStatus(int status) {
-        Status = status;
-    }
 }

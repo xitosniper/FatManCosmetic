@@ -48,8 +48,8 @@ public class DBManager extends SQLiteOpenHelper {
             "passWord VARCHAR(50)," +
             "facebookID VARCHAR(50)," +
             "facebookLink VARCHAR(50)," +
-            "emailID VARCHAR(50)," +
-            "emailLink VARCHAR(50)," +
+            "gmailID VARCHAR(50)," +
+            "gmailLink VARCHAR(50)," +
             "Name VARCHAR(50)," +
             "Image BLOB," +
             "Age INTEGER," +
@@ -82,7 +82,6 @@ public class DBManager extends SQLiteOpenHelper {
             "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
             "orderID VARCHAR(15)," +
             "customerID VARCHAR(15)," +
-            "orderDetailID VARCHAR(15)," +
             "orderDate VARCHAR(50)," +
             "shipDate VARCHAR(50)," +
             "Address VARCHAR(255)," +
@@ -94,10 +93,11 @@ public class DBManager extends SQLiteOpenHelper {
     //SQLQuery Create Table OrderDetails
     String SQLQueryOrderDetails = "CREATE TABLE  OrderDetails(" +
             "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
-            "orderDetailID VARCHAR(15)," +
+            "orderDetailsID VARCHAR(15)," +
             "orderID VARCHAR(15)," +
-            "staffID VARCHAR(15)," +
-            "dateUpdate VARCHAR(50));";
+            "itemID VARCHAR(15)," +
+            "Quantity INTEGER," +
+            "Price INTEGER);";
 
     //SQLQuery Create Table Items
     String SQLQueryItems = "CREATE TABLE  Items(" +

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fatmancosmetic.Controller.ItemDetails;
+import com.example.fatmancosmetic.Controller.ShoppingCart;
 import com.example.fatmancosmetic.Info.BrandInfo;
 import com.example.fatmancosmetic.Info.CategoryInfo;
 import com.example.fatmancosmetic.Info.ItemInfo;
@@ -66,6 +68,12 @@ public class ItemsDetailsAdapter extends RecyclerView.Adapter<ItemsDetailsAdapte
 //
 //            }
 //        });
+        holder.shoppingCartBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("This add to cart: ", String.valueOf(id));
+            }
+        });
     }
 
     @Override
@@ -74,7 +82,7 @@ public class ItemsDetailsAdapter extends RecyclerView.Adapter<ItemsDetailsAdapte
     }
 
     public class ItemsDetailsHolder extends RecyclerView.ViewHolder{
-        ImageView imageView;
+        ImageView imageView , shoppingCartBtn;
         TextView id, title, price, description;
         public ItemsDetailsHolder(@NonNull View itemView) {
             super(itemView);
@@ -83,6 +91,7 @@ public class ItemsDetailsAdapter extends RecyclerView.Adapter<ItemsDetailsAdapte
             id = itemView.findViewById(R.id.items_id);
             price = itemView.findViewById(R.id.items_price);
             description = itemView.findViewById(R.id.items_description);
+            shoppingCartBtn = itemView.findViewById(R.id.shoppingCart_icon);
         }
     }
 }

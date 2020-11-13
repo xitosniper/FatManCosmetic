@@ -59,7 +59,6 @@ public class SQLElement {
     private static final String TABLE_ORDER_NAME = "Orders";
     private static final String ORDER_ID = "orderID";
     private static final String ORDER_CUSTOMER_ID = "customerID";
-    private static final String ORDER_ORDERDETAILS_ID = "orderDetailsID";
     private static final String ORDER_ORDERDATE = "orderDate";
     private static final String ORDER_SHIPDATE = "shipDate";
     private static final String ORDER_ADDRESS = "Address";
@@ -74,7 +73,6 @@ public class SQLElement {
     private static final String ORDERDETAILS_ITEM_ID = "itemID";
     private static final String ORDERDETAILS_QUANTITY = "Quantity";
     private static final String ORDERDETAILS_PRICE = "Price";
-    private static final String ORDERDETAILS_STATUS = "Status";
     //BrowseOrders table 4 columns
     private static final String TABLE_BROWSEORDER_NAME = "BrowseOrders";
     private static final String BROWSEORDER_ID = "browseOrderID";

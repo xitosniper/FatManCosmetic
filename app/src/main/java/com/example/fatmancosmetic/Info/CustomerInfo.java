@@ -16,13 +16,13 @@ public class CustomerInfo {
     private int Gender;
     private String Phone;
     private String Address;
-    private String Emails;
+    private String Email;
     private int Status;
 
     public CustomerInfo() {
     }
 
-    public CustomerInfo(int ID, String customerID, String userName, String passWord, String facebookID, String facebookLink, String gmailID, String gmailLink, String name, String image, String age, int gender, String phone, String address, String emails, int status) {
+    public CustomerInfo(int ID, String customerID, String userName, String passWord, String facebookID, String facebookLink, String gmailID, String gmailLink, String name, String image, String age, int gender, String phone, String address, String email, int status) {
         this.ID = ID;
         this.customerID = customerID;
         this.userName = userName;
@@ -31,17 +31,17 @@ public class CustomerInfo {
         this.facebookLink = facebookLink;
         this.gmailID = gmailID;
         this.gmailLink = gmailLink;
-        Name = name;
-        Image = image;
-        Age = age;
-        Gender = gender;
-        Phone = phone;
-        Address = address;
-        Emails = emails;
-        Status = status;
+        this.Name = name;
+        this.Image = image;
+        this.Age = age;
+        this.Gender = gender;
+        this.Phone = phone;
+        this.Address = address;
+        this.Email = email;
+        this.Status = status;
     }
 
-    public CustomerInfo(String customerID, String userName, String passWord, String facebookID, String facebookLink, String gmailID, String gmailLink, String name, String image, String age, int gender) {
+    public CustomerInfo(String customerID, String userName, String passWord, String facebookID, String facebookLink, String gmailID, String gmailLink, String name, String image, String age, int gender, String phone, String address, String email, int status) {
         this.customerID = customerID;
         this.userName = userName;
         this.passWord = passWord;
@@ -49,10 +49,22 @@ public class CustomerInfo {
         this.facebookLink = facebookLink;
         this.gmailID = gmailID;
         this.gmailLink = gmailLink;
-        Name = name;
-        Image = image;
-        Age = age;
-        Gender = gender;
+        this.Name = name;
+        this.Image = image;
+        this.Age = age;
+        this.Gender = gender;
+        this.Phone = phone;
+        this.Address = address;
+        this.Email = email;
+        this.Status = status;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getCustomerID() {
@@ -159,12 +171,12 @@ public class CustomerInfo {
         Address = address;
     }
 
-    public String getEmails() {
-        return Emails;
+    public String getEmail() {
+        return Email;
     }
 
-    public void setEmails(String emails) {
-        Emails = emails;
+    public void setEmail(String email) {
+        Email = email;
     }
 
     public int getStatus() {

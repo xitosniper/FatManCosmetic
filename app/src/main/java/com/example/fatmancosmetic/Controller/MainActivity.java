@@ -17,10 +17,16 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.fatmancosmetic.DBManager.DBManager;
 import com.example.fatmancosmetic.Info.BrandInfo;
 import com.example.fatmancosmetic.Info.CategoryInfo;
+import com.example.fatmancosmetic.Info.CustomerInfo;
 import com.example.fatmancosmetic.Info.ItemInfo;
+import com.example.fatmancosmetic.Info.OrderDetailInfo;
+import com.example.fatmancosmetic.Info.OrderInfo;
 import com.example.fatmancosmetic.Model.BrandModel;
 import com.example.fatmancosmetic.Model.CategoryModel;
+import com.example.fatmancosmetic.Model.CustomerModel;
 import com.example.fatmancosmetic.Model.ItemModel;
+import com.example.fatmancosmetic.Model.OrderDetailsModel;
+import com.example.fatmancosmetic.Model.OrderModel;
 import com.example.fatmancosmetic.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -34,11 +40,10 @@ public class MainActivity extends AppCompatActivity {
     private BrandModel brandModel;
     private CategoryModel categoryModel;
     private ItemModel itemModel;
+    private OrderModel orderModel;
+    private OrderDetailsModel orderDetailsModel;
+    private CustomerModel customerModel;
     private DBManager dbManager;
-    private Fragment homeFragment = new Home();
-    private Fragment searchFragment = new Search();
-    private Fragment shoppingCartFragment = new ShoppingCart();
-    private Fragment accountFragment = new Account();
 
 
     @Override
@@ -57,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     @Override
     public boolean onSupportNavigateUp() {
         Navigation.findNavController(MainActivity.this,R.id.fragment).navigateUp();
@@ -73,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
         brandModel = new BrandModel(this);
         categoryModel = new CategoryModel(this);
         itemModel = new ItemModel(this);
+        orderModel = new OrderModel(this);
+        orderDetailsModel = new OrderDetailsModel(this);
+        customerModel = new CustomerModel(this);
 
         brandModel.addBrand(new BrandInfo("000001","Louboutin",1));
         brandModel.addBrand(new BrandInfo("000002","TeBeaute",1));
@@ -81,6 +90,13 @@ public class MainActivity extends AppCompatActivity {
         categoryModel.addCategory(new CategoryInfo("000001", "Dưỡng Thể", 1));
         categoryModel.addCategory(new CategoryInfo("000002", "Trang Điểm", 1));
         categoryModel.addCategory(new CategoryInfo("000003", "Dưỡng Da", 1));
+
+        orderModel.addOrder(new OrderInfo("000001","000001","2020/11/10","2020/11/11","2Q1 Bình Giã P.13","0903831374","","175000",1));
+        orderDetailsModel.addOrderDetails(new OrderDetailInfo("000001","000001","000037",2,50000));
+        orderDetailsModel.addOrderDetails(new OrderDetailInfo("000002","000001","000038",1,125000));
+
+        customerModel.addCustomer(new CustomerInfo("000001","","123456","","","","","Nguyễn Thị Khương","","28",1,"0903831374","2Q1 Bình Giã P.13","khuongnt@gmail.com",1));
+
 
         ImageView imageView1 = new ImageView(this);
         ImageView imageView2 = new ImageView(this);
@@ -391,9 +407,3 @@ public class MainActivity extends AppCompatActivity {
 
     }
 }
-
-
-
-//        ArrayList<ItemInfo> listItems = new ArrayList<>();
-//        listItems = itemModel.getAllItem();
-//        listItems.get(1).setImage(imageInByte);

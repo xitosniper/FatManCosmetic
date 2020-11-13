@@ -5,7 +5,6 @@ public class OrderInfo {
     private int ID;
     private String orderID;
     private String customerID;
-    private String orderDetailsID;
     private String orderDate;
     private String shipDate;
     private String Address;
@@ -17,11 +16,10 @@ public class OrderInfo {
     public OrderInfo() {
     }
 
-    public OrderInfo(int ID, String orderID, String customerID, String orderDetailsID, String orderDate, String shipDate, String address, String phone, String note, String amount, int status) {
+    public OrderInfo(int ID, String orderID, String customerID, String orderDate, String shipDate, String address, String phone, String note, String amount, int status) {
         this.ID = ID;
         this.orderID = orderID;
         this.customerID = customerID;
-        this.orderDetailsID = orderDetailsID;
         this.orderDate = orderDate;
         this.shipDate = shipDate;
         Address = address;
@@ -31,10 +29,9 @@ public class OrderInfo {
         Status = status;
     }
 
-    public OrderInfo(String orderID, String customerID, String orderDetailsID, String orderDate, String shipDate, String address, String phone, String note, String amount, int status) {
+    public OrderInfo(String orderID, String customerID, String orderDate, String shipDate, String address, String phone, String note, String amount, int status) {
         this.orderID = orderID;
         this.customerID = customerID;
-        this.orderDetailsID = orderDetailsID;
         this.orderDate = orderDate;
         this.shipDate = shipDate;
         Address = address;
@@ -66,14 +63,6 @@ public class OrderInfo {
 
     public void setCustomerID(String customerID) {
         this.customerID = customerID;
-    }
-
-    public String getOrderDetailsID() {
-        return orderDetailsID;
-    }
-
-    public void setOrderDetailsID(String orderDetailsID) {
-        this.orderDetailsID = orderDetailsID;
     }
 
     public String getOrderDate() {

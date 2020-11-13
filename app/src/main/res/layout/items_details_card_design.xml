@@ -27,6 +27,7 @@
                     android:textColor="#717171"
                     android:textSize="25dp" />
                 <ImageView
+                    android:id="@+id/shoppingCart_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/cart_icon"
