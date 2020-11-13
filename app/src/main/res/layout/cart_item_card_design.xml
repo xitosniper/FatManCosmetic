@@ -16,8 +16,8 @@
 
         <ImageView
             android:id="@+id/new_items_image"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
+            android:layout_width="129dp"
+            android:layout_height="138dp"
             android:scaleType="centerCrop"
             android:src="@drawable/son_li" />
         <LinearLayout
