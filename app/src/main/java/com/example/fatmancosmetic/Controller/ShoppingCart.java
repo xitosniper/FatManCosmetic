@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.fatmancosmetic.Adapter.ItemsAdapter;
+import com.example.fatmancosmetic.Adapter.ShoppingCartAdapter;
 import com.example.fatmancosmetic.Info.ItemInfo;
 import com.example.fatmancosmetic.Model.ItemModel;
 import com.example.fatmancosmetic.R;
@@ -33,8 +34,10 @@ public class ShoppingCart extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
+
     public ShoppingCart() {
         // Required empty public constructor
     }
@@ -75,7 +78,7 @@ public class ShoppingCart extends Fragment {
         //Hooks
         recyclerView = view.findViewById(R.id.shoppingCart_recyclerView);
 
-        //Recycle View Function Calls
+        // Call RecycleView function to show list
         recyclerView();
 
         return view;
@@ -85,13 +88,13 @@ public class ShoppingCart extends Fragment {
     private void recyclerView() {
         recyclerView.setHasFixedSize(true);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL,false));
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL, false));
         ItemModel itemModel = new ItemModel(getContext());
 
         ArrayList<ItemInfo> listItems = new ArrayList<>();
-//        listItems = itemModel.getItem;
-
-        adapter = new ItemsAdapter(listItems, getContext());
+        listItems = itemModel.getItemsByID(2);
+        FragmentManager fragmentManager = getFragmentManager();
+        adapter = new ShoppingCartAdapter(listItems, getContext(), fragmentManager);
         recyclerView.setAdapter(adapter);
     }
 }

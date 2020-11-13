@@ -10,5 +10,5 @@
         android:layout_centerInParent="true"
         android:id="@+id/sign_in_button"
         android:layout_width="wrap_content"
-        android:layout_height="11dp" />
+        android:layout_height="wrap_content" />
 </RelativeLayout>

@@ -54,18 +54,6 @@ public class ItemsDetailsAdapter extends RecyclerView.Adapter<ItemsDetailsAdapte
         holder.price.setText(itemInfo.getPrice()+"₫");
         holder.description.setText(itemInfo.getDescription());
         int id = itemInfo.getID();
-//        holder.imageView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ItemDetails itemDetails = new ItemDetails();
-//                Bundle bundle = new Bundle();
-//                bundle.putInt("itemID", id);
-//                //set Fragmentclass Arguments
-//                itemDetails.setArguments(bundle);
-//                fragmentManager.beginTransaction().replace(R.id.fragment, itemDetails, itemDetails.getTag()).commit();
-//
-//            }
-//        });
     }
 
     @Override
