@@ -3,12 +3,20 @@ package com.example.fatmancosmetic.Controller;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.fatmancosmetic.Adapter.ItemsAdapter;
+import com.example.fatmancosmetic.Info.ItemInfo;
+import com.example.fatmancosmetic.Model.ItemModel;
 import com.example.fatmancosmetic.R;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,7 +33,8 @@ public class ShoppingCart extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    RecyclerView recyclerView;
+    RecyclerView.Adapter adapter;
     public ShoppingCart() {
         // Required empty public constructor
     }
@@ -60,7 +69,29 @@ public class ShoppingCart extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shopping_cart, container, false);
+        View view = inflater.inflate(R.layout.fragment_shopping_cart, container, false);
+        //Hooks
+        recyclerView = view.findViewById(R.id.shoppingCart_recyclerView);
+
+        //Recycle View Function Calls
+        recyclerView();
+
+        return view;
+    }
+
+
+    private void recyclerView() {
+        recyclerView.setHasFixedSize(true);
+
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL,false));
+        ItemModel itemModel = new ItemModel(getContext());
+
+        ArrayList<ItemInfo> listItems = new ArrayList<>();
+//        listItems = itemModel.getItem;
+
+        adapter = new ItemsAdapter(listItems, getContext());
+        recyclerView.setAdapter(adapter);
     }
 }
