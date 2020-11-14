@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.fatmancosmetic.R;
@@ -26,6 +27,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -98,21 +100,22 @@ public class Account extends Fragment {
             Uri personPhoto = acct.getPhotoUrl();
 
             profile_image = view.findViewById(R.id.profile_image);
+//            Log.e("HInh anh : " , String.valueOf(personPhoto));
             Glide.with(this).load(String.valueOf(personPhoto)).into(profile_image);
-
 //            URL newurl = null;
 //            try {
 //                newurl = new URL(String.valueOf(personPhoto));
 //                Bitmap mIcon_val = BitmapFactory.decodeStream(newurl.openConnection().getInputStream());
+//            Log.e("HInh anh : " , mIcon_val.toString());
+//
 //                profile_image.setImageBitmap(mIcon_val);
 //            } catch (MalformedURLException e) {
 //                e.printStackTrace();
 //            } catch (IOException e) {
 //                e.printStackTrace();
 //            }
-
-//            Picasso.get().load(personPhoto).into(profile_image);
-            Log.e("personPhoto : ", personPhoto+"");
+//            Picasso.get().load(String.valueOf(personPhoto)).into(profile_image);
+//            Log.e("personPhoto : ", personPhoto+"");
 
             profile_name = view.findViewById(R.id.profile_name);
             profile_name.setText(personName);
@@ -133,14 +136,14 @@ public class Account extends Fragment {
                 .addOnCompleteListener((Executor) this, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Home home = new Home();
+//                        Home home = new Home();
 //                        FragmentManager fragmentManager = getFragmentManager();
 //                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 //                        fragmentTransaction.replace(R.id.fragment, home);
 //                        fragmentTransaction.commit();
-
-                        FragmentManager manager = getFragmentManager();
-                        manager.beginTransaction().replace(R.id.fragment, home, home.getTag()).commit();
+//                        Toast.makeText(getContext(), "logout roi ", Toast.LENGTH_SHORT).show();
+//                        FragmentManager manager = getFragmentManager();
+//                        manager.beginTransaction().replace(R.id.fragment, home, home.getTag()).commit();
                     }
                 });
     }
