@@ -107,7 +107,7 @@ public class CategoryMakeUp extends Fragment {
         listItems = itemModel.getMakeUpItems();
 
         FragmentManager fragmentManager = getFragmentManager();
-        makeUpItems_adapter = new ItemsAdapter(listItems, getContext(), fragmentManager);
+        makeUpItems_adapter = new ItemsAdapter(listItems, getContext(), fragmentManager, "CategoryMakeUp");
         makeUpItems_recyclerView.setAdapter(makeUpItems_adapter);
     }
 }

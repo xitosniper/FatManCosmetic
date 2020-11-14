@@ -28,12 +28,14 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.SkinCareItem
     Context context;
     ItemModel itemModel;
     FragmentManager fragmentManager;
+    String page;
 
 
-    public ItemsAdapter(ArrayList<ItemInfo> skinCareItemsLocations, Context context, FragmentManager fragmentManager) {
+    public ItemsAdapter(ArrayList<ItemInfo> skinCareItemsLocations, Context context, FragmentManager fragmentManager, String page) {
         this.skinCareItemsLocations = skinCareItemsLocations;
         this.context = context;
         this.fragmentManager = fragmentManager;
+        this.page = page;
     }
 
     @NonNull
@@ -52,13 +54,13 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.SkinCareItem
         holder.imageView.setImageBitmap(bmp);
         holder.title.setText(itemInfo.getName());
         holder.price.setText(itemInfo.getPrice()+"₫");
-        int id = itemInfo.getID();
+        String id = itemInfo.getItemID();
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ItemDetails itemDetails = new ItemDetails();
+                ItemDetails itemDetails = new ItemDetails(page);
                 Bundle bundle = new Bundle();
-                bundle.putInt("itemID", id);
+                bundle.putString("itemID", id);
                 //set Fragmentclass Arguments
                 itemDetails.setArguments(bundle);
                 fragmentManager.beginTransaction().replace(R.id.fragment, itemDetails, itemDetails.getTag()).commit();

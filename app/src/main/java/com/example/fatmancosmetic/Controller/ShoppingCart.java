@@ -5,16 +5,22 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.fatmancosmetic.Adapter.ItemsAdapter;
+import com.example.fatmancosmetic.Adapter.ShoppingCartAdapter;
 import com.example.fatmancosmetic.Info.ItemInfo;
+import com.example.fatmancosmetic.Info.OrderDetailInfo;
 import com.example.fatmancosmetic.Model.ItemModel;
+import com.example.fatmancosmetic.Model.OrderDetailsModel;
 import com.example.fatmancosmetic.R;
 
 import java.util.ArrayList;
@@ -37,6 +43,7 @@ public class ShoppingCart extends Fragment {
     private ImageView backBtn;
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
+    private TextView numberOfItemsInCart, shoppingCart_Amount;
 
     public ShoppingCart() {
         // Required empty public constructor
@@ -78,6 +85,8 @@ public class ShoppingCart extends Fragment {
         //Hooks
         recyclerView = view.findViewById(R.id.shoppingCart_recyclerView);
         backBtn = view.findViewById(R.id.back_pressed);
+        numberOfItemsInCart = view.findViewById(R.id.shoppingCart_numberOfItems);
+        shoppingCart_Amount = view.findViewById(R.id.shoppingCart_Amount);
 
 
         //Recycle View Function Calls
@@ -101,13 +110,28 @@ public class ShoppingCart extends Fragment {
     private void recyclerView() {
         recyclerView.setHasFixedSize(true);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL,false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false));
         ItemModel itemModel = new ItemModel(getContext());
+        OrderDetailsModel orderDetailsModel = new OrderDetailsModel(getContext());
 
         ArrayList<ItemInfo> listItems = new ArrayList<>();
-//        listItems = itemModel.getItem;
+        ArrayList<OrderDetailInfo> listOrderDetails = new ArrayList<>();
+
+
+        String customerID = "000001";
+        listItems = itemModel.getItemsByCustomerID(customerID);
+        listOrderDetails = orderDetailsModel.getOrderDetailsByCustomerID(customerID);
+        int amount = 0;
+        for (OrderDetailInfo orderDetailInfo:listOrderDetails) {
+            amount += orderDetailInfo.getQuantity() * orderDetailInfo.getPrice();
+        }
+
+        //Set count items in shopping cart
+        numberOfItemsInCart.setText(listItems.size()+"");
+        shoppingCart_Amount.setText(amount +"");
+
         FragmentManager fragmentManager = getFragmentManager();
-        adapter = new ItemsAdapter(listItems, getContext(),fragmentManager);
+        adapter = new ShoppingCartAdapter(listItems, getContext(),fragmentManager);
         recyclerView.setAdapter(adapter);
     }
 }

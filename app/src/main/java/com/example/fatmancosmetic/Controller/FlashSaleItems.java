@@ -105,7 +105,7 @@ public class FlashSaleItems extends Fragment {
         listItems = itemModel.getAllSaleItems();
 
         FragmentManager fragmentManager = getFragmentManager();
-        adapter = new ItemsAdapter(listItems, getContext(), fragmentManager);
+        adapter = new ItemsAdapter(listItems, getContext(), fragmentManager, "FlashSaleItems");
         recyclerView.setAdapter(adapter);
     }
 }

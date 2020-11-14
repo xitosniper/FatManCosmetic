@@ -105,7 +105,7 @@ public class BestSellerItems extends Fragment {
         listItems = itemModel.getAllBestSaleItems();
 
         FragmentManager fragmentManager = getFragmentManager();
-        adapter = new ItemsAdapter(listItems, getContext(), fragmentManager);
+        adapter = new ItemsAdapter(listItems, getContext(), fragmentManager, "BestSellerItems");
         recyclerView.setAdapter(adapter);
     }
 }

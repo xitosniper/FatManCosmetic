@@ -106,7 +106,7 @@ public class NewItems extends Fragment {
         listItems = itemModel.getAllNewItems();
 
         FragmentManager fragmentManager = getFragmentManager();
-        adapter = new ItemsAdapter(listItems, getContext(), fragmentManager);
+        adapter = new ItemsAdapter(listItems, getContext(), fragmentManager, "Home");
         recyclerView.setAdapter(adapter);
     }
 }

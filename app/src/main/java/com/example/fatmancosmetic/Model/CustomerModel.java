@@ -71,6 +71,41 @@ public class CustomerModel extends DBManager {
         return listCustomers;
     }
 
+    public ArrayList<CustomerInfo> getCustomerByCustomerID(String customerID){
+        ArrayList<CustomerInfo> listCustomers = new ArrayList<>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_CUSTOMER_NAME + " WHERE Customers.customerID = '" + customerID +"'";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                CustomerInfo customerInfo = new CustomerInfo();
+                customerInfo.setID(cursor.getInt(0));
+                customerInfo.setCustomerID(cursor.getString(1));
+                customerInfo.setUserName(cursor.getString(2));
+                customerInfo.setPassWord(cursor.getString(3));
+                customerInfo.setFacebookID(cursor.getString(4));
+                customerInfo.setFacebookLink(cursor.getString(5));
+                customerInfo.setGmailID(cursor.getString(6));
+                customerInfo.setGmailLink(cursor.getString(7));
+                customerInfo.setName(cursor.getString(8));
+                customerInfo.setImage(cursor.getString(9));
+                customerInfo.setAge(cursor.getString(10));
+                customerInfo.setGender(cursor.getInt(11));
+                customerInfo.setPhone(cursor.getString(12));
+                customerInfo.setAddress(cursor.getString(13));
+                customerInfo.setEmail(cursor.getString(14));
+                customerInfo.setStatus(cursor.getInt(15));
+                listCustomers.add(customerInfo);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return listCustomers;
+    }
+
     public void addCustomer(CustomerInfo customerInfo){
 
         SQLiteDatabase db = this.getWritableDatabase();

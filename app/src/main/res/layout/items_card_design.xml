@@ -20,7 +20,7 @@
             android:scaleType="centerCrop"/>
         <TextView
             android:id="@+id/items_title"
-            android:maxLength="35"
+            android:maxLength="30"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Son Kem Lì Merzy Velvet Tint Season 3"

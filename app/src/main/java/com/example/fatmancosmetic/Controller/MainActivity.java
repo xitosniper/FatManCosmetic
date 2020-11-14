@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Function Add Data Into DB Call
-//        addDB();
+        //addDB();
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         navController = Navigation.findNavController(MainActivity.this, R.id.fragment);
@@ -92,8 +92,8 @@ public class MainActivity extends AppCompatActivity {
         categoryModel.addCategory(new CategoryInfo("000003", "Dưỡng Da", 1));
 
         orderModel.addOrder(new OrderInfo("000001","000001","2020/11/10","2020/11/11","2Q1 Bình Giã P.13","0903831374","","175000",1));
-        orderDetailsModel.addOrderDetails(new OrderDetailInfo("000001","000001","000037",2,50000));
-        orderDetailsModel.addOrderDetails(new OrderDetailInfo("000002","000001","000038",1,125000));
+        orderDetailsModel.addOrderDetails(new OrderDetailInfo("000001","000001","000035",2,140000));
+        orderDetailsModel.addOrderDetails(new OrderDetailInfo("000002","000001","000036",1,59000));
 
         customerModel.addCustomer(new CustomerInfo("000001","","123456","","","","","Nguyễn Thị Khương","","28",1,"0903831374","2Q1 Bình Giã P.13","khuongnt@gmail.com",1));
 

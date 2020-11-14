@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,7 +41,12 @@ public class ItemDetails extends Fragment {
     private ImageView backBtn;
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
+    private String page;
 
+    public ItemDetails(String page) {
+        // Required empty public constructor
+        this.page = page;
+    }
     public ItemDetails() {
         // Required empty public constructor
     }
@@ -89,9 +95,48 @@ public class ItemDetails extends Fragment {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Home home = new Home();
+//                Home home = new Home();
+//                FragmentManager manager = getFragmentManager();
+//                manager.beginTransaction().replace(R.id.fragment, home, home.getTag()).commit();
                 FragmentManager manager = getFragmentManager();
-                manager.beginTransaction().replace(R.id.fragment, home, home.getTag()).commit();
+                switch (page){
+                    case "BestSellerItems":
+                        BestSellerItems bestSellerItems = new BestSellerItems();
+
+                        manager.beginTransaction().replace(R.id.fragment, bestSellerItems, bestSellerItems.getTag()).commit();
+                        break;
+                    case "CategoryBodyCare":
+                        CategoryBodyCare categoryBodyCare = new CategoryBodyCare();
+                        manager.beginTransaction().replace(R.id.fragment, categoryBodyCare, categoryBodyCare.getTag()).commit();
+                        break;
+                    case "CategorySkinCare":
+                        CategorySkinCare categorySkinCare = new CategorySkinCare();
+                        manager.beginTransaction().replace(R.id.fragment, categorySkinCare, categorySkinCare.getTag()).commit();
+                        break;
+                    case "CategoryMakeUp":
+                        CategoryMakeUp categoryMakeUp = new CategoryMakeUp();
+                        manager.beginTransaction().replace(R.id.fragment, categoryMakeUp, categoryMakeUp.getTag()).commit();
+                        break;
+                    case "FlashSaleItems":
+                        FlashSaleItems flashSaleItems = new FlashSaleItems();
+                        manager.beginTransaction().replace(R.id.fragment, flashSaleItems, flashSaleItems.getTag()).commit();
+                        break;
+                    case "Home":
+                        Home home = new Home();
+                        manager.beginTransaction().replace(R.id.fragment, home, home.getTag()).commit();
+                        break;
+                    case "NewItems":
+                        NewItems newItems = new NewItems();
+                        manager.beginTransaction().replace(R.id.fragment, newItems, newItems.getTag()).commit();
+                        break;
+                    case "ShoppingCart":
+                        ShoppingCart shoppingCart = new ShoppingCart();
+                        manager.beginTransaction().replace(R.id.fragment, shoppingCart, shoppingCart.getTag()).commit();
+                        break;
+                    default:
+                        Home home1 = new Home();
+                        manager.beginTransaction().replace(R.id.fragment, home1, home1.getTag()).commit();
+                }
             }
         });
         return view;
@@ -103,8 +148,9 @@ public class ItemDetails extends Fragment {
         ItemModel itemModel = new ItemModel(getContext());
 
         ArrayList<ItemInfo> listItems = new ArrayList<>();
-        int itemID = getArguments().getInt("itemID");
-        listItems = itemModel.getItemsByID(itemID);
+        String itemID = getArguments().getString("itemID");
+
+        listItems = itemModel.getItemsByItemID(itemID);
 
         FragmentManager fragmentManager = getFragmentManager();
         adapter = new ItemsDetailsAdapter(listItems, getContext(), fragmentManager);

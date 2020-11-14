@@ -58,6 +58,37 @@ public class OrderModel extends DBManager {
         db.close();
         return listOrders;
     }
+
+    public ArrayList<OrderInfo> getOrderByCustomerID(String customerID){
+        ArrayList<OrderInfo> listOrders = new ArrayList<>();
+        // Select All Query
+        String selectQuery = "SELECT Orders.* FROM Orders WHERE Orders.customerID = '" + customerID + "'" ;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                OrderInfo orderInfo = new OrderInfo();
+                orderInfo.setID(cursor.getInt(0));
+                orderInfo.setOrderID(cursor.getString(1));
+                orderInfo.setCustomerID(cursor.getString(2));
+                orderInfo.setOrderDate(cursor.getString(3));
+                orderInfo.setShipDate(cursor.getString(4));
+                orderInfo.setAddress(cursor.getString(5));
+                orderInfo.setPhone(cursor.getString(6));
+                orderInfo.setNote(cursor.getString(7));
+                orderInfo.setAmount(cursor.getString(7));
+                orderInfo.setStatus(cursor.getInt(8));
+                listOrders.add(orderInfo);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return listOrders;
+    }
+
+
     public void addOrder(OrderInfo orderInfo){
 
         SQLiteDatabase db = this.getWritableDatabase();

@@ -290,7 +290,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         listItems = itemModel.get4SaleItems();
 
         FragmentManager fragmentManager = getFragmentManager();
-        flashsafe_adapter = new ItemsAdapter(listItems, this.mainActivity, fragmentManager);
+        flashsafe_adapter = new ItemsAdapter(listItems, this.mainActivity, fragmentManager, "Home");
         flashsafe_recyclerView.setAdapter(flashsafe_adapter);
     }
 
@@ -305,7 +305,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         listItems = itemModel.get4NewItems();
 
         FragmentManager fragmentManager = getFragmentManager();
-        newitems_adapter = new ItemsAdapter(listItems, this.mainActivity,fragmentManager);
+        newitems_adapter = new ItemsAdapter(listItems, this.mainActivity,fragmentManager, "Home");
         newitems_recyclerView.setAdapter(newitems_adapter);
     }
 
@@ -319,7 +319,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         listItems = itemModel.get4BestSaleItems();
 
         FragmentManager fragmentManager = getFragmentManager();
-        bestsale_adapter = new ItemsAdapter(listItems, this.mainActivity, fragmentManager);
+        bestsale_adapter = new ItemsAdapter(listItems, this.mainActivity, fragmentManager, "Home");
         bestsale_recyclerView.setAdapter(bestsale_adapter);
     }
 

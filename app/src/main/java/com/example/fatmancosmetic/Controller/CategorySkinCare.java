@@ -106,7 +106,7 @@ public class CategorySkinCare extends Fragment {
         listItems = itemModel.getBodyCareItems();
 
         FragmentManager fragmentManager = getFragmentManager();
-        adapter = new ItemsAdapter(listItems, getContext(), fragmentManager);
+        adapter = new ItemsAdapter(listItems, getContext(), fragmentManager, "CategorySkinCare");
         recyclerView.setAdapter(adapter);
     }
 }
