@@ -1,5 +1,7 @@
 package com.example.fatmancosmetic.Controller;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -124,7 +126,13 @@ public class Account extends Fragment {
             sign_out.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    signOut();
+                    switch (v.getId()) {
+                        // ...
+                        case R.id.btnSignOut:
+                            signOut();
+                            break;
+                        // ...
+                    }
                 }
             });
 
@@ -132,19 +140,23 @@ public class Account extends Fragment {
         return view;
     }
     private void signOut() {
-        mGoogleSignInClient.signOut()
-                .addOnCompleteListener((Executor) this, new OnCompleteListener<Void>() {
+        mGoogleSignInClient.signOut().addOnCompleteListener((Executor) this,
+                new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-//                        Home home = new Home();
-//                        FragmentManager fragmentManager = getFragmentManager();
-//                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                        fragmentTransaction.replace(R.id.fragment, home);
-//                        fragmentTransaction.commit();
-//                        Toast.makeText(getContext(), "logout roi ", Toast.LENGTH_SHORT).show();
-//                        FragmentManager manager = getFragmentManager();
-//                        manager.beginTransaction().replace(R.id.fragment, home, home.getTag()).commit();
+//                        updateUI(null);
+
                     }
                 });
+    }
+
+    private void updateUI(GoogleSignInAccount account) {
+        if(account != null){
+            Toast.makeText(getContext(), "Signin Successfully =))", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getActivity(), MainActivity.class));
+        }
+        else{
+            Toast.makeText(getContext(), "Signin Failed =((", Toast.LENGTH_SHORT).show();
+        }
     }
 }

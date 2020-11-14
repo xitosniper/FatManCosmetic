@@ -93,6 +93,7 @@ public class ShoppingCart extends Fragment {
 
         ArrayList<ItemInfo> listItems = new ArrayList<>();
         listItems = itemModel.getItemsByID(2);
+
         FragmentManager fragmentManager = getFragmentManager();
         adapter = new ShoppingCartAdapter(listItems, getContext(), fragmentManager);
         recyclerView.setAdapter(adapter);

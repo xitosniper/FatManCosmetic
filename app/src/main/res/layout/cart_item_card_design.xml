@@ -47,27 +47,36 @@
                     android:layout_height="match_parent"
                     android:gravity="right|bottom"
                     android:orientation="horizontal">
+                        <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+                            android:id="@+id/number_button"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:gravity="center"
+                            android:background="@color/colorAccent"
+                            app:initialNumber="1"
+                            app:finalNumber="20">
+                        </com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
 
-                    <ImageView
-                        android:id="@+id/cart_items_descrease"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/icon_remove" />
+<!--                    <ImageView-->
+<!--                        android:id="@+id/cart_items_descrease"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:src="@drawable/icon_remove" />-->
 
-                    <TextView
-                        android:id="@+id/cart_items_count"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_margin="5dp"
-                        android:gravity="center"
-                        android:text="2"
-                        android:textSize="15dp" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/cart_items_count"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_margin="5dp"-->
+<!--                        android:gravity="center"-->
+<!--                        android:text="2"-->
+<!--                        android:textSize="15dp" />-->
 
-                    <ImageView
-                        android:id="@+id/cart_items_increase"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/icon_add" />
+<!--                    <ImageView-->
+<!--                        android:id="@+id/cart_items_increase"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:src="@drawable/icon_add" />-->
                 </LinearLayout>
 
             </LinearLayout>
@@ -81,5 +90,8 @@
                 android:text="129,0000đ"
                 android:textColor="#FF0000" />
         </LinearLayout>
+
     </LinearLayout>
+
+
 </androidx.cardview.widget.CardView>
