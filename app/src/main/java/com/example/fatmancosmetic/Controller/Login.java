@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.fatmancosmetic.R;
 import com.example.fatmancosmetic.SplashScreen.SplashScreen;
@@ -44,18 +45,29 @@ public class Login extends AppCompatActivity {
         super.onStart();
         // Check for existing Google Sign In account, if the user is already signed in
         // the GoogleSignInAccount will be non-null.
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
 
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        updateUI(account);
         // Set the dimensions of the sign-in button.
         SignInButton signInButton = findViewById(R.id.sign_in_button);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
-        
+
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signIn();
             }
         });
+    }
+
+    private void updateUI(GoogleSignInAccount account) {
+        if(account != null){
+            Toast.makeText(this, "Signin Successfully =))", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, MainActivity.class));
+        }
+        else{
+            Toast.makeText(this, "Signin Failed =((", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void signIn() {
@@ -83,13 +95,13 @@ public class Login extends AppCompatActivity {
             startActivity(intent);
             finish();
             // Signed in successfully, show authenticated UI.
-//            updateUI(account);
+            updateUI(account);
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
 //            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
             Log.e("Error Google Login: ", e.getMessage());
-//            updateUI(null);
+            updateUI(null);
         }
     }
 }
