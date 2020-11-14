@@ -96,5 +96,7 @@ public class ShoppingCart extends Fragment {
         FragmentManager fragmentManager = getFragmentManager();
         adapter = new ShoppingCartAdapter(listItems, getContext(), fragmentManager);
         recyclerView.setAdapter(adapter);
+
+
     }
 }

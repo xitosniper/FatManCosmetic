@@ -53,6 +53,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.SkinCareItem
         holder.title.setText(itemInfo.getName());
         holder.price.setText(itemInfo.getPrice()+"₫");
         int id = itemInfo.getID();
+
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

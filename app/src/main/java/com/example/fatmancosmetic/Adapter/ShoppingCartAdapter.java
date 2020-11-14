@@ -3,6 +3,7 @@ package com.example.fatmancosmetic.Adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.appcompat.view.menu.MenuView;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fatmancosmetic.Controller.ItemDetails;
 import com.example.fatmancosmetic.Info.ItemInfo;
 import com.example.fatmancosmetic.Model.ItemModel;
 import com.example.fatmancosmetic.R;
@@ -49,9 +51,23 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         holder.imageView.setImageBitmap(bmp);
         holder.title.setText(itemInfo.getName());
         holder.price.setText(itemInfo.getPrice()+"");
+
+        int id = itemInfo.getID();
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ItemDetails itemDetails = new ItemDetails();
+                Bundle bundle = new Bundle();
+                bundle.putInt("itemID", id);
+                //set Fragmentclass Arguments
+                itemDetails.setArguments(bundle);
+                fragmentManager.beginTransaction().replace(R.id.fragment, itemDetails, itemDetails.getTag()).commit();
+
+            }
+        });
 //        holder.quanlity.setText(itemInfo.);
 //        holder.description.setText(itemInfo.getDescription());
-//        int id = itemInfo.getID();
+
     }
 
     @Override
