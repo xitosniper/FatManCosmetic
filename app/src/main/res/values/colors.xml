@@ -9,4 +9,6 @@
     <color name="colorSearchBackGroup">#ECEFF1</color>
     //Header
     <color name="colorMenuLeftHeader">#FFA0A0</color>
+    //Add to cart
+    <color name="colorAddToCart">#0000FF</color>
 </resources>

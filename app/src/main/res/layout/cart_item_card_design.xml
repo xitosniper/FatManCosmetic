@@ -89,8 +89,9 @@
                 android:layout_height="34dp"
                 android:gravity="start|center"
                 android:layout_marginLeft="5dp"
-                android:text="129,0000đ"
+                android:text="129,000₫"
                 android:textColor="#FF0000" />
+
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

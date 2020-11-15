@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,7 @@ public class ItemDetails extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private ImageView backBtn;
+    private ImageView backBtn, cartBtn;
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
     private String page;
@@ -86,7 +87,7 @@ public class ItemDetails extends Fragment {
         //Hooks
         recyclerView = view.findViewById(R.id.itemDetails_recyclerView);
         backBtn = view.findViewById(R.id.back_pressed);
-
+        //cartBtn = view.findViewById(R.id.cart_pressed);
 
         //Recycle View Function Calls
         recyclerView();
@@ -95,14 +96,10 @@ public class ItemDetails extends Fragment {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Home home = new Home();
-//                FragmentManager manager = getFragmentManager();
-//                manager.beginTransaction().replace(R.id.fragment, home, home.getTag()).commit();
                 FragmentManager manager = getFragmentManager();
                 switch (page){
                     case "BestSellerItems":
                         BestSellerItems bestSellerItems = new BestSellerItems();
-
                         manager.beginTransaction().replace(R.id.fragment, bestSellerItems, bestSellerItems.getTag()).commit();
                         break;
                     case "CategoryBodyCare":
@@ -139,6 +136,14 @@ public class ItemDetails extends Fragment {
                 }
             }
         });
+//        cartBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ShoppingCart shoppingCart = new ShoppingCart(page);
+//                FragmentManager fragmentManager = getFragmentManager();
+//                fragmentManager.beginTransaction().replace(R.id.fragment, shoppingCart, shoppingCart.getTag()).commit();
+//            }
+//        });
         return view;
     }
     private void recyclerView() {
