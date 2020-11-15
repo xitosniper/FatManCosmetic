@@ -30,6 +30,8 @@ import com.example.fatmancosmetic.Model.OrderDetailsModel;
 import com.example.fatmancosmetic.Model.OrderModel;
 import com.example.fatmancosmetic.R;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapter.ShoppingCartHolder> {
@@ -70,7 +72,11 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         Bitmap bmp = BitmapFactory.decodeByteArray(itemInfo.getImage(), 0, itemInfo.getImage().length);
         holder.imageView.setImageBitmap(bmp);
         holder.title.setText(itemInfo.getName());
-        holder.price.setText(itemInfo.getPrice()+"");
+        //Format price vnd
+        NumberFormat formatter = new DecimalFormat("#,###");
+        double myNumber = itemInfo.getPrice();
+        String formattedNumber = formatter.format(myNumber);
+        holder.price.setText(formattedNumber+"₫");
         holder.btn_quantity.setNumber(orderDetailInfoArrayList.get(0).getQuantity()+"");
         holder.btn_quantity.setOnClickListener(new ElegantNumberButton.OnClickListener() {
             @Override

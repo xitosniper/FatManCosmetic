@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,8 @@ import com.example.fatmancosmetic.Model.OrderDetailsModel;
 import com.example.fatmancosmetic.Model.OrderModel;
 import com.example.fatmancosmetic.R;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -67,11 +70,15 @@ public class ItemsDetailsAdapter extends RecyclerView.Adapter<ItemsDetailsAdapte
         holder.imageView.setImageBitmap(bmp);
         holder.title.setText(itemInfo.getName());
         holder.id.setText(itemInfo.getItemID());
-        holder.price.setText(itemInfo.getPrice()+"₫");
+        //Format price vnd
+        NumberFormat formatter = new DecimalFormat("#,###");
+        double myNumber = itemInfo.getPrice();
+        String formattedNumber = formatter.format(myNumber);
+        holder.price.setText(formattedNumber+"₫");
         holder.description.setText(itemInfo.getDescription());
 
 
-        holder.shoppingCartBtn.setOnClickListener(new View.OnClickListener() {
+        holder.button_AddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -84,7 +91,15 @@ public class ItemsDetailsAdapter extends RecyclerView.Adapter<ItemsDetailsAdapte
 
 
                 String orderDetailsID;
-                int checkOrderDetailsID = orderDetailInfos.get(orderDetailInfos.size()-1).getID();
+
+                int checkOrderDetailsID = 0;
+                if (orderDetailInfos.size()>0){
+                    checkOrderDetailsID = orderDetailInfos.get(orderDetailInfos.size()-1).getID();
+                } else{
+                    checkOrderDetailsID = 0;
+                }
+
+
                 if (checkOrderDetailsID<10){
                     orderDetailsID = "00000"+(checkOrderDetailsID+1);
                 } else if(checkOrderDetailsID<100){
@@ -115,7 +130,14 @@ public class ItemsDetailsAdapter extends RecyclerView.Adapter<ItemsDetailsAdapte
                 } else {
 
                     String orderID;
-                    int checkOrderID = orderInfos.get(orderInfos.size()-1).getID();
+                    int checkOrderID = 0;
+
+                    if (orderInfos.size()>0){
+                        checkOrderID = orderInfos.get(orderInfos.size()-1).getID();
+                    } else{
+                        checkOrderID = 0;
+                    }
+
                     if (checkOrderID<10){
                         orderID = "00000"+(checkOrderID+1);
                     } else if(checkOrderID<100){
@@ -158,7 +180,8 @@ public class ItemsDetailsAdapter extends RecyclerView.Adapter<ItemsDetailsAdapte
     }
 
     public class ItemsDetailsHolder extends RecyclerView.ViewHolder{
-        ImageView imageView , shoppingCartBtn;
+        ImageView imageView;
+        LinearLayout button_AddToCart;
         TextView id, title, price, description;
         public ItemsDetailsHolder(@NonNull View itemView) {
             super(itemView);
@@ -167,7 +190,7 @@ public class ItemsDetailsAdapter extends RecyclerView.Adapter<ItemsDetailsAdapte
             id = itemView.findViewById(R.id.items_id);
             price = itemView.findViewById(R.id.items_price);
             description = itemView.findViewById(R.id.items_description);
-            shoppingCartBtn = itemView.findViewById(R.id.shoppingCart_icon);
+            button_AddToCart = itemView.findViewById(R.id.button_AddToCart);
         }
     }
 }

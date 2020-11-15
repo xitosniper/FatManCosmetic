@@ -41,6 +41,14 @@
                     android:fontFamily="@font/baloo"
                     android:text="Chi Tiết Sản Phẩm"
                     android:textSize="20sp" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/cart_pressed"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:padding="15dp"-->
+<!--                    android:src="@drawable/cart_icon"-->
+<!--                    android:layout_alignParentRight="true"/>-->
             </RelativeLayout>
 
 

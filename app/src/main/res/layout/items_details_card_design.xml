@@ -3,101 +3,121 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_margin="10dp">
+    android:layout_margin="10dp"
+    android:orientation="vertical">
 
 
+    <ImageView
+        android:id="@+id/items_image"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"
+        android:src="@drawable/item_000001" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/items_title"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/baloo"
+            android:text="Son Kem Lì Merzy Velvet Tint Season 3"
+            android:textColor="#717171"
+            android:textSize="25dp" />
+
+        <LinearLayout
+            android:id="@+id/button_AddToCart"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:background="@drawable/radius_addtocart_button">
             <ImageView
-                android:id="@+id/items_image"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
+                android:id="@+id/shoppingCart_icon"
+                android:layout_width="14dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:scaleType="centerCrop"
-                android:src="@drawable/item_000001" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/items_title"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/baloo"
-                    android:text="Son Kem Lì Merzy Velvet Tint Season 3"
-                    android:textColor="#717171"
-                    android:textSize="25dp" />
-                <ImageView
-                    android:id="@+id/shoppingCart_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/cart_icon"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="30dp"/>
-            </LinearLayout>
-
-
+                android:src="@drawable/cart_icon"
+                app:tint="#ffffff" />
             <TextView
-                android:id="@+id/items_id"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:text="000001"
-                android:textColor="#717171"
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/items_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/baloo"
-                android:text="129,0000đ"
-                android:textColor="#717171"
-                android:textSize="20dp" />
-
-            <TextView
-                android:id="@+id/description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="@font/baloo"
-                android:text="Mô tả sản phẩm"
-                android:textColor="#717171"
-                android:textSize="20dp" />
-
-            <TextView
-                android:id="@+id/items_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/itemsDescription"
-                android:textColor="#717171"
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/comment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:fontFamily="@font/baloo"
-                android:text="Khách hàng nhận xét"
-                android:textColor="#717171"
-                android:textSize="20dp" />
-
-            <TextView
-                android:id="@+id/items_comment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Chưa có nhận xét nào."
-                android:textColor="#717171"
-                android:textSize="15dp" />
-
-            <Button
-                android:background="@drawable/shap_round_solid"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="25dp"
+                android:text="Thêm giỏ hàng"
+                android:textSize="10dp"
                 android:textColor="#ffffff"
-                android:text="Viết nhận xét"/>
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/items_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:text="000001"
+        android:textColor="#717171"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/items_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/baloo"
+        android:text="129,0000đ"
+        android:textColor="#717171"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/baloo"
+        android:text="Mô tả sản phẩm"
+        android:textColor="#717171"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/items_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/itemsDescription"
+        android:textColor="#717171"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/baloo"
+        android:text="Khách hàng nhận xét"
+        android:textColor="#717171"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/items_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chưa có nhận xét nào."
+        android:textColor="#717171"
+        android:textSize="15dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shap_round_solid"
+        android:text="Viết nhận xét"
+        android:textColor="#ffffff" />
 
 
 </LinearLayout>

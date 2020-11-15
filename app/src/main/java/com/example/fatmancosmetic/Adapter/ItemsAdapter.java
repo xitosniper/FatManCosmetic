@@ -22,6 +22,8 @@ import com.example.fatmancosmetic.Info.ItemInfo;
 import com.example.fatmancosmetic.Model.ItemModel;
 import com.example.fatmancosmetic.R;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -58,14 +60,18 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.SkinCareItem
         Bitmap bmp = BitmapFactory.decodeByteArray(itemInfo.getImage(), 0, itemInfo.getImage().length);
         holder.imageView.setImageBitmap(bmp);
         holder.title.setText(itemInfo.getName());
-        holder.price.setText(itemInfo.getPrice()+"₫");
-        String id = itemInfo.getItemID();
+        //Format price vnd
+        NumberFormat formatter = new DecimalFormat("#,###");
+        double myNumber = itemInfo.getPrice();
+        String formattedNumber = formatter.format(myNumber);
+        holder.price.setText(formattedNumber+"₫");
+        String itemID = itemInfo.getItemID();
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ItemDetails itemDetails = new ItemDetails(page);
                 Bundle bundle = new Bundle();
-                bundle.putString("itemID", id);
+                bundle.putString("itemID", itemID);
                 //set Fragmentclass Arguments
                 itemDetails.setArguments(bundle);
                 fragmentManager.beginTransaction().replace(R.id.fragment, itemDetails, itemDetails.getTag()).commit();

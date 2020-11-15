@@ -30,13 +30,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize">
 
-                <ImageView
-                    android:id="@+id/back_pressed"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:padding="15dp"
-                    android:src="@drawable/general_back_icon" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/back_pressed"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:padding="15dp"-->
+<!--                    android:src="@drawable/general_back_icon" />-->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -130,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/shap_round_solid"/>
             <Button
-                android:id="@+id/button"
+                android:id="@+id/checkOutBtn"
                 android:layout_width="371dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"

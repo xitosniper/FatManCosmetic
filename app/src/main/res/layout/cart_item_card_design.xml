@@ -17,7 +17,7 @@
         <ImageView
             android:id="@+id/cart_items_image"
             android:layout_width="160dp"
-            android:layout_height="140dp"
+            android:layout_height="120dp"
             android:scaleType="centerCrop"
             android:src="@drawable/son_li" />
         <LinearLayout
@@ -72,9 +72,8 @@
                         <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
                             android:id="@+id/number_button"
                             android:layout_width="100dp"
-                            android:layout_height="30dp"
+                            android:layout_height="match_parent"
                             android:gravity="center"
-                            android:background="@color/colorAccent"
                             app:initialNumber="0"
                             app:finalNumber="20">
                         </com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
@@ -89,8 +88,9 @@
                 android:layout_height="34dp"
                 android:gravity="start|center"
                 android:layout_marginLeft="5dp"
-                android:text="129,0000đ"
+                android:text="129,000₫"
                 android:textColor="#FF0000" />
+
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

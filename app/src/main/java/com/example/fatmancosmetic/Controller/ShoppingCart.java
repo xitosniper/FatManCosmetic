@@ -12,8 +12,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fatmancosmetic.Adapter.ItemsAdapter;
 import com.example.fatmancosmetic.Adapter.ShoppingCartAdapter;
@@ -23,6 +25,8 @@ import com.example.fatmancosmetic.Model.ItemModel;
 import com.example.fatmancosmetic.Model.OrderDetailsModel;
 import com.example.fatmancosmetic.R;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 /**
@@ -44,10 +48,15 @@ public class ShoppingCart extends Fragment {
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
     private TextView numberOfItemsInCart, shoppingCart_Amount;
+    private String page;
+    private Button checkOutBtn;
 
     public ShoppingCart() {
         // Required empty public constructor
     }
+//    public ShoppingCart(String page) {
+//        this.page = page;
+//    }
 
     /**
      * Use this factory method to create a new instance of
@@ -84,21 +93,26 @@ public class ShoppingCart extends Fragment {
         View view = inflater.inflate(R.layout.fragment_shopping_cart, container, false);
         //Hooks
         recyclerView = view.findViewById(R.id.shoppingCart_recyclerView);
-        backBtn = view.findViewById(R.id.back_pressed);
+        //backBtn = view.findViewById(R.id.back_pressed);
         numberOfItemsInCart = view.findViewById(R.id.shoppingCart_numberOfItems);
         shoppingCart_Amount = view.findViewById(R.id.shoppingCart_Amount);
-
+        checkOutBtn = view.findViewById(R.id.checkOutBtn);
 
         //Recycle View Function Calls
         recyclerView();
 
         //Set handle
-        backBtn.setOnClickListener(new View.OnClickListener() {
+//        backBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                FragmentManager manager = getFragmentManager();
+//                Home home = new Home();
+//                manager.beginTransaction().replace(R.id.fragment, home, home.getTag()).commit();
+//            }
+//        });
+        checkOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Home home = new Home();
-                FragmentManager manager = getFragmentManager();
-                manager.beginTransaction().replace(R.id.fragment, home, home.getTag()).commit();
 
             }
         });
@@ -129,7 +143,11 @@ public class ShoppingCart extends Fragment {
 
         //Set count items in shopping cart
         numberOfItemsInCart.setText(listItems.size()+"");
-        shoppingCart_Amount.setText(amount +"");
+        //Format price vnd
+        NumberFormat formatter = new DecimalFormat("#,###");
+        double myNumber = amount;
+        String formattedNumber = formatter.format(myNumber);
+        shoppingCart_Amount.setText(formattedNumber +"₫");
 
         FragmentManager fragmentManager = getFragmentManager();
         adapter = new ShoppingCartAdapter(listItems, getContext(),fragmentManager);
