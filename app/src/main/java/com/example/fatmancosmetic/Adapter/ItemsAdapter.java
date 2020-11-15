@@ -102,27 +102,30 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.SkinCareItem
             if (charSequence.length() > 0) {
                 charSequence = charSequence.toString().toLowerCase();
                 ArrayList<ItemInfo> itemInfo = new ArrayList<>();
-                for (int i = 0; i < itemList.size(); i++) {
-                    if (itemList.get(i).getName().toLowerCase().contains(charSequence)) {
-                        ItemInfo f = new ItemInfo(itemList.get(i).getItemID(), itemList.get(i).getBrandID(),
-                                itemList.get(i).getCategoryID(), itemList.get(i).getName(),
-                                itemList.get(i).getImage(), itemList.get(i).getPrice(),
-                                itemList.get(i).getDescription(), itemList.get(i).getStatus());
+
+//                itemList = new ArrayList<>();
+
+                for (int i = 0; i < skinCareItemsLocations.size(); i++) {
+                    if (skinCareItemsLocations.get(i).getName().toLowerCase().contains(charSequence)) {
+                        ItemInfo f = new ItemInfo(skinCareItemsLocations.get(i).getItemID(), skinCareItemsLocations.get(i).getBrandID(),
+                                skinCareItemsLocations.get(i).getCategoryID(), skinCareItemsLocations.get(i).getName(),
+                                skinCareItemsLocations.get(i).getImage(), skinCareItemsLocations.get(i).getPrice(),
+                                skinCareItemsLocations.get(i).getDescription(), skinCareItemsLocations.get(i).getStatus());
                         itemInfo.add(f);
                     }
                 }
                 results.count = itemInfo.size();
                 results.values = itemInfo;
             } else {
-                results.count = itemList.size();
-                results.values = itemList;
+                results.count = skinCareItemsLocations.size();
+                results.values = skinCareItemsLocations;
             }
             return results;
         }
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            itemList = (ArrayList<ItemInfo>) results.values;
+            skinCareItemsLocations = (ArrayList<ItemInfo>) results.values;
             notifyDataSetChanged();
         }
     }
@@ -139,6 +142,4 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.SkinCareItem
 
         }
     }
-
-
 }

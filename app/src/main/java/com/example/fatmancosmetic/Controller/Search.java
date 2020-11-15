@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,12 +101,14 @@ public class Search extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 try {
-                    ItemModel itemModel = new ItemModel(getContext());
-                    listItems = new ArrayList<>();
-                    listItems = itemModel.getAllItems();
-                    FragmentManager fragmentManager = getFragmentManager();
-                    ItemsAdapter itemsAdapter= new ItemsAdapter(listItems, getContext(),fragmentManager, "Search");
-                    itemsAdapter.getFilter().filter(s);
+                    String searchName = s.toString();
+
+                        if(searchName.equals("") ){
+                            recyclerView();
+                        }
+                        else{
+                            recyclerView(searchName);
+                        }
                 } catch (Exception e) {
                     Toast.makeText(getContext(), "No result", Toast.LENGTH_SHORT).show();
                 }
@@ -117,6 +120,20 @@ public class Search extends Fragment {
         return view;
     }
 
+    private void recyclerView(String txt) {
+        recyclerView.setHasFixedSize(true);
+
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL,false));
+        ItemModel itemModel = new ItemModel(getContext());
+
+        listItems = new ArrayList<>();
+        listItems = itemModel.getItemsByItemName(txt);
+
+        FragmentManager fragmentManager = getFragmentManager();
+        adapter = new ItemsAdapter(listItems, getContext(),fragmentManager, "Search");
+        recyclerView.setAdapter(adapter);
+    }
+
     private void recyclerView() {
         recyclerView.setHasFixedSize(true);
 
@@ -124,10 +141,12 @@ public class Search extends Fragment {
         ItemModel itemModel = new ItemModel(getContext());
 
         listItems = new ArrayList<>();
-        listItems = itemModel.getAllItems();
+        listItems = itemModel.get4NewItems();
 
         FragmentManager fragmentManager = getFragmentManager();
         adapter = new ItemsAdapter(listItems, getContext(),fragmentManager, "Search");
         recyclerView.setAdapter(adapter);
     }
+
+
 }

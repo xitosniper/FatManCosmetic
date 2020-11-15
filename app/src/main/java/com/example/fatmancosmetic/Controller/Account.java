@@ -102,22 +102,9 @@ public class Account extends Fragment {
             Uri personPhoto = acct.getPhotoUrl();
 
             profile_image = view.findViewById(R.id.profile_image);
-//            Log.e("HInh anh : " , String.valueOf(personPhoto));
             Glide.with(this).load(String.valueOf(personPhoto)).into(profile_image);
-//            URL newurl = null;
-//            try {
-//                newurl = new URL(String.valueOf(personPhoto));
-//                Bitmap mIcon_val = BitmapFactory.decodeStream(newurl.openConnection().getInputStream());
-//            Log.e("HInh anh : " , mIcon_val.toString());
-//
-//                profile_image.setImageBitmap(mIcon_val);
-//            } catch (MalformedURLException e) {
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            Picasso.get().load(String.valueOf(personPhoto)).into(profile_image);
-//            Log.e("personPhoto : ", personPhoto+"");
+
+
 
             profile_name = view.findViewById(R.id.profile_name);
             profile_name.setText(personName);
@@ -140,11 +127,12 @@ public class Account extends Fragment {
         return view;
     }
     private void signOut() {
-        mGoogleSignInClient.signOut().addOnCompleteListener((Executor) this,
+        mGoogleSignInClient.signOut().addOnCompleteListener((Activity) getContext(),
                 new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
 //                        updateUI(null);
+
 
                     }
                 });

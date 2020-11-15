@@ -71,6 +71,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         //OrderDetailInfo orderDetailInfo = orderDetailInfoArrayList.get(position);
         Bitmap bmp = BitmapFactory.decodeByteArray(itemInfo.getImage(), 0, itemInfo.getImage().length);
         holder.imageView.setImageBitmap(bmp);
+
         holder.title.setText(itemInfo.getName());
         //Format price vnd
         NumberFormat formatter = new DecimalFormat("#,###");
@@ -81,7 +82,9 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         holder.btn_quantity.setOnClickListener(new ElegantNumberButton.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 int itemQuantity = Integer.parseInt(holder.btn_quantity.getNumber());
+
                 ArrayList<OrderDetailInfo> orderDetailInfoArrayList = new ArrayList<>();
                 orderDetailInfoArrayList = orderDetailsModel.getOrderDetailsByCustomerIDAndItemID(customerID, itemInfo.getItemID());
 
@@ -103,10 +106,12 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
             }
         });
+
         String itemID = itemInfo.getItemID();
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 ItemDetails itemDetails = new ItemDetails("ShoppingCart");
                 Bundle bundle = new Bundle();
                 bundle.putString("itemID", itemID);
