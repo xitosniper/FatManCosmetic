@@ -134,8 +134,14 @@ public class OrderDetailsModel extends DBManager {
         contentValues.put(ORDERDETAILS_PRICE, orderDetailInfo.getPrice());
         return db.update(TABLE_ORDERDETAILS_NAME,contentValues,ID +"=?",new String[] { String.valueOf(orderDetailInfo.getID())});
     }
-    public int deleteOrderDetails(int id){
+    public int deleteOrderDetails(int ID){
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(TABLE_ORDERDETAILS_NAME,ID+"=?", new String[]{String.valueOf(String.valueOf(id))});
+        return db.delete(TABLE_ORDERDETAILS_NAME,ID+"=?", new String[]{String.valueOf(String.valueOf(ID))});
+    }
+    public void deleteOrderDetailsSQL(int ID){
+        String sqlQuery = "DELETE FROM OrderDetails WHERE OrderDetails.ID = " +ID;
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL(sqlQuery);
+        db.close();
     }
 }

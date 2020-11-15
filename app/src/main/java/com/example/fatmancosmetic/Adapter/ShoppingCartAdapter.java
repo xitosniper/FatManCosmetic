@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.view.menu.MenuView;
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.example.fatmancosmetic.Controller.ItemDetails;
+import com.example.fatmancosmetic.Controller.ShoppingCart;
 import com.example.fatmancosmetic.Info.ItemInfo;
 import com.example.fatmancosmetic.Info.OrderDetailInfo;
 import com.example.fatmancosmetic.Info.OrderInfo;
@@ -39,6 +41,8 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     OrderDetailsModel orderDetailsModel;
     FragmentManager fragmentManager;
     String customerID = "000001";
+
+    ImageView shoppingCart_Amount;
 
 
     public ShoppingCartAdapter(ArrayList<ItemInfo> itemsCartLocations, Context context, FragmentManager fragmentManager) {
@@ -67,24 +71,45 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         holder.imageView.setImageBitmap(bmp);
         holder.title.setText(itemInfo.getName());
         holder.price.setText(itemInfo.getPrice()+"");
-        holder.quanlity.setText(orderDetailInfoArrayList.get(0).getQuantity()+"");
+        holder.btn_quantity.setNumber(orderDetailInfoArrayList.get(0).getQuantity()+"");
+        holder.btn_quantity.setOnClickListener(new ElegantNumberButton.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int itemQuantity = Integer.parseInt(holder.btn_quantity.getNumber());
+                ArrayList<OrderDetailInfo> orderDetailInfoArrayList = new ArrayList<>();
+                orderDetailInfoArrayList = orderDetailsModel.getOrderDetailsByCustomerIDAndItemID(customerID, itemInfo.getItemID());
 
-        int id = itemInfo.getID();
+                if(itemQuantity==0){
+
+                    orderDetailsModel.deleteOrderDetailsSQL(orderDetailInfoArrayList.get(0).getID());
+
+                    //Toast.makeText(context, "Xóa sản phẩm thành công", Toast.LENGTH_SHORT).show();
+
+                } else {
+
+                    orderDetailsModel.updateOrderDetails(new OrderDetailInfo(orderDetailInfoArrayList.get(0).getID(), orderDetailInfoArrayList.get(0).getOrderDetailsID(), orderDetailInfoArrayList.get(0).getOrderID(),orderDetailInfoArrayList.get(0).getItemID(), itemQuantity, orderDetailInfoArrayList.get(0).getPrice()));
+
+                    //Toast.makeText(context, "Cập nhật số lượng thành công", Toast.LENGTH_SHORT).show();
+                }
+
+                ShoppingCart shoppingCart = new ShoppingCart();
+                fragmentManager.beginTransaction().replace(R.id.fragment, shoppingCart, shoppingCart.getTag()).commit();
+
+            }
+        });
+        String itemID = itemInfo.getItemID();
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ItemDetails itemDetails = new ItemDetails();
+                ItemDetails itemDetails = new ItemDetails("ShoppingCart");
                 Bundle bundle = new Bundle();
-                bundle.putInt("itemID", id);
+                bundle.putString("itemID", itemID);
                 //set Fragmentclass Arguments
                 itemDetails.setArguments(bundle);
                 fragmentManager.beginTransaction().replace(R.id.fragment, itemDetails, itemDetails.getTag()).commit();
 
             }
         });
-//        holder.quanlity.setText(itemInfo.);
-//        holder.description.setText(itemInfo.getDescription());
-
     }
 
     @Override
@@ -94,7 +119,6 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
     public class ShoppingCartHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView title, price, quanlity, numOfItems;
         TextView title, price;
 
         ElegantNumberButton btn_quantity;
@@ -103,19 +127,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             imageView = itemView.findViewById(R.id.cart_items_image);
             title = itemView.findViewById(R.id.cart_items_title);
             price = itemView.findViewById(R.id.cart_items_price);
-            quanlity = itemView.findViewById(R.id.cart_items_quantity);
-
-            //
             btn_quantity = itemView.findViewById(R.id.number_button);
-
-            btn_quantity.setOnClickListener(new ElegantNumberButton.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String num = btn_quantity.getNumber();
-                    Log.e("NUMmmmmmmmmmmmmmm : ", num);
-                }
-            });
-
         }
     }
 }

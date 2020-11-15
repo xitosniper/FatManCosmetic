@@ -84,25 +84,19 @@ public class ItemsDetailsAdapter extends RecyclerView.Adapter<ItemsDetailsAdapte
 
 
                 String orderDetailsID;
-                int size = orderDetailInfos.size();
-                if (size<10){
-                    orderDetailsID = "00000"+(size+1);
-                } else if(size<100){
-                    orderDetailsID = "0000"+(size+1);
-                } else if(size<1000){
-                    orderDetailsID = "000"+(size+1);
-                } else if(size<10000){
-                    orderDetailsID = "000"+(size+1);
-                } else if(size<100000){
-                    orderDetailsID = "000"+(size+1);
-                } else if(size<1000000){
-                    orderDetailsID = "000"+(size+1);
-                } else if(size<10000000){
-                    orderDetailsID = "00"+(size+1);
-                } else if(size<100000000){
-                    orderDetailsID = "0"+(size+1);
+                int checkOrderDetailsID = orderDetailInfos.get(orderDetailInfos.size()-1).getID();
+                if (checkOrderDetailsID<10){
+                    orderDetailsID = "00000"+(checkOrderDetailsID+1);
+                } else if(checkOrderDetailsID<100){
+                    orderDetailsID = "0000"+(checkOrderDetailsID+1);
+                } else if(checkOrderDetailsID<1000){
+                    orderDetailsID = "000"+(checkOrderDetailsID+1);
+                } else if(checkOrderDetailsID<10000){
+                    orderDetailsID = "00"+(checkOrderDetailsID+1);
+                } else if(checkOrderDetailsID<100000){
+                    orderDetailsID = "0"+(checkOrderDetailsID+1);
                 } else {
-                    orderDetailsID = ""+(size+1);
+                    orderDetailsID = ""+(checkOrderDetailsID+1);
                 }
 
 
@@ -110,8 +104,8 @@ public class ItemsDetailsAdapter extends RecyclerView.Adapter<ItemsDetailsAdapte
                     String orderID = orderInfos.get(0).getOrderID();
                     ArrayList<OrderDetailInfo> orderDetailInfos1 = orderDetailsModel.getOrderDetailsByCustomerIDAndItemID(customerID, itemInfo.getItemID());
                     if (orderDetailInfos1.size()!=0){
-                        orderDetailsModel.updateOrderDetails(new OrderDetailInfo(orderDetailsID,orderInfos.get(0).getOrderID(),itemInfo.getItemID(),(orderDetailInfos1.get(0).getQuantity() + 1),itemInfo.getPrice()));
-                        Log.e("Update quantity: ", (orderDetailInfos1.get(0).getQuantity()+1)+"");
+                        orderDetailsModel.updateOrderDetails(new OrderDetailInfo(orderDetailInfos1.get(0).getID(), orderDetailsID,orderInfos.get(0).getOrderID(),itemInfo.getItemID(),(orderDetailInfos1.get(0).getQuantity() + 1),itemInfo.getPrice()));
+                        //Log.e("Update quantity: ", (orderDetailInfos1.get(0).getQuantity()+1)+"");
                         Toast.makeText(context, "Thêm giỏ hàng thành công", Toast.LENGTH_SHORT).show();
                     } else {
                         orderDetailsModel.addOrderDetails(new OrderDetailInfo(orderDetailsID,orderInfos.get(0).getOrderID(),itemInfo.getItemID(),1,itemInfo.getPrice()));
@@ -121,25 +115,19 @@ public class ItemsDetailsAdapter extends RecyclerView.Adapter<ItemsDetailsAdapte
                 } else {
 
                     String orderID;
-                    int size1 = orderInfos.size();
-                    if (size1<10){
-                        orderID = "00000"+(size1+1);
-                    } else if(size1<100){
-                        orderID = "0000"+(size1+1);
-                    } else if(size1<1000){
-                        orderID = "000"+(size1+1);
-                    } else if(size1<10000){
-                        orderID = "000"+(size1+1);
-                    } else if(size1<100000){
-                        orderID = "000"+(size1+1);
-                    } else if(size1<1000000){
-                        orderID = "000"+(size1+1);
-                    } else if(size1<10000000){
-                        orderID = "00"+(size1+1);
-                    } else if(size1<100000000){
-                        orderID = "0"+(size1+1);
+                    int checkOrderID = orderInfos.get(orderInfos.size()-1).getID();
+                    if (checkOrderID<10){
+                        orderID = "00000"+(checkOrderID+1);
+                    } else if(checkOrderID<100){
+                        orderID = "0000"+(checkOrderID+1);
+                    } else if(checkOrderID<1000){
+                        orderID = "000"+(checkOrderID+1);
+                    }  else if(checkOrderID<10000){
+                        orderID = "00"+(checkOrderID+1);
+                    } else if(checkOrderID<100000){
+                        orderID = "0"+(checkOrderID+1);
                     } else {
-                        orderID = ""+(size1+1);
+                        orderID = ""+(checkOrderID+1);
                     }
 
 

@@ -121,6 +121,7 @@ public class ShoppingCart extends Fragment {
         String customerID = "000001";
         listItems = itemModel.getItemsByCustomerID(customerID);
         listOrderDetails = orderDetailsModel.getOrderDetailsByCustomerID(customerID);
+
         int amount = 0;
         for (OrderDetailInfo orderDetailInfo:listOrderDetails) {
             amount += orderDetailInfo.getQuantity() * orderDetailInfo.getPrice();
@@ -132,6 +133,8 @@ public class ShoppingCart extends Fragment {
 
         FragmentManager fragmentManager = getFragmentManager();
         adapter = new ShoppingCartAdapter(listItems, getContext(),fragmentManager);
+
         recyclerView.setAdapter(adapter);
+
     }
 }
