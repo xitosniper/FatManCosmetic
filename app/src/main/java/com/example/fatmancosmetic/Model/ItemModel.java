@@ -128,6 +128,7 @@ public class ItemModel extends DBManager {
         db.close();
         return listItems;
     }
+
     public ArrayList<ItemInfo> getBodyCareItems(){
         ArrayList<ItemInfo> listItems = new ArrayList<>();
         // Select All Query
@@ -406,9 +407,9 @@ public class ItemModel extends DBManager {
         contentValues.put(ITEM_STATUS, itemInfo.getStatus());
         return db.update(TABLE_ITEM_NAME,contentValues,ID +"=?",new String[] { String.valueOf(itemInfo.getID())});
     }
-    public int deleteBrand(int id){
+    public int deleteBrand(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(TABLE_ITEM_NAME,ID+"=?", new String[]{String.valueOf(String.valueOf(id))});
+        return db.delete(TABLE_ITEM_NAME, ID + "=?", new String[]{String.valueOf(String.valueOf(id))});
     }
 
 }

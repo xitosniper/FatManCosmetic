@@ -3,12 +3,27 @@ package com.example.fatmancosmetic.Controller;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.fatmancosmetic.Adapter.ItemsAdapter;
+import com.example.fatmancosmetic.Info.ItemInfo;
+import com.example.fatmancosmetic.Model.ItemModel;
 import com.example.fatmancosmetic.R;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +40,12 @@ public class Search extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    // Declare
+    TextView searchBar;
+    RecyclerView recyclerView;
+    RecyclerView.Adapter adapter;
+    ArrayList<ItemInfo> listItems;
 
     public Search() {
         // Required empty public constructor
@@ -61,6 +82,52 @@ public class Search extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        View view = inflater.inflate(R.layout.fragment_search, container, false);
+        recyclerView =view.findViewById(R.id.search_recyclerView);
+        searchBar = view.findViewById(R.id.search_bar);
+        searchBar.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                searchBar.setFocusable(true);
+            }
+        });
+        // show recycleview
+        recyclerView();
+        searchBar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                try {
+                    ItemModel itemModel = new ItemModel(getContext());
+                    listItems = new ArrayList<>();
+                    listItems = itemModel.getAllItems();
+                    FragmentManager fragmentManager = getFragmentManager();
+                    ItemsAdapter itemsAdapter= new ItemsAdapter(listItems, getContext(),fragmentManager, "Search");
+                    itemsAdapter.getFilter().filter(s);
+                } catch (Exception e) {
+                    Toast.makeText(getContext(), "No result", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+        return view;
+    }
+
+    private void recyclerView() {
+        recyclerView.setHasFixedSize(true);
+
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL,false));
+        ItemModel itemModel = new ItemModel(getContext());
+
+        listItems = new ArrayList<>();
+        listItems = itemModel.getAllItems();
+
+        FragmentManager fragmentManager = getFragmentManager();
+        adapter = new ItemsAdapter(listItems, getContext(),fragmentManager, "Search");
+        recyclerView.setAdapter(adapter);
     }
 }

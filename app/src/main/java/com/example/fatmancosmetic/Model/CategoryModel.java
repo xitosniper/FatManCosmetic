@@ -19,7 +19,7 @@ public class CategoryModel extends DBManager {
     private static final String ID = "ID";
     private static final String CATEGORY_ID = "categoryID";
     private static final String CATEGORY_NAME = "categoryName";
-    private static final String CATEGORY_STATUS = "Status";
+private static final String CATEGORY_STATUS = "Status";
 
     public CategoryModel(@Nullable Context context) {
         super(context);

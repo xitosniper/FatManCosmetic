@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,10 +23,13 @@ import com.example.fatmancosmetic.Model.ItemModel;
 import com.example.fatmancosmetic.R;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
-public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.SkinCareItemsViewHolder> {
+public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.SkinCareItemsViewHolder> implements Filterable {
 
     ArrayList<ItemInfo> skinCareItemsLocations;
+    ArrayList<ItemInfo> itemList;
+    ItemFilter itemFilter;
     Context context;
     ItemModel itemModel;
     FragmentManager fragmentManager;
@@ -76,6 +81,46 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.SkinCareItem
         return skinCareItemsLocations.size();
     }
 
+    @Override
+    public Filter getFilter() {
+
+        itemFilter = new ItemFilter();
+        return itemFilter;
+    }
+
+    class ItemFilter extends Filter {
+
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            FilterResults results = new FilterResults();
+            if (charSequence.length() > 0) {
+                charSequence = charSequence.toString().toLowerCase();
+                ArrayList<ItemInfo> itemInfo = new ArrayList<>();
+                for (int i = 0; i < itemList.size(); i++) {
+                    if (itemList.get(i).getName().toLowerCase().contains(charSequence)) {
+                        ItemInfo f = new ItemInfo(itemList.get(i).getItemID(), itemList.get(i).getBrandID(),
+                                itemList.get(i).getCategoryID(), itemList.get(i).getName(),
+                                itemList.get(i).getImage(), itemList.get(i).getPrice(),
+                                itemList.get(i).getDescription(), itemList.get(i).getStatus());
+                        itemInfo.add(f);
+                    }
+                }
+                results.count = itemInfo.size();
+                results.values = itemInfo;
+            } else {
+                results.count = itemList.size();
+                results.values = itemList;
+            }
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            itemList = (ArrayList<ItemInfo>) results.values;
+            notifyDataSetChanged();
+        }
+    }
+
     public class SkinCareItemsViewHolder extends RecyclerView.ViewHolder{
 
         ImageView imageView;
@@ -88,4 +133,6 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.SkinCareItem
 
         }
     }
+
+
 }
