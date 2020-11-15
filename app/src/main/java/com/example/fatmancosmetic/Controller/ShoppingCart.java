@@ -113,7 +113,7 @@ public class ShoppingCart extends Fragment {
         checkOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+
             }
         });
 
