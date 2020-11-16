@@ -4,20 +4,16 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.fatmancosmetic.Adapter.ItemsAdapter;
 import com.example.fatmancosmetic.Adapter.ShoppingCartAdapter;
 import com.example.fatmancosmetic.Info.ItemInfo;
 import com.example.fatmancosmetic.Info.OrderDetailInfo;
@@ -113,7 +109,8 @@ public class ShoppingCart extends Fragment {
         checkOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                FragmentManager manager = getFragmentManager();
+//                manager.beginTransaction().replace(R.id.fragment, checkout, checkout.getTag()).commit();
             }
         });
 

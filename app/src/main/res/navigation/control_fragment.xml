@@ -74,4 +74,9 @@
         android:name="com.example.fatmancosmetic.Controller.MyBill"
         android:label="fragment_my_bill"
         tools:layout="@layout/fragment_my_bill" />
+    <fragment
+        android:id="@+id/billsDetail"
+        android:name="com.example.fatmancosmetic.Controller.BillsDetail"
+        android:label="fragment_bills_detail"
+        tools:layout="@layout/fragment_bills_detail" />
 </navigation>

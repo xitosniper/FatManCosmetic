@@ -145,7 +145,8 @@ public class Account extends Fragment {
                     public void onComplete(@NonNull Task<Void> task) {
 //                        updateUI(null);
 
-
+                        Toast.makeText(getContext(), "Log out successfully", Toast.LENGTH_SHORT).show();
+                        getActivity().finish();
                     }
                 });
     }
