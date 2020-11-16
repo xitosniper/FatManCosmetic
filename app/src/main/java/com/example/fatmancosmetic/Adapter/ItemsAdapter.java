@@ -16,16 +16,15 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.fatmancosmetic.Controller.FlashSaleItems;
 import com.example.fatmancosmetic.Controller.ItemDetails;
 import com.example.fatmancosmetic.Info.ItemInfo;
+import com.example.fatmancosmetic.Info.OrderInfo;
 import com.example.fatmancosmetic.Model.ItemModel;
 import com.example.fatmancosmetic.R;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.SkinCareItemsViewHolder> implements Filterable {
 
@@ -66,6 +65,8 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.SkinCareItem
         String formattedNumber = formatter.format(myNumber);
         holder.price.setText(formattedNumber+"₫");
         String itemID = itemInfo.getItemID();
+
+        // event click to see detail
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
