@@ -29,23 +29,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/menuIcon"
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:background="#FFFFFF"
-                android:layout_marginBottom="10dp"
-                android:minHeight="?attr/actionBarSize"
-                android:theme="?attr/actionBarTheme"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/menu" />
+<!--            <ImageView-->
+<!--                android:id="@+id/menuIcon"-->
+<!--                android:layout_width="50dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:background="#FFFFFF"-->
+<!--                android:layout_marginBottom="10dp"-->
+<!--                android:minHeight="?attr/actionBarSize"-->
+<!--                android:theme="?attr/actionBarTheme"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                android:src="@drawable/menu" />-->
 
             <EditText
                 android:id="@+id/search_bar"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_margin="10dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/radius_search"
                 android:drawableLeft="@drawable/search"
