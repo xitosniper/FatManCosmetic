@@ -87,14 +87,16 @@ public class ItemsDetailsAdapter extends RecyclerView.Adapter<ItemsDetailsAdapte
                 customerModel = new CustomerModel(context);
 
                 ArrayList<OrderInfo> orderInfos = orderModel.getOrderByCustomerID(customerID);
-                ArrayList<OrderDetailInfo> orderDetailInfos = orderDetailsModel.getAllOrderDetails();
+                ArrayList<OrderDetailInfo> orderDetailInfos = orderDetailsModel.getOrderDetailsByCustomerID(customerID);
 
+                ArrayList<OrderDetailInfo> listAllOrderDetails = orderDetailsModel.getAllOrderDetails();
+                ArrayList<OrderInfo> listAllOrders = orderModel.getAllOrders();
 
                 String orderDetailsID;
 
                 int checkOrderDetailsID = 0;
-                if (orderDetailInfos.size()>0){
-                    checkOrderDetailsID = orderDetailInfos.get(orderDetailInfos.size()-1).getID();
+                if (listAllOrderDetails.size()>0){
+                    checkOrderDetailsID = listAllOrderDetails.get(listAllOrderDetails.size()-1).getID();
                 } else{
                     checkOrderDetailsID = 0;
                 }
@@ -132,8 +134,8 @@ public class ItemsDetailsAdapter extends RecyclerView.Adapter<ItemsDetailsAdapte
                     String orderID;
                     int checkOrderID = 0;
 
-                    if (orderInfos.size()>0){
-                        checkOrderID = orderInfos.get(orderInfos.size()-1).getID();
+                    if (listAllOrders.size()>0){
+                        checkOrderID = listAllOrders.get(listAllOrders.size()-1).getID();
                     } else{
                         checkOrderID = 0;
                     }

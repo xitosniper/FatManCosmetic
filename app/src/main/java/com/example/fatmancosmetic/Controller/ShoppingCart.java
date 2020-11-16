@@ -21,8 +21,10 @@ import com.example.fatmancosmetic.Adapter.ItemsAdapter;
 import com.example.fatmancosmetic.Adapter.ShoppingCartAdapter;
 import com.example.fatmancosmetic.Info.ItemInfo;
 import com.example.fatmancosmetic.Info.OrderDetailInfo;
+import com.example.fatmancosmetic.Info.OrderInfo;
 import com.example.fatmancosmetic.Model.ItemModel;
 import com.example.fatmancosmetic.Model.OrderDetailsModel;
+import com.example.fatmancosmetic.Model.OrderModel;
 import com.example.fatmancosmetic.R;
 
 import java.text.DecimalFormat;
@@ -50,6 +52,7 @@ public class ShoppingCart extends Fragment {
     private TextView numberOfItemsInCart, shoppingCart_Amount;
     private String page;
     private Button checkOutBtn;
+    private String customerID = "000001";
 
     public ShoppingCart() {
         // Required empty public constructor
@@ -113,7 +116,27 @@ public class ShoppingCart extends Fragment {
         checkOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                CheckOut checkOut = new CheckOut();
+                Bundle bundle =  new Bundle();
+                OrderModel orderModel = new OrderModel(getContext());
+                OrderDetailsModel orderDetailsModel = new OrderDetailsModel(getContext());
 
+                ArrayList<OrderInfo> orderInfos = orderModel.getOrderByCustomerID(customerID);
+                ArrayList<OrderDetailInfo> listOrderDetails = new ArrayList<>();
+
+                String orderID = orderInfos.get(0).getOrderID();
+                listOrderDetails = orderDetailsModel.getOrderDetailsByCustomerID(customerID);
+
+                int amount = 0;
+                for (OrderDetailInfo orderDetailInfo:listOrderDetails) {
+                    amount += orderDetailInfo.getQuantity() * orderDetailInfo.getPrice();
+                }
+
+                bundle.putString("orderID", orderID);
+                bundle.putString("amount", amount+"");
+                checkOut.setArguments(bundle);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.fragment, checkOut, checkOut.getTag()).commit();
             }
         });
 
@@ -132,7 +155,7 @@ public class ShoppingCart extends Fragment {
         ArrayList<OrderDetailInfo> listOrderDetails = new ArrayList<>();
 
 
-        String customerID = "000001";
+
         listItems = itemModel.getItemsByCustomerID(customerID);
         listOrderDetails = orderDetailsModel.getOrderDetailsByCustomerID(customerID);
 

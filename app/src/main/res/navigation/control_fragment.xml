@@ -69,4 +69,9 @@
         android:name="com.example.fatmancosmetic.Controller.Login"
         android:label="activity_login"
         tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/checkOut"
+        android:name="com.example.fatmancosmetic.Controller.CheckOut"
+        android:label="fragment_check_out"
+        tools:layout="@layout/fragment_check_out" />
 </navigation>
