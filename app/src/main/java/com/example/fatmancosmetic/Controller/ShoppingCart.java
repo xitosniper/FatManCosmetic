@@ -155,7 +155,7 @@ public class ShoppingCart extends Fragment {
         ArrayList<OrderDetailInfo> listOrderDetails = new ArrayList<>();
 
 
-
+        String customerID = "000001";
         listItems = itemModel.getItemsByCustomerID(customerID);
         listOrderDetails = orderDetailsModel.getOrderDetailsByCustomerID(customerID);
 

@@ -49,7 +49,7 @@ public class Account extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     GoogleSignInClient mGoogleSignInClient;
     Button sign_out;
-    TextView profile_name;
+    TextView profile_name, my_bill;
     ImageView profile_image;
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -109,6 +109,18 @@ public class Account extends Fragment {
             profile_name = view.findViewById(R.id.profile_name);
             profile_name.setText(personName);
 
+
+            my_bill = view.findViewById(R.id.donhangcuatoi);
+            my_bill.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MyBill myBill = new MyBill();
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.fragment, myBill, myBill.getTag()).commit();
+                }
+            });
+
+
             sign_out = view.findViewById(R.id.btnSignOut);
             sign_out.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -133,7 +145,8 @@ public class Account extends Fragment {
                     public void onComplete(@NonNull Task<Void> task) {
 //                        updateUI(null);
 
-
+                        Toast.makeText(getContext(), "Log out successfully", Toast.LENGTH_SHORT).show();
+                        getActivity().finish();
                     }
                 });
     }
