@@ -101,6 +101,34 @@ public class ItemModel extends DBManager {
         return listItems;
     }
 
+    public ArrayList<ItemInfo> getItemsByCodeBill(String codeBill) {
+        ArrayList<ItemInfo> listItems = new ArrayList<>();
+        String sqlQuery = "SELECT 'Items'.* FROM 'Items','OrderDetails' WHERE 'OrderDetails'.'orderID' = '" + codeBill +"' AND 'OrderDetails'.'itemID' = 'Items'.'itemID';";
+//        String sqlQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE Status = 2 LIMIT 4";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(sqlQuery, null);
+
+        if(cursor.moveToFirst()) {
+            do {
+                ItemInfo itemInfo = new ItemInfo();
+                itemInfo.setID(cursor.getInt(0));
+                itemInfo.setItemID(cursor.getString(1));
+                itemInfo.setBrandID(cursor.getString(2));
+                itemInfo.setCategoryID(cursor.getString(3));
+                itemInfo.setName(cursor.getString(4));
+                itemInfo.setImage(cursor.getBlob(5));
+                itemInfo.setPrice(cursor.getInt(6));
+                itemInfo.setDescription(cursor.getString(7));
+                itemInfo.setStatus(cursor.getInt(8));
+                listItems.add(itemInfo);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return listItems;
+    }
+
     public ArrayList<ItemInfo> getItemsByItemID(String itemID){
         ArrayList<ItemInfo> listItems = new ArrayList<>();
         // Select All Query

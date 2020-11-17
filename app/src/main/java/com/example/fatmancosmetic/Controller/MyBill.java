@@ -108,13 +108,12 @@ public class MyBill extends Fragment {
         String customerID = "000001";
         OrderModel orderModel = new OrderModel(getContext());
         listOrder = new ArrayList<>();
-        listOrder = orderModel.getOrderByCustomerID(customerID);
+        listOrder = orderModel.getOrderByCustomerIDBill2(customerID);
 
         FragmentManager fragmentManager = getFragmentManager();
         adapter = new BillAdapter(listOrder,fragmentManager, getContext());
         recyclerView.setAdapter(adapter);
 
-        Log.e("after ", "..........................");
 
     }
 }

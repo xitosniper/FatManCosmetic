@@ -54,6 +54,7 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillViewHolder
                 BillsDetail billsDetail = new BillsDetail();
                 Bundle bundle = new Bundle();
                 bundle.putString("customerID", "000001");
+                bundle.putString("codeBill",orderInfo.getOrderID());
                 //set Fragmentclass Arguments
                 billsDetail.setArguments(bundle);
                 fragmentManager.beginTransaction().replace(R.id.fragment, billsDetail, billsDetail.getTag()).commit();
