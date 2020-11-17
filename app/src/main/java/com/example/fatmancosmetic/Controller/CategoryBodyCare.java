@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,31 +76,34 @@ public class CategoryBodyCare extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_category_body_care, container, false);
+        try {
+            //Hooks
+            recyclerView = view.findViewById(R.id.bodyCareItems_recyclerView);
+            backBtn = view.findViewById(R.id.back_pressed);
 
-        //Hooks
-        recyclerView = view.findViewById(R.id.bodyCareItems_recyclerView);
-        backBtn = view.findViewById(R.id.back_pressed);
 
+            //Recycle View Function Calls
+            recyclerView();
 
-        //Recycle View Function Calls
-        recyclerView();
-
-        //Set handle
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Home home = new Home();
-                FragmentManager manager = getFragmentManager();
-                manager.beginTransaction().replace(R.id.fragment, home, home.getTag()).commit();
-            }
-        });
-
+            //Set handle
+            backBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Home home = new Home();
+                    FragmentManager manager = getFragmentManager();
+                    manager.beginTransaction().replace(R.id.fragment, home, home.getTag()).commit();
+                }
+            });
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
+        }
         return view;
     }
+
     private void recyclerView() {
         recyclerView.setHasFixedSize(true);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL,false));
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false));
         ItemModel itemModel = new ItemModel(getContext());
 
         ArrayList<ItemInfo> listItems = new ArrayList<>();

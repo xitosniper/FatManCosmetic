@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -95,6 +96,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        try {
         //Animation banner Slider Image
         ImageView imageViewBanner = view.findViewById(R.id.imageViewBanner);
         AnimationDrawable animationDrawable = (AnimationDrawable) imageViewBanner.getDrawable();
@@ -184,7 +186,9 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
             }
         });
 
-
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
+        }
         return view;
     }
 

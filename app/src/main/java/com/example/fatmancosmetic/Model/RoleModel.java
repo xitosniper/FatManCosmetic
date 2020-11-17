@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
 import androidx.annotation.Nullable;
 
 import com.example.fatmancosmetic.DBManager.DBManager;
@@ -24,56 +26,69 @@ public class RoleModel extends DBManager {
     private static final String ROLE_STATUS = "Status";
 
 
-    public RoleModel(@Nullable Context context) {super(context);}
+    public RoleModel(@Nullable Context context) {
+        super(context);
+    }
 
     // Function Get role from table to array
     public ArrayList<RoleInfo> getAllRole() {
 
         ArrayList<RoleInfo> roleList = new ArrayList<>();
+        try {
+            // Get data from database
+            String query = "SELECT * FROM " + TABLE_ROLE_NAME;
+            SQLiteDatabase db = this.getWritableDatabase();
+            Cursor cursor = db.rawQuery(query, null);
 
-        // Get data from database
-        String query = "SELECT * FROM " + TABLE_ROLE_NAME;
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
-
-        if(cursor.moveToFirst()) {
-            do {
-                RoleInfo roleInfo = new RoleInfo();
-                roleInfo.setID(cursor.getInt(0));
-                roleInfo.setRoleID(cursor.getString(1));
-                roleInfo.setRoleName(cursor.getString(2));
-                roleInfo.setRoleDescription(cursor.getString(3));
-                roleInfo.setStatus(cursor.getInt(4));
-            } while (cursor.moveToNext());
+            if (cursor.moveToFirst()) {
+                do {
+                    RoleInfo roleInfo = new RoleInfo();
+                    roleInfo.setID(cursor.getInt(0));
+                    roleInfo.setRoleID(cursor.getString(1));
+                    roleInfo.setRoleName(cursor.getString(2));
+                    roleInfo.setRoleDescription(cursor.getString(3));
+                    roleInfo.setStatus(cursor.getInt(4));
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            db.close();
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
         }
-        cursor.close();
-        db.close();
-        return  roleList;
+        return roleList;
     }
 
     // Function add new role
     public void addRole(RoleInfo roleInfo) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues content = new ContentValues();
-        content.put(ROLE_ID, roleInfo.getRoleID());
-        content.put(ROLE_NAME, roleInfo.getRoleName());
-        content.put(ROLE_DESCRIPTION, roleInfo.getRoleDescription());
-        content.put(ROLE_STATUS, roleInfo.getStatus());
+        try {
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues content = new ContentValues();
+            content.put(ROLE_ID, roleInfo.getRoleID());
+            content.put(ROLE_NAME, roleInfo.getRoleName());
+            content.put(ROLE_DESCRIPTION, roleInfo.getRoleDescription());
+            content.put(ROLE_STATUS, roleInfo.getStatus());
 
-        db.insert(TABLE_ROLE_NAME,null,content);
-        db.close();
+            db.insert(TABLE_ROLE_NAME, null, content);
+            db.close();
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
+        }
     }
 
     // Function update role
-    public void updateRole (RoleInfo roleInfo) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(ROLE_ID, roleInfo.getRoleID());
-        contentValues.put(ROLE_NAME, roleInfo.getRoleName());
-        contentValues.put(ROLE_DESCRIPTION, roleInfo.getRoleDescription());
-        contentValues.put(ROLE_STATUS, roleInfo.getStatus());
-        db.update(TABLE_ROLE_NAME,contentValues,ID + "= ? ",new String[] {String.valueOf(roleInfo.getID())});
-        db.close();
+    public void updateRole(RoleInfo roleInfo) {
+        try {
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(ROLE_ID, roleInfo.getRoleID());
+            contentValues.put(ROLE_NAME, roleInfo.getRoleName());
+            contentValues.put(ROLE_DESCRIPTION, roleInfo.getRoleDescription());
+            contentValues.put(ROLE_STATUS, roleInfo.getStatus());
+            db.update(TABLE_ROLE_NAME, contentValues, ID + "= ? ", new String[]{String.valueOf(roleInfo.getID())});
+            db.close();
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
+        }
     }
 
     // Function delete Role

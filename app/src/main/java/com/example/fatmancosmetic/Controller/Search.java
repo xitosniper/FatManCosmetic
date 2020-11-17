@@ -84,67 +84,72 @@ public class Search extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search, container, false);
-        recyclerView =view.findViewById(R.id.search_recyclerView);
-        searchBar = view.findViewById(R.id.search_bar);
-        searchBar.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                searchBar.setFocusable(true);
-            }
-        });
-        // show recycleview
-        recyclerView();
-        searchBar.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+        try {
+            recyclerView = view.findViewById(R.id.search_recyclerView);
+            searchBar = view.findViewById(R.id.search_bar);
+            searchBar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    searchBar.setFocusable(true);
+                }
+            });
+            // show recycleview
+            recyclerView();
+            searchBar.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                try {
-                    String searchName = s.toString();
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    try {
+                        String searchName = s.toString();
 
-                        if(searchName.equals("") ){
+                        if (searchName.equals("")) {
                             recyclerView();
-                        }
-                        else{
+                        } else {
                             recyclerView(searchName);
                         }
-                } catch (Exception e) {
-                    Toast.makeText(getContext(), "No result", Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        Toast.makeText(getContext(), "No result", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
 
-            @Override
-            public void afterTextChanged(Editable s) {}
-        });
+                @Override
+                public void afterTextChanged(Editable s) {
+                }
+            });
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
+        }
         return view;
     }
 
     private void recyclerView(String txt) {
         recyclerView.setHasFixedSize(true);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL,false));
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false));
         ItemModel itemModel = new ItemModel(getContext());
 
         listItems = new ArrayList<>();
         listItems = itemModel.getItemsByItemName(txt);
 
         FragmentManager fragmentManager = getFragmentManager();
-        adapter = new ItemsAdapter(listItems, getContext(),fragmentManager, "Search");
+        adapter = new ItemsAdapter(listItems, getContext(), fragmentManager, "Search");
         recyclerView.setAdapter(adapter);
     }
 
     private void recyclerView() {
         recyclerView.setHasFixedSize(true);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL,false));
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false));
         ItemModel itemModel = new ItemModel(getContext());
 
         listItems = new ArrayList<>();
         listItems = itemModel.get4NewItems();
 
         FragmentManager fragmentManager = getFragmentManager();
-        adapter = new ItemsAdapter(listItems, getContext(),fragmentManager, "Search");
+        adapter = new ItemsAdapter(listItems, getContext(), fragmentManager, "Search");
         recyclerView.setAdapter(adapter);
     }
 

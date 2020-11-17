@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -65,7 +66,7 @@ public class DBManager extends SQLiteOpenHelper {
             "commentID VARCHAR(15)," +
             "customerID VARCHAR(15)," +
             "itemID VARCHAR(15)," +
-            "changeDate VARCHAR(50)," +
+            "commentDate VARCHAR(50)," +
             "Content VARCHAR(255)," +
             "Status INTEGER);";
 
@@ -126,23 +127,26 @@ public class DBManager extends SQLiteOpenHelper {
             "Status INTEGER);";
 
 
-
     public DBManager(@Nullable Context context) {
         super(context, DATABASE_NAME, null, VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(SQLQueryItems);
-        db.execSQL(SQLQueryBrands);
-        db.execSQL(SQLQueryCategories);
-        db.execSQL(SQLQueryRoles);
-        db.execSQL(SQLQueryCustomers);
-        db.execSQL(SQLQueryStaffs);
-        db.execSQL(SQLQueryOrders);
-        db.execSQL(SQLQueryOrderDetails);
-        db.execSQL(SQLQueryComments);
-        db.execSQL(SQLQueryBrowseComments);
+        try {
+            db.execSQL(SQLQueryItems);
+            db.execSQL(SQLQueryBrands);
+            db.execSQL(SQLQueryCategories);
+            db.execSQL(SQLQueryRoles);
+            db.execSQL(SQLQueryCustomers);
+            db.execSQL(SQLQueryStaffs);
+            db.execSQL(SQLQueryOrders);
+            db.execSQL(SQLQueryOrderDetails);
+            db.execSQL(SQLQueryComments);
+            db.execSQL(SQLQueryBrowseComments);
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
+        }
     }
 
     @Override

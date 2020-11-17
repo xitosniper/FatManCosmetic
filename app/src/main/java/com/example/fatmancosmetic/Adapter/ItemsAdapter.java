@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.SkinCareItem
     ItemModel itemModel;
     FragmentManager fragmentManager;
     String page;
-
+    String customerID = "000001";
 
     public ItemsAdapter(ArrayList<ItemInfo> skinCareItemsLocations, Context context, FragmentManager fragmentManager, String page) {
         this.skinCareItemsLocations = skinCareItemsLocations;
@@ -47,7 +48,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.SkinCareItem
     @NonNull
     @Override
     public ItemsAdapter.SkinCareItemsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.items_card_design,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.items_card_design, parent, false);
         SkinCareItemsViewHolder skinCareItemsViewHolder = new SkinCareItemsViewHolder(view);
 
         return skinCareItemsViewHolder;
@@ -55,32 +56,36 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.SkinCareItem
 
     @Override
     public void onBindViewHolder(@NonNull ItemsAdapter.SkinCareItemsViewHolder holder, int position) {
-        ItemInfo itemInfo = skinCareItemsLocations.get(position);
-        Bitmap bmp = BitmapFactory.decodeByteArray(itemInfo.getImage(), 0, itemInfo.getImage().length);
-        holder.imageView.setImageBitmap(bmp);
-        holder.title.setText(itemInfo.getName());
-        //Format price vnd
-        NumberFormat formatter = new DecimalFormat("#,###");
-        double myNumber = itemInfo.getPrice();
-        String formattedNumber = formatter.format(myNumber);
-        holder.price.setText(formattedNumber+"₫");
-        String itemID = itemInfo.getItemID();
+        try {
+            ItemInfo itemInfo = skinCareItemsLocations.get(position);
+            Bitmap bmp = BitmapFactory.decodeByteArray(itemInfo.getImage(), 0, itemInfo.getImage().length);
+            holder.imageView.setImageBitmap(bmp);
+            holder.title.setText(itemInfo.getName());
+            //Format price vnd
+            NumberFormat formatter = new DecimalFormat("#,###");
+            double myNumber = itemInfo.getPrice();
+            String formattedNumber = formatter.format(myNumber);
+            holder.price.setText(formattedNumber + "₫");
+            String itemID = itemInfo.getItemID();
 
-        // event click to see detail
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ItemDetails itemDetails = new ItemDetails(page);
-                Bundle bundle = new Bundle();
-                bundle.putString("itemID", itemID);
-                //set Fragmentclass Arguments
-                itemDetails.setArguments(bundle);
-                fragmentManager.beginTransaction().replace(R.id.fragment, itemDetails, itemDetails.getTag()).commit();
+            // event click to see detail
+            holder.imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ItemDetails itemDetails = new ItemDetails(page);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("itemID", itemID);
+                    bundle.putString("customerID", customerID);
+                    //set Fragmentclass Arguments
+                    itemDetails.setArguments(bundle);
+                    fragmentManager.beginTransaction().replace(R.id.fragment, itemDetails, itemDetails.getTag()).commit();
 
-            }
-        });
+                }
+            });
 
-
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
+        }
     }
 
     @Override
@@ -131,10 +136,11 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.SkinCareItem
         }
     }
 
-    public class SkinCareItemsViewHolder extends RecyclerView.ViewHolder{
+    public class SkinCareItemsViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
         TextView title, price;
+
         public SkinCareItemsViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.items_image);

@@ -11,7 +11,7 @@ public class CustomerInfo {
     private String gmailID;
     private String gmailLink;
     private String Name;
-    private String Image;
+    private byte[] Image;
     private String Age;
     private int Gender;
     private String Phone;
@@ -22,7 +22,7 @@ public class CustomerInfo {
     public CustomerInfo() {
     }
 
-    public CustomerInfo(int ID, String customerID, String userName, String passWord, String facebookID, String facebookLink, String gmailID, String gmailLink, String name, String image, String age, int gender, String phone, String address, String email, int status) {
+    public CustomerInfo(int ID, String customerID, String userName, String passWord, String facebookID, String facebookLink, String gmailID, String gmailLink, String name, byte[] image, String age, int gender, String phone, String address, String email, int status) {
         this.ID = ID;
         this.customerID = customerID;
         this.userName = userName;
@@ -41,7 +41,7 @@ public class CustomerInfo {
         this.Status = status;
     }
 
-    public CustomerInfo(String customerID, String userName, String passWord, String facebookID, String facebookLink, String gmailID, String gmailLink, String name, String image, String age, int gender, String phone, String address, String email, int status) {
+    public CustomerInfo(String customerID, String userName, String passWord, String facebookID, String facebookLink, String gmailID, String gmailLink, String name, byte[] image, String age, int gender, String phone, String address, String email, int status) {
         this.customerID = customerID;
         this.userName = userName;
         this.passWord = passWord;
@@ -131,11 +131,11 @@ public class CustomerInfo {
         Name = name;
     }
 
-    public String getImage() {
+    public byte[] getImage() {
         return Image;
     }
 
-    public void setImage(String image) {
+    public void setImage(byte[] image) {
         Image = image;
     }
 

@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,32 +76,34 @@ public class CategoryMakeUp extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_category_make_up, container, false);
+        try {
+            //Hooks
+            makeUpItems_recyclerView = view.findViewById(R.id.makeUpItems_recyclerView);
+            backBtn = view.findViewById(R.id.back_pressed);
 
-        //Hooks
-        makeUpItems_recyclerView = view.findViewById(R.id.makeUpItems_recyclerView);
-        backBtn = view.findViewById(R.id.back_pressed);
 
+            //Recycle View Function Calls
+            makeUpItems_recyclerView();
 
-        //Recycle View Function Calls
-        makeUpItems_recyclerView();
-
-        //Set handle
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Home home = new Home();
-                FragmentManager manager = getFragmentManager();
-                manager.beginTransaction().replace(R.id.fragment, home, home.getTag()).commit();
-            }
-        });
-
+            //Set handle
+            backBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Home home = new Home();
+                    FragmentManager manager = getFragmentManager();
+                    manager.beginTransaction().replace(R.id.fragment, home, home.getTag()).commit();
+                }
+            });
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
+        }
         return view;
     }
 
     private void makeUpItems_recyclerView() {
         makeUpItems_recyclerView.setHasFixedSize(true);
 
-        makeUpItems_recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL,false));
+        makeUpItems_recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false));
         ItemModel itemModel = new ItemModel(getContext());
 
         ArrayList<ItemInfo> listItems = new ArrayList<>();

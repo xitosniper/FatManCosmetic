@@ -77,10 +77,14 @@ public class BillsDetail extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_bills_detail, container, false);
-        recyclerView = view.findViewById(R.id.billsDetail_Recyclerview);
-        title_detail = view.findViewById(R.id.bill_code);
-        name = view.findViewById(R.id.bill_customer);
-        recyclerView();
+        try {
+            recyclerView = view.findViewById(R.id.billsDetail_Recyclerview);
+            title_detail = view.findViewById(R.id.bill_code);
+            name = view.findViewById(R.id.bill_customer);
+            recyclerView();
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
+        }
         return view;
     }
 
@@ -88,7 +92,7 @@ public class BillsDetail extends Fragment {
         Log.e("Testtttt", "Success");
         recyclerView.setHasFixedSize(true);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL,false));
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL, false));
 
         String customerID = "000001";
         OrderModel orderModel = new OrderModel(getContext());
@@ -98,7 +102,7 @@ public class BillsDetail extends Fragment {
 
 
         FragmentManager fragmentManager = getFragmentManager();
-        adapter = new BillAdapter(listOrder,fragmentManager, getContext());
+        adapter = new BillAdapter(listOrder, fragmentManager, getContext());
         recyclerView.setAdapter(adapter);
 
     }

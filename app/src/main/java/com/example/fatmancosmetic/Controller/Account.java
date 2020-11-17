@@ -90,54 +90,60 @@ public class Account extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_account, container, false);
-        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getActivity());
-        if (acct != null) {
-            String personName = acct.getDisplayName();
-            String personGivenName = acct.getGivenName();
-            String personFamilyName = acct.getFamilyName();
-            String personEmail = acct.getEmail();
-            String personId = acct.getId();
-            Uri personPhoto = acct.getPhotoUrl();
+        try {
+            GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getActivity());
+            if (acct != null) {
+                String personName = acct.getDisplayName();
+                String personGivenName = acct.getGivenName();
+                String personFamilyName = acct.getFamilyName();
+                String personEmail = acct.getEmail();
+                String personId = acct.getId();
+                Uri personPhoto = acct.getPhotoUrl();
 
-            profile_image = view.findViewById(R.id.profile_image);
-            Glide.with(this).load(String.valueOf(personPhoto)).into(profile_image);
-
-
-
-            profile_name = view.findViewById(R.id.profile_name);
-            profile_name.setText(personName);
+                profile_image = view.findViewById(R.id.profile_image);
+                Glide.with(this).load(String.valueOf(personPhoto)).into(profile_image);
 
 
-            my_bill = view.findViewById(R.id.donhangcuatoi);
-            my_bill.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    MyBill myBill = new MyBill();
-                    FragmentManager fragmentManager = getFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.fragment, myBill, myBill.getTag()).commit();
-                }
-            });
+                profile_name = view.findViewById(R.id.profile_name);
+                profile_name.setText(personName);
 
 
-            sign_out = view.findViewById(R.id.btnSignOut);
-            sign_out.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    switch (v.getId()) {
-                        // ...
-                        case R.id.btnSignOut:
-                            signOut();
-                            break;
-                        // ...
+                my_bill = view.findViewById(R.id.donhangcuatoi);
+                my_bill.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        MyBill myBill = new MyBill();
+                        FragmentManager fragmentManager = getFragmentManager();
+                        fragmentManager.beginTransaction().replace(R.id.fragment, myBill, myBill.getTag()).commit();
                     }
-                }
-            });
+                });
 
+
+                sign_out = view.findViewById(R.id.btnSignOut);
+                sign_out.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        switch (v.getId()) {
+                            // ...
+                            case R.id.btnSignOut:
+                                signOut();
+                                break;
+                            // ...
+                        }
+                    }
+                });
+
+            }
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
         }
         return view;
+
     }
+
     private void signOut() {
         mGoogleSignInClient.signOut().addOnCompleteListener((Activity) getContext(),
                 new OnCompleteListener<Void>() {
@@ -152,11 +158,10 @@ public class Account extends Fragment {
     }
 
     private void updateUI(GoogleSignInAccount account) {
-        if(account != null){
+        if (account != null) {
             Toast.makeText(getContext(), "Signin Successfully =))", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(getActivity(), MainActivity.class));
-        }
-        else{
+        } else {
             Toast.makeText(getContext(), "Signin Failed =((", Toast.LENGTH_SHORT).show();
         }
     }

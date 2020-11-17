@@ -2,6 +2,7 @@ package com.example.fatmancosmetic.Adapter;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,23 +44,27 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull BillAdapter.BillViewHolder holder, int position) {
-        OrderInfo orderInfo = listOrder.get(position);
-        holder.bill_title.setText(orderInfo.getOrderID());
-        holder.bill_date.setText(orderInfo.getOrderDate());
+        try {
+            OrderInfo orderInfo = listOrder.get(position);
+            holder.bill_title.setText(orderInfo.getOrderID());
+            holder.bill_date.setText(orderInfo.getOrderDate());
 
-        holder.bill_title.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            holder.bill_title.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                BillsDetail billsDetail = new BillsDetail();
-                Bundle bundle = new Bundle();
-                bundle.putString("customerID", "000001");
-                //set Fragmentclass Arguments
-                billsDetail.setArguments(bundle);
-                fragmentManager.beginTransaction().replace(R.id.fragment, billsDetail, billsDetail.getTag()).commit();
+                    BillsDetail billsDetail = new BillsDetail();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("customerID", "000001");
+                    //set Fragmentclass Arguments
+                    billsDetail.setArguments(bundle);
+                    fragmentManager.beginTransaction().replace(R.id.fragment, billsDetail, billsDetail.getTag()).commit();
 
-            }
-        });
+                }
+            });
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
+        }
     }
 
     @Override
@@ -67,9 +72,10 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillViewHolder
         return listOrder.size();
     }
 
-    public class BillViewHolder extends RecyclerView.ViewHolder{
+    public class BillViewHolder extends RecyclerView.ViewHolder {
 
         TextView bill_title, bill_date;
+
         public BillViewHolder(@NonNull View itemView) {
             super(itemView);
 

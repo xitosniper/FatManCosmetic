@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -36,98 +37,109 @@ public class CustomerModel extends DBManager {
         super(context);
     }
 
-    public ArrayList<CustomerInfo> getAllCustomers(){
+    public ArrayList<CustomerInfo> getAllCustomers() {
         ArrayList<CustomerInfo> listCustomers = new ArrayList<>();
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_CUSTOMER_NAME;
+        try {
+            // Select All Query
+            String selectQuery = "SELECT  * FROM " + TABLE_CUSTOMER_NAME;
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+            SQLiteDatabase db = this.getWritableDatabase();
+            Cursor cursor = db.rawQuery(selectQuery, null);
 
-        if (cursor.moveToFirst()) {
-            do {
-                CustomerInfo customerInfo = new CustomerInfo();
-                customerInfo.setID(cursor.getInt(0));
-                customerInfo.setCustomerID(cursor.getString(1));
-                customerInfo.setUserName(cursor.getString(2));
-                customerInfo.setPassWord(cursor.getString(3));
-                customerInfo.setFacebookID(cursor.getString(4));
-                customerInfo.setFacebookLink(cursor.getString(5));
-                customerInfo.setGmailID(cursor.getString(6));
-                customerInfo.setGmailLink(cursor.getString(7));
-                customerInfo.setName(cursor.getString(8));
-                customerInfo.setImage(cursor.getString(9));
-                customerInfo.setAge(cursor.getString(10));
-                customerInfo.setGender(cursor.getInt(11));
-                customerInfo.setPhone(cursor.getString(12));
-                customerInfo.setAddress(cursor.getString(13));
-                customerInfo.setEmail(cursor.getString(14));
-                customerInfo.setStatus(cursor.getInt(15));
-                listCustomers.add(customerInfo);
-            } while (cursor.moveToNext());
+            if (cursor.moveToFirst()) {
+                do {
+                    CustomerInfo customerInfo = new CustomerInfo();
+                    customerInfo.setID(cursor.getInt(0));
+                    customerInfo.setCustomerID(cursor.getString(1));
+                    customerInfo.setUserName(cursor.getString(2));
+                    customerInfo.setPassWord(cursor.getString(3));
+                    customerInfo.setFacebookID(cursor.getString(4));
+                    customerInfo.setFacebookLink(cursor.getString(5));
+                    customerInfo.setGmailID(cursor.getString(6));
+                    customerInfo.setGmailLink(cursor.getString(7));
+                    customerInfo.setName(cursor.getString(8));
+                    customerInfo.setImage(cursor.getBlob(9));
+                    customerInfo.setAge(cursor.getString(10));
+                    customerInfo.setGender(cursor.getInt(11));
+                    customerInfo.setPhone(cursor.getString(12));
+                    customerInfo.setAddress(cursor.getString(13));
+                    customerInfo.setEmail(cursor.getString(14));
+                    customerInfo.setStatus(cursor.getInt(15));
+                    listCustomers.add(customerInfo);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            db.close();
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
         }
-        cursor.close();
-        db.close();
         return listCustomers;
     }
 
-    public ArrayList<CustomerInfo> getCustomerByCustomerID(String customerID){
+    public ArrayList<CustomerInfo> getCustomerByCustomerID(String customerID) {
         ArrayList<CustomerInfo> listCustomers = new ArrayList<>();
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_CUSTOMER_NAME + " WHERE Customers.customerID = '" + customerID +"'";
+        try {
+            // Select All Query
+            String selectQuery = "SELECT  * FROM " + TABLE_CUSTOMER_NAME + " WHERE Customers.customerID = '" + customerID + "'";
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+            SQLiteDatabase db = this.getWritableDatabase();
+            Cursor cursor = db.rawQuery(selectQuery, null);
 
-        if (cursor.moveToFirst()) {
-            do {
-                CustomerInfo customerInfo = new CustomerInfo();
-                customerInfo.setID(cursor.getInt(0));
-                customerInfo.setCustomerID(cursor.getString(1));
-                customerInfo.setUserName(cursor.getString(2));
-                customerInfo.setPassWord(cursor.getString(3));
-                customerInfo.setFacebookID(cursor.getString(4));
-                customerInfo.setFacebookLink(cursor.getString(5));
-                customerInfo.setGmailID(cursor.getString(6));
-                customerInfo.setGmailLink(cursor.getString(7));
-                customerInfo.setName(cursor.getString(8));
-                customerInfo.setImage(cursor.getString(9));
-                customerInfo.setAge(cursor.getString(10));
-                customerInfo.setGender(cursor.getInt(11));
-                customerInfo.setPhone(cursor.getString(12));
-                customerInfo.setAddress(cursor.getString(13));
-                customerInfo.setEmail(cursor.getString(14));
-                customerInfo.setStatus(cursor.getInt(15));
-                listCustomers.add(customerInfo);
-            } while (cursor.moveToNext());
+            if (cursor.moveToFirst()) {
+                do {
+                    CustomerInfo customerInfo = new CustomerInfo();
+                    customerInfo.setID(cursor.getInt(0));
+                    customerInfo.setCustomerID(cursor.getString(1));
+                    customerInfo.setUserName(cursor.getString(2));
+                    customerInfo.setPassWord(cursor.getString(3));
+                    customerInfo.setFacebookID(cursor.getString(4));
+                    customerInfo.setFacebookLink(cursor.getString(5));
+                    customerInfo.setGmailID(cursor.getString(6));
+                    customerInfo.setGmailLink(cursor.getString(7));
+                    customerInfo.setName(cursor.getString(8));
+                    customerInfo.setImage(cursor.getBlob(9));
+                    customerInfo.setAge(cursor.getString(10));
+                    customerInfo.setGender(cursor.getInt(11));
+                    customerInfo.setPhone(cursor.getString(12));
+                    customerInfo.setAddress(cursor.getString(13));
+                    customerInfo.setEmail(cursor.getString(14));
+                    customerInfo.setStatus(cursor.getInt(15));
+                    listCustomers.add(customerInfo);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            db.close();
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
         }
-        cursor.close();
-        db.close();
         return listCustomers;
     }
 
-    public void addCustomer(CustomerInfo customerInfo){
+    public void addCustomer(CustomerInfo customerInfo) {
+        try {
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(CUSTOMER_ID, customerInfo.getCustomerID());
+            contentValues.put(CUSTOMER_USERNAME, customerInfo.getUserName());
+            contentValues.put(CUSTOMER_PASSWORD, customerInfo.getPassWord());
+            contentValues.put(CUSTOMER_FACEBOOKID, customerInfo.getFacebookID());
+            contentValues.put(CUSTOMER_FACEBOOKLINK, customerInfo.getFacebookLink());
+            contentValues.put(CUSTOMER_GMAILID, customerInfo.getGmailID());
+            contentValues.put(CUSTOMER_GMAILLINK, customerInfo.getGmailLink());
+            contentValues.put(CUSTOMER_NAME, customerInfo.getName());
+            contentValues.put(CUSTOMER_IMAGE, customerInfo.getImage());
+            contentValues.put(CUSTOMER_AGE, customerInfo.getAge());
+            contentValues.put(CUSTOMER_GENDER, customerInfo.getGender());
+            contentValues.put(CUSTOMER_PHONE, customerInfo.getPhone());
+            contentValues.put(CUSTOMER_ADDRESS, customerInfo.getAddress());
+            contentValues.put(CUSTOMER_EMAIL, customerInfo.getEmail());
+            contentValues.put(CUSTOMER_STATUS, customerInfo.getStatus());
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(CUSTOMER_ID, customerInfo.getCustomerID());
-        contentValues.put(CUSTOMER_USERNAME, customerInfo.getUserName());
-        contentValues.put(CUSTOMER_PASSWORD, customerInfo.getPassWord());
-        contentValues.put(CUSTOMER_FACEBOOKID, customerInfo.getFacebookID());
-        contentValues.put(CUSTOMER_FACEBOOKLINK, customerInfo.getFacebookLink());
-        contentValues.put(CUSTOMER_GMAILID, customerInfo.getGmailID());
-        contentValues.put(CUSTOMER_GMAILLINK, customerInfo.getGmailLink());
-        contentValues.put(CUSTOMER_NAME, customerInfo.getName());
-        contentValues.put(CUSTOMER_IMAGE, customerInfo.getImage());
-        contentValues.put(CUSTOMER_AGE, customerInfo.getAge());
-        contentValues.put(CUSTOMER_GENDER, customerInfo.getGender());
-        contentValues.put(CUSTOMER_PHONE, customerInfo.getPhone());
-        contentValues.put(CUSTOMER_ADDRESS, customerInfo.getAddress());
-        contentValues.put(CUSTOMER_EMAIL, customerInfo.getEmail());
-        contentValues.put(CUSTOMER_STATUS, customerInfo.getStatus());
 
-
-        db.insert(TABLE_CUSTOMER_NAME, null, contentValues);
-        db.close();
+            db.insert(TABLE_CUSTOMER_NAME, null, contentValues);
+            db.close();
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
+        }
     }
 }

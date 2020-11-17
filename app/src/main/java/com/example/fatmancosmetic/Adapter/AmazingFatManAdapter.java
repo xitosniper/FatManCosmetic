@@ -1,5 +1,6 @@
 package com.example.fatmancosmetic.Adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,17 +25,20 @@ public class AmazingFatManAdapter extends RecyclerView.Adapter<AmazingFatManAdap
     @NonNull
     @Override
     public AmazingFatManViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.amazing_fatman_card_design,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.amazing_fatman_card_design, parent, false);
         AmazingFatManViewHolder amazingFatManViewHolder = new AmazingFatManViewHolder(view);
         return amazingFatManViewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull AmazingFatManViewHolder holder, int position) {
-        AmazingFatManInfo amazingFatManInfo = amazingFatManLocations.get(position);
-        holder.imageView.setImageResource(amazingFatManInfo.getImage());
-        holder.title.setText(amazingFatManInfo.getTitle());
-
+        try {
+            AmazingFatManInfo amazingFatManInfo = amazingFatManLocations.get(position);
+            holder.imageView.setImageResource(amazingFatManInfo.getImage());
+            holder.title.setText(amazingFatManInfo.getTitle());
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
+        }
     }
 
     @Override
@@ -42,7 +46,7 @@ public class AmazingFatManAdapter extends RecyclerView.Adapter<AmazingFatManAdap
         return amazingFatManLocations.size();
     }
 
-    public static class AmazingFatManViewHolder extends RecyclerView.ViewHolder{
+    public static class AmazingFatManViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
         TextView title;
 

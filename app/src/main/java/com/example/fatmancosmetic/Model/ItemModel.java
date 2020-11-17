@@ -33,52 +33,56 @@ public class ItemModel extends DBManager {
         super(context);
     }
 
-    public ArrayList<ItemInfo> getAllItems(){
+    public ArrayList<ItemInfo> getAllItems() {
         ArrayList<ItemInfo> listItems = new ArrayList<>();
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME;
+        try {
+            // Select All Query
+            String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME;
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+            SQLiteDatabase db = this.getWritableDatabase();
+            Cursor cursor = db.rawQuery(selectQuery, null);
 
-        if (cursor.moveToFirst()) {
-            do {
-                ItemInfo itemInfo = new ItemInfo();
-                itemInfo.setID(cursor.getInt(0));
-                itemInfo.setItemID(cursor.getString(1));
-                itemInfo.setBrandID(cursor.getString(2));
-                itemInfo.setCategoryID(cursor.getString(3));
-                itemInfo.setName(cursor.getString(4));
-                itemInfo.setImage(cursor.getBlob(5));
-                itemInfo.setPrice(cursor.getInt(6));
-                itemInfo.setDescription(cursor.getString(7));
-                itemInfo.setStatus(cursor.getInt(8));
-                listItems.add(itemInfo);
-            } while (cursor.moveToNext());
+            if (cursor.moveToFirst()) {
+                do {
+                    ItemInfo itemInfo = new ItemInfo();
+                    itemInfo.setID(cursor.getInt(0));
+                    itemInfo.setItemID(cursor.getString(1));
+                    itemInfo.setBrandID(cursor.getString(2));
+                    itemInfo.setCategoryID(cursor.getString(3));
+                    itemInfo.setName(cursor.getString(4));
+                    itemInfo.setImage(cursor.getBlob(5));
+                    itemInfo.setPrice(cursor.getInt(6));
+                    itemInfo.setDescription(cursor.getString(7));
+                    itemInfo.setStatus(cursor.getInt(8));
+                    listItems.add(itemInfo);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            db.close();
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
         }
-        cursor.close();
-        db.close();
         return listItems;
     }
 
-    public ArrayList<ItemInfo> getItemsByCustomerID(String customerID){
+    public ArrayList<ItemInfo> getItemsByCustomerID(String customerID) {
         ArrayList<ItemInfo> listItems = new ArrayList<>();
-        // Select All Query
-        String selectQuery = "SELECT Items.itemID FROM Items, Orders, OrderDetails WHERE Orders.Status = 1 AND Orders.customerID = '"+customerID+"' AND Orders.orderID = OrderDetails.orderID AND OrderDetails.itemID = Items.itemID";
+        try {
+            // Select All Query
+            String selectQuery = "SELECT Items.itemID FROM Items, Orders, OrderDetails WHERE Orders.Status = 1 AND Orders.customerID = '" + customerID + "' AND Orders.orderID = OrderDetails.orderID AND OrderDetails.itemID = Items.itemID";
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+            SQLiteDatabase db = this.getWritableDatabase();
+            Cursor cursor = db.rawQuery(selectQuery, null);
 
-        if (cursor.moveToFirst()) {
-            do {
-                ArrayList<ItemInfo> listItemsTemple = new ArrayList<>();
-                String itemID = cursor.getString(0);
-                listItemsTemple = getItemsByItemID(itemID);
+            if (cursor.moveToFirst()) {
+                do {
+                    ArrayList<ItemInfo> listItemsTemple = new ArrayList<>();
+                    String itemID = cursor.getString(0);
+                    listItemsTemple = getItemsByItemID(itemID);
 
 
-
-                ItemInfo itemInfo = new ItemInfo();
-                itemInfo = listItemsTemple.get(0);
+                    ItemInfo itemInfo = new ItemInfo();
+                    itemInfo = listItemsTemple.get(0);
 
 //                itemInfo.setID(listItemsTemple.get(0).getID());
 //                itemInfo.setItemID(listItemsTemple.get(0).getItemID());
@@ -91,349 +95,410 @@ public class ItemModel extends DBManager {
 //                itemInfo.setStatus(listItemsTemple.get(0).getStatus());
 
 
-                listItems.add(itemInfo);
+                    listItems.add(itemInfo);
 
 
-            } while (cursor.moveToNext());
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            db.close();
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
         }
-        cursor.close();
-        db.close();
         return listItems;
     }
 
-    public ArrayList<ItemInfo> getItemsByItemID(String itemID){
+    public ArrayList<ItemInfo> getItemsByItemID(String itemID) {
         ArrayList<ItemInfo> listItems = new ArrayList<>();
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE itemID = '" + itemID + "'";
+        try {
+            // Select All Query
+            String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE itemID = '" + itemID + "'";
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+            SQLiteDatabase db = this.getWritableDatabase();
+            Cursor cursor = db.rawQuery(selectQuery, null);
 
-        if (cursor.moveToFirst()) {
-            do {
-                ItemInfo itemInfo = new ItemInfo();
-                itemInfo.setID(cursor.getInt(0));
-                itemInfo.setItemID(cursor.getString(1));
-                itemInfo.setBrandID(cursor.getString(2));
-                itemInfo.setCategoryID(cursor.getString(3));
-                itemInfo.setName(cursor.getString(4));
-                itemInfo.setImage(cursor.getBlob(5));
-                itemInfo.setPrice(cursor.getInt(6));
-                itemInfo.setDescription(cursor.getString(7));
-                itemInfo.setStatus(cursor.getInt(8));
-                listItems.add(itemInfo);
-            } while (cursor.moveToNext());
+            if (cursor.moveToFirst()) {
+                do {
+                    ItemInfo itemInfo = new ItemInfo();
+                    itemInfo.setID(cursor.getInt(0));
+                    itemInfo.setItemID(cursor.getString(1));
+                    itemInfo.setBrandID(cursor.getString(2));
+                    itemInfo.setCategoryID(cursor.getString(3));
+                    itemInfo.setName(cursor.getString(4));
+                    itemInfo.setImage(cursor.getBlob(5));
+                    itemInfo.setPrice(cursor.getInt(6));
+                    itemInfo.setDescription(cursor.getString(7));
+                    itemInfo.setStatus(cursor.getInt(8));
+                    listItems.add(itemInfo);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            db.close();
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
         }
-        cursor.close();
-        db.close();
         return listItems;
     }
-    public ArrayList<ItemInfo> getItemsByItemName(String ItemName){
+
+    public ArrayList<ItemInfo> getItemsByItemName(String ItemName) {
         ArrayList<ItemInfo> listItems = new ArrayList<>();
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE Name LIKE '%" + ItemName + "%'";
+        try {
+            // Select All Query
+            String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE Name LIKE '%" + ItemName + "%'";
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+            SQLiteDatabase db = this.getWritableDatabase();
+            Cursor cursor = db.rawQuery(selectQuery, null);
 
-        if (cursor.moveToFirst()) {
-            do {
-                ItemInfo itemInfo = new ItemInfo();
-                itemInfo.setID(cursor.getInt(0));
-                itemInfo.setItemID(cursor.getString(1));
-                itemInfo.setBrandID(cursor.getString(2));
-                itemInfo.setCategoryID(cursor.getString(3));
-                itemInfo.setName(cursor.getString(4));
-                itemInfo.setImage(cursor.getBlob(5));
-                itemInfo.setPrice(cursor.getInt(6));
-                itemInfo.setDescription(cursor.getString(7));
-                itemInfo.setStatus(cursor.getInt(8));
-                listItems.add(itemInfo);
-            } while (cursor.moveToNext());
+            if (cursor.moveToFirst()) {
+                do {
+                    ItemInfo itemInfo = new ItemInfo();
+                    itemInfo.setID(cursor.getInt(0));
+                    itemInfo.setItemID(cursor.getString(1));
+                    itemInfo.setBrandID(cursor.getString(2));
+                    itemInfo.setCategoryID(cursor.getString(3));
+                    itemInfo.setName(cursor.getString(4));
+                    itemInfo.setImage(cursor.getBlob(5));
+                    itemInfo.setPrice(cursor.getInt(6));
+                    itemInfo.setDescription(cursor.getString(7));
+                    itemInfo.setStatus(cursor.getInt(8));
+                    listItems.add(itemInfo);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            db.close();
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
         }
-        cursor.close();
-        db.close();
         return listItems;
     }
 
-    public ArrayList<ItemInfo> getBodyCareItems(){
+    public ArrayList<ItemInfo> getBodyCareItems() {
         ArrayList<ItemInfo> listItems = new ArrayList<>();
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE categoryID = '000001'";
+        try {
+            // Select All Query
+            String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE categoryID = '000001'";
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+            SQLiteDatabase db = this.getWritableDatabase();
+            Cursor cursor = db.rawQuery(selectQuery, null);
 
-        if (cursor.moveToFirst()) {
-            do {
-                ItemInfo itemInfo = new ItemInfo();
-                itemInfo.setID(cursor.getInt(0));
-                itemInfo.setItemID(cursor.getString(1));
-                itemInfo.setBrandID(cursor.getString(2));
-                itemInfo.setCategoryID(cursor.getString(3));
-                itemInfo.setName(cursor.getString(4));
-                itemInfo.setImage(cursor.getBlob(5));
-                itemInfo.setPrice(cursor.getInt(6));
-                itemInfo.setDescription(cursor.getString(7));
-                itemInfo.setStatus(cursor.getInt(8));
-                listItems.add(itemInfo);
-            } while (cursor.moveToNext());
+            if (cursor.moveToFirst()) {
+                do {
+                    ItemInfo itemInfo = new ItemInfo();
+                    itemInfo.setID(cursor.getInt(0));
+                    itemInfo.setItemID(cursor.getString(1));
+                    itemInfo.setBrandID(cursor.getString(2));
+                    itemInfo.setCategoryID(cursor.getString(3));
+                    itemInfo.setName(cursor.getString(4));
+                    itemInfo.setImage(cursor.getBlob(5));
+                    itemInfo.setPrice(cursor.getInt(6));
+                    itemInfo.setDescription(cursor.getString(7));
+                    itemInfo.setStatus(cursor.getInt(8));
+                    listItems.add(itemInfo);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            db.close();
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
         }
-        cursor.close();
-        db.close();
         return listItems;
     }
-    public ArrayList<ItemInfo> getSkinCareItems(){
+
+    public ArrayList<ItemInfo> getSkinCareItems() {
         ArrayList<ItemInfo> listItems = new ArrayList<>();
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE categoryID = '000003'";
+        try {
+            // Select All Query
+            String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE categoryID = '000003'";
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+            SQLiteDatabase db = this.getWritableDatabase();
+            Cursor cursor = db.rawQuery(selectQuery, null);
 
-        if (cursor.moveToFirst()) {
-            do {
-                ItemInfo itemInfo = new ItemInfo();
-                itemInfo.setID(cursor.getInt(0));
-                itemInfo.setItemID(cursor.getString(1));
-                itemInfo.setBrandID(cursor.getString(2));
-                itemInfo.setCategoryID(cursor.getString(3));
-                itemInfo.setName(cursor.getString(4));
-                itemInfo.setImage(cursor.getBlob(5));
-                itemInfo.setPrice(cursor.getInt(6));
-                itemInfo.setDescription(cursor.getString(7));
-                itemInfo.setStatus(cursor.getInt(8));
-                listItems.add(itemInfo);
-            } while (cursor.moveToNext());
+            if (cursor.moveToFirst()) {
+                do {
+                    ItemInfo itemInfo = new ItemInfo();
+                    itemInfo.setID(cursor.getInt(0));
+                    itemInfo.setItemID(cursor.getString(1));
+                    itemInfo.setBrandID(cursor.getString(2));
+                    itemInfo.setCategoryID(cursor.getString(3));
+                    itemInfo.setName(cursor.getString(4));
+                    itemInfo.setImage(cursor.getBlob(5));
+                    itemInfo.setPrice(cursor.getInt(6));
+                    itemInfo.setDescription(cursor.getString(7));
+                    itemInfo.setStatus(cursor.getInt(8));
+                    listItems.add(itemInfo);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            db.close();
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
         }
-        cursor.close();
-        db.close();
         return listItems;
     }
 
-    public ArrayList<ItemInfo> getMakeUpItems(){
+    public ArrayList<ItemInfo> getMakeUpItems() {
         ArrayList<ItemInfo> listItems = new ArrayList<>();
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE categoryID = '000002'";
+        try {
+            // Select All Query
+            String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE categoryID = '000002'";
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+            SQLiteDatabase db = this.getWritableDatabase();
+            Cursor cursor = db.rawQuery(selectQuery, null);
 
-        if (cursor.moveToFirst()) {
-            do {
-                ItemInfo itemInfo = new ItemInfo();
-                itemInfo.setID(cursor.getInt(0));
-                itemInfo.setItemID(cursor.getString(1));
-                itemInfo.setBrandID(cursor.getString(2));
-                itemInfo.setCategoryID(cursor.getString(3));
-                itemInfo.setName(cursor.getString(4));
-                itemInfo.setImage(cursor.getBlob(5));
-                itemInfo.setPrice(cursor.getInt(6));
-                itemInfo.setDescription(cursor.getString(7));
-                itemInfo.setStatus(cursor.getInt(8));
-                listItems.add(itemInfo);
-            } while (cursor.moveToNext());
+            if (cursor.moveToFirst()) {
+                do {
+                    ItemInfo itemInfo = new ItemInfo();
+                    itemInfo.setID(cursor.getInt(0));
+                    itemInfo.setItemID(cursor.getString(1));
+                    itemInfo.setBrandID(cursor.getString(2));
+                    itemInfo.setCategoryID(cursor.getString(3));
+                    itemInfo.setName(cursor.getString(4));
+                    itemInfo.setImage(cursor.getBlob(5));
+                    itemInfo.setPrice(cursor.getInt(6));
+                    itemInfo.setDescription(cursor.getString(7));
+                    itemInfo.setStatus(cursor.getInt(8));
+                    listItems.add(itemInfo);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            db.close();
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
         }
-        cursor.close();
-        db.close();
         return listItems;
     }
 
-    public ArrayList<ItemInfo> get4SaleItems(){
+    public ArrayList<ItemInfo> get4SaleItems() {
         ArrayList<ItemInfo> listItems = new ArrayList<>();
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE Status = 2 LIMIT 4";
+        try {
+            // Select All Query
+            String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE Status = 2 LIMIT 4";
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+            SQLiteDatabase db = this.getWritableDatabase();
+            Cursor cursor = db.rawQuery(selectQuery, null);
 
-        if (cursor.moveToFirst()) {
-            do {
-                ItemInfo itemInfo = new ItemInfo();
-                itemInfo.setID(cursor.getInt(0));
-                itemInfo.setItemID(cursor.getString(1));
-                itemInfo.setBrandID(cursor.getString(2));
-                itemInfo.setCategoryID(cursor.getString(3));
-                itemInfo.setName(cursor.getString(4));
-                itemInfo.setImage(cursor.getBlob(5));
-                itemInfo.setPrice(cursor.getInt(6));
-                itemInfo.setDescription(cursor.getString(7));
-                itemInfo.setStatus(cursor.getInt(8));
-                listItems.add(itemInfo);
-            } while (cursor.moveToNext());
+            if (cursor.moveToFirst()) {
+                do {
+                    ItemInfo itemInfo = new ItemInfo();
+                    itemInfo.setID(cursor.getInt(0));
+                    itemInfo.setItemID(cursor.getString(1));
+                    itemInfo.setBrandID(cursor.getString(2));
+                    itemInfo.setCategoryID(cursor.getString(3));
+                    itemInfo.setName(cursor.getString(4));
+                    itemInfo.setImage(cursor.getBlob(5));
+                    itemInfo.setPrice(cursor.getInt(6));
+                    itemInfo.setDescription(cursor.getString(7));
+                    itemInfo.setStatus(cursor.getInt(8));
+                    listItems.add(itemInfo);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            db.close();
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
         }
-        cursor.close();
-        db.close();
         return listItems;
     }
 
-    public ArrayList<ItemInfo> get4NewItems(){
+    public ArrayList<ItemInfo> get4NewItems() {
         ArrayList<ItemInfo> listItems = new ArrayList<>();
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE Status = 3  LIMIT 4";
+        try {
+            // Select All Query
+            String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE Status = 3  LIMIT 4";
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+            SQLiteDatabase db = this.getWritableDatabase();
+            Cursor cursor = db.rawQuery(selectQuery, null);
 
-        if (cursor.moveToFirst()) {
-            do {
-                ItemInfo itemInfo = new ItemInfo();
-                itemInfo.setID(cursor.getInt(0));
-                itemInfo.setItemID(cursor.getString(1));
-                itemInfo.setBrandID(cursor.getString(2));
-                itemInfo.setCategoryID(cursor.getString(3));
-                itemInfo.setName(cursor.getString(4));
-                itemInfo.setImage(cursor.getBlob(5));
-                itemInfo.setPrice(cursor.getInt(6));
-                itemInfo.setDescription(cursor.getString(7));
-                itemInfo.setStatus(cursor.getInt(8));
-                listItems.add(itemInfo);
-            } while (cursor.moveToNext());
+            if (cursor.moveToFirst()) {
+                do {
+                    ItemInfo itemInfo = new ItemInfo();
+                    itemInfo.setID(cursor.getInt(0));
+                    itemInfo.setItemID(cursor.getString(1));
+                    itemInfo.setBrandID(cursor.getString(2));
+                    itemInfo.setCategoryID(cursor.getString(3));
+                    itemInfo.setName(cursor.getString(4));
+                    itemInfo.setImage(cursor.getBlob(5));
+                    itemInfo.setPrice(cursor.getInt(6));
+                    itemInfo.setDescription(cursor.getString(7));
+                    itemInfo.setStatus(cursor.getInt(8));
+                    listItems.add(itemInfo);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            db.close();
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
         }
-        cursor.close();
-        db.close();
         return listItems;
     }
 
-    public ArrayList<ItemInfo> get4BestSaleItems(){
+    public ArrayList<ItemInfo> get4BestSaleItems() {
         ArrayList<ItemInfo> listItems = new ArrayList<>();
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE Status = 4  LIMIT 4";
+        try {
+            // Select All Query
+            String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE Status = 4  LIMIT 4";
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+            SQLiteDatabase db = this.getWritableDatabase();
+            Cursor cursor = db.rawQuery(selectQuery, null);
 
-        if (cursor.moveToFirst()) {
-            do {
-                ItemInfo itemInfo = new ItemInfo();
-                itemInfo.setID(cursor.getInt(0));
-                itemInfo.setItemID(cursor.getString(1));
-                itemInfo.setBrandID(cursor.getString(2));
-                itemInfo.setCategoryID(cursor.getString(3));
-                itemInfo.setName(cursor.getString(4));
-                itemInfo.setImage(cursor.getBlob(5));
-                itemInfo.setPrice(cursor.getInt(6));
-                itemInfo.setDescription(cursor.getString(7));
-                itemInfo.setStatus(cursor.getInt(8));
-                listItems.add(itemInfo);
-            } while (cursor.moveToNext());
+            if (cursor.moveToFirst()) {
+                do {
+                    ItemInfo itemInfo = new ItemInfo();
+                    itemInfo.setID(cursor.getInt(0));
+                    itemInfo.setItemID(cursor.getString(1));
+                    itemInfo.setBrandID(cursor.getString(2));
+                    itemInfo.setCategoryID(cursor.getString(3));
+                    itemInfo.setName(cursor.getString(4));
+                    itemInfo.setImage(cursor.getBlob(5));
+                    itemInfo.setPrice(cursor.getInt(6));
+                    itemInfo.setDescription(cursor.getString(7));
+                    itemInfo.setStatus(cursor.getInt(8));
+                    listItems.add(itemInfo);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            db.close();
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
         }
-        cursor.close();
-        db.close();
         return listItems;
     }
-    public ArrayList<ItemInfo> getAllSaleItems(){
+
+    public ArrayList<ItemInfo> getAllSaleItems() {
         ArrayList<ItemInfo> listItems = new ArrayList<>();
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE Status = 2";
+        try {
+            // Select All Query
+            String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE Status = 2";
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+            SQLiteDatabase db = this.getWritableDatabase();
+            Cursor cursor = db.rawQuery(selectQuery, null);
 
-        if (cursor.moveToFirst()) {
-            do {
-                ItemInfo itemInfo = new ItemInfo();
-                itemInfo.setID(cursor.getInt(0));
-                itemInfo.setItemID(cursor.getString(1));
-                itemInfo.setBrandID(cursor.getString(2));
-                itemInfo.setCategoryID(cursor.getString(3));
-                itemInfo.setName(cursor.getString(4));
-                itemInfo.setImage(cursor.getBlob(5));
-                itemInfo.setPrice(cursor.getInt(6));
-                itemInfo.setDescription(cursor.getString(7));
-                itemInfo.setStatus(cursor.getInt(8));
-                listItems.add(itemInfo);
-            } while (cursor.moveToNext());
+            if (cursor.moveToFirst()) {
+                do {
+                    ItemInfo itemInfo = new ItemInfo();
+                    itemInfo.setID(cursor.getInt(0));
+                    itemInfo.setItemID(cursor.getString(1));
+                    itemInfo.setBrandID(cursor.getString(2));
+                    itemInfo.setCategoryID(cursor.getString(3));
+                    itemInfo.setName(cursor.getString(4));
+                    itemInfo.setImage(cursor.getBlob(5));
+                    itemInfo.setPrice(cursor.getInt(6));
+                    itemInfo.setDescription(cursor.getString(7));
+                    itemInfo.setStatus(cursor.getInt(8));
+                    listItems.add(itemInfo);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            db.close();
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
         }
-        cursor.close();
-        db.close();
         return listItems;
     }
 
-    public ArrayList<ItemInfo> getAllNewItems(){
+    public ArrayList<ItemInfo> getAllNewItems() {
         ArrayList<ItemInfo> listItems = new ArrayList<>();
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE Status = 3";
+        try {
+            // Select All Query
+            String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE Status = 3";
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+            SQLiteDatabase db = this.getWritableDatabase();
+            Cursor cursor = db.rawQuery(selectQuery, null);
 
-        if (cursor.moveToFirst()) {
-            do {
-                ItemInfo itemInfo = new ItemInfo();
-                itemInfo.setID(cursor.getInt(0));
-                itemInfo.setItemID(cursor.getString(1));
-                itemInfo.setBrandID(cursor.getString(2));
-                itemInfo.setCategoryID(cursor.getString(3));
-                itemInfo.setName(cursor.getString(4));
-                itemInfo.setImage(cursor.getBlob(5));
-                itemInfo.setPrice(cursor.getInt(6));
-                itemInfo.setDescription(cursor.getString(7));
-                itemInfo.setStatus(cursor.getInt(8));
-                listItems.add(itemInfo);
-            } while (cursor.moveToNext());
+            if (cursor.moveToFirst()) {
+                do {
+                    ItemInfo itemInfo = new ItemInfo();
+                    itemInfo.setID(cursor.getInt(0));
+                    itemInfo.setItemID(cursor.getString(1));
+                    itemInfo.setBrandID(cursor.getString(2));
+                    itemInfo.setCategoryID(cursor.getString(3));
+                    itemInfo.setName(cursor.getString(4));
+                    itemInfo.setImage(cursor.getBlob(5));
+                    itemInfo.setPrice(cursor.getInt(6));
+                    itemInfo.setDescription(cursor.getString(7));
+                    itemInfo.setStatus(cursor.getInt(8));
+                    listItems.add(itemInfo);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            db.close();
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
         }
-        cursor.close();
-        db.close();
         return listItems;
     }
 
-    public ArrayList<ItemInfo> getAllBestSaleItems(){
+    public ArrayList<ItemInfo> getAllBestSaleItems() {
         ArrayList<ItemInfo> listItems = new ArrayList<>();
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE Status = 4";
+        try {
+            // Select All Query
+            String selectQuery = "SELECT  * FROM " + TABLE_ITEM_NAME + " WHERE Status = 4";
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+            SQLiteDatabase db = this.getWritableDatabase();
+            Cursor cursor = db.rawQuery(selectQuery, null);
 
-        if (cursor.moveToFirst()) {
-            do {
-                ItemInfo itemInfo = new ItemInfo();
-                itemInfo.setID(cursor.getInt(0));
-                itemInfo.setItemID(cursor.getString(1));
-                itemInfo.setBrandID(cursor.getString(2));
-                itemInfo.setCategoryID(cursor.getString(3));
-                itemInfo.setName(cursor.getString(4));
-                itemInfo.setImage(cursor.getBlob(5));
-                itemInfo.setPrice(cursor.getInt(6));
-                itemInfo.setDescription(cursor.getString(7));
-                itemInfo.setStatus(cursor.getInt(8));
-                listItems.add(itemInfo);
-            } while (cursor.moveToNext());
+            if (cursor.moveToFirst()) {
+                do {
+                    ItemInfo itemInfo = new ItemInfo();
+                    itemInfo.setID(cursor.getInt(0));
+                    itemInfo.setItemID(cursor.getString(1));
+                    itemInfo.setBrandID(cursor.getString(2));
+                    itemInfo.setCategoryID(cursor.getString(3));
+                    itemInfo.setName(cursor.getString(4));
+                    itemInfo.setImage(cursor.getBlob(5));
+                    itemInfo.setPrice(cursor.getInt(6));
+                    itemInfo.setDescription(cursor.getString(7));
+                    itemInfo.setStatus(cursor.getInt(8));
+                    listItems.add(itemInfo);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            db.close();
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
         }
-        cursor.close();
-        db.close();
         return listItems;
     }
 
-    public void addItem(ItemInfo itemInfo){
+    public void addItem(ItemInfo itemInfo) {
+        try {
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(ITEM_ID, itemInfo.getItemID());
+            contentValues.put(ITEM_BRAND_ID, itemInfo.getBrandID());
+            contentValues.put(ITEM_CATEGORY_ID, itemInfo.getCategoryID());
+            contentValues.put(ITEM_NAME, itemInfo.getName());
+            contentValues.put(ITEM_IMAGE, itemInfo.getImage());
+            contentValues.put(ITEM_PRICE, itemInfo.getPrice());
+            contentValues.put(ITEM_DESCRIPTION, itemInfo.getDescription());
+            contentValues.put(ITEM_STATUS, itemInfo.getStatus());
+
+            db.insert(TABLE_ITEM_NAME, null, contentValues);
+            db.close();
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
+        }
+    }
+
+    public int updateItem(ItemInfo itemInfo) {
+
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(ITEM_ID, itemInfo.getItemID());
-        contentValues.put(ITEM_BRAND_ID, itemInfo.getBrandID());
-        contentValues.put(ITEM_CATEGORY_ID, itemInfo.getCategoryID());
-        contentValues.put(ITEM_NAME, itemInfo.getName());
-        contentValues.put(ITEM_IMAGE, itemInfo.getImage());
-        contentValues.put(ITEM_PRICE, itemInfo.getPrice());
-        contentValues.put(ITEM_DESCRIPTION, itemInfo.getDescription());
-        contentValues.put(ITEM_STATUS, itemInfo.getStatus());
+        try {
+            contentValues.put(ITEM_ID, itemInfo.getItemID());
+            contentValues.put(ITEM_BRAND_ID, itemInfo.getBrandID());
+            contentValues.put(ITEM_CATEGORY_ID, itemInfo.getCategoryID());
+            contentValues.put(ITEM_NAME, itemInfo.getName());
+            contentValues.put(ITEM_IMAGE, itemInfo.getImage());
+            contentValues.put(ITEM_PRICE, itemInfo.getPrice());
+            contentValues.put(ITEM_DESCRIPTION, itemInfo.getDescription());
+            contentValues.put(ITEM_STATUS, itemInfo.getStatus());
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
+        }
+        return db.update(TABLE_ITEM_NAME, contentValues, ID + "=?", new String[]{String.valueOf(itemInfo.getID())});
+    }
 
-        db.insert(TABLE_ITEM_NAME, null, contentValues);
-        db.close();
-    }
-    public int updateItem(ItemInfo itemInfo){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(ITEM_ID, itemInfo.getItemID());
-        contentValues.put(ITEM_BRAND_ID, itemInfo.getBrandID());
-        contentValues.put(ITEM_CATEGORY_ID, itemInfo.getCategoryID());
-        contentValues.put(ITEM_NAME, itemInfo.getName());
-        contentValues.put(ITEM_IMAGE, itemInfo.getImage());
-        contentValues.put(ITEM_PRICE, itemInfo.getPrice());
-        contentValues.put(ITEM_DESCRIPTION, itemInfo.getDescription());
-        contentValues.put(ITEM_STATUS, itemInfo.getStatus());
-        return db.update(TABLE_ITEM_NAME,contentValues,ID +"=?",new String[] { String.valueOf(itemInfo.getID())});
-    }
     public int deleteBrand(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_ITEM_NAME, ID + "=?", new String[]{String.valueOf(String.valueOf(id))});

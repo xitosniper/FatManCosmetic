@@ -80,9 +80,9 @@ public class MyBill extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_bill, container, false);
-
-        recyclerView = view.findViewById(R.id.bill_recyclerView);
-        recyclerView();
+        try {
+            recyclerView = view.findViewById(R.id.bill_recyclerView);
+            recyclerView();
 //
 //        title  = view.findViewById(R.id.bill_title);
 //
@@ -94,8 +94,9 @@ public class MyBill extends Fragment {
 //        });
 
 
-
-
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
+        }
 
         return view;
     }
@@ -103,7 +104,7 @@ public class MyBill extends Fragment {
     private void recyclerView() {
         recyclerView.setHasFixedSize(true);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL,false));
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false));
 
         String customerID = "000001";
         OrderModel orderModel = new OrderModel(getContext());
@@ -111,7 +112,7 @@ public class MyBill extends Fragment {
         listOrder = orderModel.getOrderByCustomerID(customerID);
 
         FragmentManager fragmentManager = getFragmentManager();
-        adapter = new BillAdapter(listOrder,fragmentManager, getContext());
+        adapter = new BillAdapter(listOrder, fragmentManager, getContext());
         recyclerView.setAdapter(adapter);
 
         Log.e("after ", "..........................");

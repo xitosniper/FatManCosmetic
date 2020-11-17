@@ -56,71 +56,78 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     @NonNull
     @Override
     public ShoppingCartAdapter.ShoppingCartHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_item_card_design,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_item_card_design, parent, false);
         ShoppingCartHolder shoppingCartHolder = new ShoppingCartHolder(view);
         return shoppingCartHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ShoppingCartAdapter.ShoppingCartHolder holder, int position) {
+        try {
+            ItemInfo itemInfo = itemsCartLocations.get(position);
 
-        ItemInfo itemInfo = itemsCartLocations.get(position);
-        ArrayList<OrderDetailInfo> orderDetailInfoArrayList = new ArrayList<>();
-        orderDetailsModel = new OrderDetailsModel(context);
-        orderDetailInfoArrayList = orderDetailsModel.getOrderDetailsByCustomerIDAndItemID(customerID, itemInfo.getItemID());
-        //OrderDetailInfo orderDetailInfo = orderDetailInfoArrayList.get(position);
-        Bitmap bmp = BitmapFactory.decodeByteArray(itemInfo.getImage(), 0, itemInfo.getImage().length);
-        holder.imageView.setImageBitmap(bmp);
+            ArrayList<OrderDetailInfo> orderDetailInfoArrayList = new ArrayList<>();
+            orderDetailsModel = new OrderDetailsModel(context);
+            orderDetailInfoArrayList = orderDetailsModel.getOrderDetailsByCustomerIDAndItemID(customerID, itemInfo.getItemID());
 
-        holder.title.setText(itemInfo.getName());
-        //Format price vnd
-        NumberFormat formatter = new DecimalFormat("#,###");
-        double myNumber = itemInfo.getPrice();
-        String formattedNumber = formatter.format(myNumber);
-        holder.price.setText(formattedNumber+"₫");
-        holder.btn_quantity.setNumber(orderDetailInfoArrayList.get(0).getQuantity()+"");
-        holder.btn_quantity.setOnClickListener(new ElegantNumberButton.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            //OrderDetailInfo orderDetailInfo = orderDetailInfoArrayList.get(position);
 
-                int itemQuantity = Integer.parseInt(holder.btn_quantity.getNumber());
+            Bitmap bmp = BitmapFactory.decodeByteArray(itemInfo.getImage(), 0, itemInfo.getImage().length);
+            holder.imageView.setImageBitmap(bmp);
 
-                ArrayList<OrderDetailInfo> orderDetailInfoArrayList = new ArrayList<>();
-                orderDetailInfoArrayList = orderDetailsModel.getOrderDetailsByCustomerIDAndItemID(customerID, itemInfo.getItemID());
+            holder.title.setText(itemInfo.getName());
 
-                if(itemQuantity==0){
+            //Format price vnd
+            NumberFormat formatter = new DecimalFormat("#,###");
+            double myNumber = itemInfo.getPrice();
+            String formattedNumber = formatter.format(myNumber);
+            holder.price.setText(formattedNumber + "₫");
+            holder.btn_quantity.setNumber(orderDetailInfoArrayList.get(0).getQuantity() + "");
+            holder.btn_quantity.setOnClickListener(new ElegantNumberButton.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-                    orderDetailsModel.deleteOrderDetailsSQL(orderDetailInfoArrayList.get(0).getID());
+                    int itemQuantity = Integer.parseInt(holder.btn_quantity.getNumber());
 
-                    //Toast.makeText(context, "Xóa sản phẩm thành công", Toast.LENGTH_SHORT).show();
+                    ArrayList<OrderDetailInfo> orderDetailInfoArrayList = new ArrayList<>();
+                    orderDetailInfoArrayList = orderDetailsModel.getOrderDetailsByCustomerIDAndItemID(customerID, itemInfo.getItemID());
 
-                } else {
+                    if (itemQuantity == 0) {
 
-                    orderDetailsModel.updateOrderDetails(new OrderDetailInfo(orderDetailInfoArrayList.get(0).getID(), orderDetailInfoArrayList.get(0).getOrderDetailsID(), orderDetailInfoArrayList.get(0).getOrderID(),orderDetailInfoArrayList.get(0).getItemID(), itemQuantity, orderDetailInfoArrayList.get(0).getPrice()));
+                        orderDetailsModel.deleteOrderDetailsSQL(orderDetailInfoArrayList.get(0).getID());
 
-                    //Toast.makeText(context, "Cập nhật số lượng thành công", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, "Xóa sản phẩm thành công", Toast.LENGTH_SHORT).show();
+
+                    } else {
+
+                        orderDetailsModel.updateOrderDetails(new OrderDetailInfo(orderDetailInfoArrayList.get(0).getID(), orderDetailInfoArrayList.get(0).getOrderDetailsID(), orderDetailInfoArrayList.get(0).getOrderID(), orderDetailInfoArrayList.get(0).getItemID(), itemQuantity, orderDetailInfoArrayList.get(0).getPrice()));
+
+                        //Toast.makeText(context, "Cập nhật số lượng thành công", Toast.LENGTH_SHORT).show();
+                    }
+
+                    ShoppingCart shoppingCart = new ShoppingCart();
+                    fragmentManager.beginTransaction().replace(R.id.fragment, shoppingCart, shoppingCart.getTag()).commit();
+
                 }
+            });
 
-                ShoppingCart shoppingCart = new ShoppingCart();
-                fragmentManager.beginTransaction().replace(R.id.fragment, shoppingCart, shoppingCart.getTag()).commit();
+            String itemID = itemInfo.getItemID();
+            holder.imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-            }
-        });
+                    ItemDetails itemDetails = new ItemDetails("ShoppingCart");
+                    Bundle bundle = new Bundle();
+                    bundle.putString("itemID", itemID);
+                    //set Fragmentclass Arguments
+                    itemDetails.setArguments(bundle);
+                    fragmentManager.beginTransaction().replace(R.id.fragment, itemDetails, itemDetails.getTag()).commit();
 
-        String itemID = itemInfo.getItemID();
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                ItemDetails itemDetails = new ItemDetails("ShoppingCart");
-                Bundle bundle = new Bundle();
-                bundle.putString("itemID", itemID);
-                //set Fragmentclass Arguments
-                itemDetails.setArguments(bundle);
-                fragmentManager.beginTransaction().replace(R.id.fragment, itemDetails, itemDetails.getTag()).commit();
-
-            }
-        });
+                }
+            });
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
+        }
     }
 
     @Override
@@ -133,6 +140,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         TextView title, price;
 
         ElegantNumberButton btn_quantity;
+
         public ShoppingCartHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.cart_items_image);

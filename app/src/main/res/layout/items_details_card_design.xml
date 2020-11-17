@@ -80,7 +80,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
         android:fontFamily="@font/baloo"
         android:text="Mô tả sản phẩm"
         android:textColor="#717171"
@@ -94,30 +93,44 @@
         android:textColor="#717171"
         android:textSize="15dp" />
 
-    <TextView
-        android:id="@+id/comment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:fontFamily="@font/baloo"
-        android:text="Khách hàng nhận xét"
-        android:textColor="#717171"
-        android:textSize="20dp" />
+<!--    <TextView-->
+<!--        android:id="@+id/comment"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:fontFamily="@font/baloo"-->
+<!--        android:text="Khách hàng nhận xét"-->
+<!--        android:textColor="#717171"-->
+<!--        android:textSize="20dp" />-->
 
-    <TextView
-        android:id="@+id/items_comment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Chưa có nhận xét nào."
-        android:textColor="#717171"
-        android:textSize="15dp" />
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/shap_round_solid"
-        android:text="Viết nhận xét"
-        android:textColor="#ffffff" />
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="10dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent">-->
+
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/comment_recyclerView"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintHorizontal_bias="0.0"-->
+<!--                app:layout_constraintStart_toStartOf="parent" />-->
+<!--        </RelativeLayout>-->
+<!--    </LinearLayout>-->
+<!--    <Button-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@drawable/shap_round_solid"-->
+<!--        android:text="Viết nhận xét"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:textColor="#ffffff" />-->
 
 
 </LinearLayout>

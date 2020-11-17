@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -32,125 +33,144 @@ public class OrderModel extends DBManager {
         super(context);
     }
 
-    public ArrayList<OrderInfo> getAllOrders(){
+    public ArrayList<OrderInfo> getAllOrders() {
         ArrayList<OrderInfo> listOrders = new ArrayList<>();
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_ORDER_NAME;
+        try {
+            // Select All Query
+            String selectQuery = "SELECT  * FROM " + TABLE_ORDER_NAME;
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+            SQLiteDatabase db = this.getWritableDatabase();
+            Cursor cursor = db.rawQuery(selectQuery, null);
 
-        if (cursor.moveToFirst()) {
-            do {
-                OrderInfo orderInfo = new OrderInfo();
-                orderInfo.setID(cursor.getInt(0));
-                orderInfo.setOrderID(cursor.getString(1));
-                orderInfo.setCustomerID(cursor.getString(2));
-                orderInfo.setOrderDate(cursor.getString(3));
-                orderInfo.setShipDate(cursor.getString(4));
-                orderInfo.setAddress(cursor.getString(5));
-                orderInfo.setPhone(cursor.getString(6));
-                orderInfo.setNote(cursor.getString(7));
-                orderInfo.setAmount(cursor.getString(7));
-                orderInfo.setStatus(cursor.getInt(8));
-                listOrders.add(orderInfo);
-            } while (cursor.moveToNext());
+            if (cursor.moveToFirst()) {
+                do {
+                    OrderInfo orderInfo = new OrderInfo();
+                    orderInfo.setID(cursor.getInt(0));
+                    orderInfo.setOrderID(cursor.getString(1));
+                    orderInfo.setCustomerID(cursor.getString(2));
+                    orderInfo.setOrderDate(cursor.getString(3));
+                    orderInfo.setShipDate(cursor.getString(4));
+                    orderInfo.setAddress(cursor.getString(5));
+                    orderInfo.setPhone(cursor.getString(6));
+                    orderInfo.setNote(cursor.getString(7));
+                    orderInfo.setAmount(cursor.getString(7));
+                    orderInfo.setStatus(cursor.getInt(8));
+                    listOrders.add(orderInfo);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            db.close();
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
         }
-        cursor.close();
-        db.close();
         return listOrders;
     }
 
-    public ArrayList<OrderInfo> getOrderByOrderID(String orderID){
+    public ArrayList<OrderInfo> getOrderByOrderID(String orderID) {
         ArrayList<OrderInfo> listOrders = new ArrayList<>();
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_ORDER_NAME + " WHERE Orders.orderID = '" + orderID +"'";
+        try {
+            // Select All Query
+            String selectQuery = "SELECT  * FROM " + TABLE_ORDER_NAME + " WHERE Orders.orderID = '" + orderID + "'";
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+            SQLiteDatabase db = this.getWritableDatabase();
+            Cursor cursor = db.rawQuery(selectQuery, null);
 
-        if (cursor.moveToFirst()) {
-            do {
-                OrderInfo orderInfo = new OrderInfo();
-                orderInfo.setID(cursor.getInt(0));
-                orderInfo.setOrderID(cursor.getString(1));
-                orderInfo.setCustomerID(cursor.getString(2));
-                orderInfo.setOrderDate(cursor.getString(3));
-                orderInfo.setShipDate(cursor.getString(4));
-                orderInfo.setAddress(cursor.getString(5));
-                orderInfo.setPhone(cursor.getString(6));
-                orderInfo.setNote(cursor.getString(7));
-                orderInfo.setAmount(cursor.getString(7));
-                orderInfo.setStatus(cursor.getInt(8));
-                listOrders.add(orderInfo);
-            } while (cursor.moveToNext());
+            if (cursor.moveToFirst()) {
+                do {
+                    OrderInfo orderInfo = new OrderInfo();
+                    orderInfo.setID(cursor.getInt(0));
+                    orderInfo.setOrderID(cursor.getString(1));
+                    orderInfo.setCustomerID(cursor.getString(2));
+                    orderInfo.setOrderDate(cursor.getString(3));
+                    orderInfo.setShipDate(cursor.getString(4));
+                    orderInfo.setAddress(cursor.getString(5));
+                    orderInfo.setPhone(cursor.getString(6));
+                    orderInfo.setNote(cursor.getString(7));
+                    orderInfo.setAmount(cursor.getString(7));
+                    orderInfo.setStatus(cursor.getInt(8));
+                    listOrders.add(orderInfo);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            db.close();
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
         }
-        cursor.close();
-        db.close();
         return listOrders;
     }
 
-    public ArrayList<OrderInfo> getOrderByCustomerID(String customerID){
+    public ArrayList<OrderInfo> getOrderByCustomerID(String customerID) {
         ArrayList<OrderInfo> listOrders = new ArrayList<>();
-        // Select All Query
-        String selectQuery = "SELECT Orders.* FROM Orders WHERE Orders.Status = 1 AND Orders.customerID = '" + customerID + "'" ;
+        try {
+            // Select All Query
+            String selectQuery = "SELECT Orders.* FROM Orders WHERE Orders.Status = 1 AND Orders.customerID = '" + customerID + "'";
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+            SQLiteDatabase db = this.getWritableDatabase();
+            Cursor cursor = db.rawQuery(selectQuery, null);
 
-        if (cursor.moveToFirst()) {
-            do {
-                OrderInfo orderInfo = new OrderInfo();
-                orderInfo.setID(cursor.getInt(0));
-                orderInfo.setOrderID(cursor.getString(1));
-                orderInfo.setCustomerID(cursor.getString(2));
-                orderInfo.setOrderDate(cursor.getString(3));
-                orderInfo.setShipDate(cursor.getString(4));
-                orderInfo.setAddress(cursor.getString(5));
-                orderInfo.setPhone(cursor.getString(6));
-                orderInfo.setNote(cursor.getString(7));
-                orderInfo.setAmount(cursor.getString(7));
-                orderInfo.setStatus(cursor.getInt(8));
-                listOrders.add(orderInfo);
-            } while (cursor.moveToNext());
+            if (cursor.moveToFirst()) {
+                do {
+                    OrderInfo orderInfo = new OrderInfo();
+                    orderInfo.setID(cursor.getInt(0));
+                    orderInfo.setOrderID(cursor.getString(1));
+                    orderInfo.setCustomerID(cursor.getString(2));
+                    orderInfo.setOrderDate(cursor.getString(3));
+                    orderInfo.setShipDate(cursor.getString(4));
+                    orderInfo.setAddress(cursor.getString(5));
+                    orderInfo.setPhone(cursor.getString(6));
+                    orderInfo.setNote(cursor.getString(7));
+                    orderInfo.setAmount(cursor.getString(7));
+                    orderInfo.setStatus(cursor.getInt(8));
+                    listOrders.add(orderInfo);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            db.close();
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
         }
-        cursor.close();
-        db.close();
         return listOrders;
     }
 
 
-    public void addOrder(OrderInfo orderInfo){
+    public void addOrder(OrderInfo orderInfo) {
+        try {
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(ORDER_ID, orderInfo.getOrderID());
+            contentValues.put(ORDER_CUSTOMER_ID, orderInfo.getCustomerID());
+            contentValues.put(ORDER_ORDERDATE, orderInfo.getOrderDate());
+            contentValues.put(ORDER_SHIPDATE, orderInfo.getOrderDate());
+            contentValues.put(ORDER_ADDRESS, orderInfo.getAddress());
+            contentValues.put(ORDER_PHONE, orderInfo.getPhone());
+            contentValues.put(ORDER_NOTE, orderInfo.getNote());
+            contentValues.put(ORDER_AMOUNT, orderInfo.getAmount());
+            contentValues.put(ORDER_STATUS, orderInfo.getStatus());
 
+            db.insert(TABLE_ORDER_NAME, null, contentValues);
+            db.close();
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
+        }
+    }
+
+    public int updateOrder(OrderInfo orderInfo) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(ORDER_ID, orderInfo.getOrderID());
-        contentValues.put(ORDER_CUSTOMER_ID, orderInfo.getCustomerID());
-        contentValues.put(ORDER_ORDERDATE, orderInfo.getOrderDate());
-        contentValues.put(ORDER_SHIPDATE, orderInfo.getOrderDate());
-        contentValues.put(ORDER_ADDRESS, orderInfo.getAddress());
-        contentValues.put(ORDER_PHONE, orderInfo.getPhone());
-        contentValues.put(ORDER_NOTE, orderInfo.getNote());
-        contentValues.put(ORDER_AMOUNT, orderInfo.getAmount());
-        contentValues.put(ORDER_STATUS, orderInfo.getStatus());
-
-        db.insert(TABLE_ORDER_NAME, null, contentValues);
-        db.close();
-    }
-
-    public int updateOrder(OrderInfo orderInfo){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(ORDER_ID, orderInfo.getOrderID());
-        contentValues.put(ORDER_CUSTOMER_ID, orderInfo.getCustomerID());
-        contentValues.put(ORDER_ORDERDATE, orderInfo.getOrderDate());
-        contentValues.put(ORDER_SHIPDATE, orderInfo.getOrderDate());
-        contentValues.put(ORDER_ADDRESS, orderInfo.getAddress());
-        contentValues.put(ORDER_PHONE, orderInfo.getPhone());
-        contentValues.put(ORDER_NOTE, orderInfo.getNote());
-        contentValues.put(ORDER_AMOUNT, orderInfo.getAmount());
-        contentValues.put(ORDER_STATUS, orderInfo.getStatus());
-        return db.update(TABLE_ORDER_NAME,contentValues,ID +"=?",new String[] { String.valueOf(orderInfo.getID())});
+        try {
+            contentValues.put(ORDER_ID, orderInfo.getOrderID());
+            contentValues.put(ORDER_CUSTOMER_ID, orderInfo.getCustomerID());
+            contentValues.put(ORDER_ORDERDATE, orderInfo.getOrderDate());
+            contentValues.put(ORDER_SHIPDATE, orderInfo.getOrderDate());
+            contentValues.put(ORDER_ADDRESS, orderInfo.getAddress());
+            contentValues.put(ORDER_PHONE, orderInfo.getPhone());
+            contentValues.put(ORDER_NOTE, orderInfo.getNote());
+            contentValues.put(ORDER_AMOUNT, orderInfo.getAmount());
+            contentValues.put(ORDER_STATUS, orderInfo.getStatus());
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
+        }
+        return db.update(TABLE_ORDER_NAME, contentValues, ID + "=?", new String[]{String.valueOf(orderInfo.getID())});
     }
 
 }

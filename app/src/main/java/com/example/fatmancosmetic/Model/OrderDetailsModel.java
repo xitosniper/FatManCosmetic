@@ -20,7 +20,7 @@ public class OrderDetailsModel extends DBManager {
     private static final String ID = "ID";
     private static final String TABLE_ORDERDETAILS_NAME = "OrderDetails";
     private static final String ORDERDETAILS_ID = "orderDetailsID";
-    private static final String ORDERDETAILS_ORDER_ID  = "orderID";
+    private static final String ORDERDETAILS_ORDER_ID = "orderID";
     private static final String ORDERDETAILS_ITEM_ID = "itemID";
     private static final String ORDERDETAILS_QUANTITY = "Quantity";
     private static final String ORDERDETAILS_PRICE = "Price";
@@ -30,116 +30,137 @@ public class OrderDetailsModel extends DBManager {
         super(context);
     }
 
-    public ArrayList<OrderDetailInfo> getAllOrderDetails(){
+    public ArrayList<OrderDetailInfo> getAllOrderDetails() {
         ArrayList<OrderDetailInfo> listOrderDetails = new ArrayList<>();
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_ORDERDETAILS_NAME;
+        try {
+            // Select All Query
+            String selectQuery = "SELECT  * FROM " + TABLE_ORDERDETAILS_NAME;
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+            SQLiteDatabase db = this.getWritableDatabase();
+            Cursor cursor = db.rawQuery(selectQuery, null);
 
-        if (cursor.moveToFirst()) {
-            do {
-                OrderDetailInfo orderDetailInfo = new OrderDetailInfo();
-                orderDetailInfo.setID(cursor.getInt(0));
-                orderDetailInfo.setOrderDetailsID(cursor.getString(1));
-                orderDetailInfo.setOrderID(cursor.getString(2));
-                orderDetailInfo.setItemID(cursor.getString(3));
-                orderDetailInfo.setQuantity(cursor.getInt(4));
-                orderDetailInfo.setPrice(cursor.getInt(5));
-                listOrderDetails.add(orderDetailInfo);
-            } while (cursor.moveToNext());
+            if (cursor.moveToFirst()) {
+                do {
+                    OrderDetailInfo orderDetailInfo = new OrderDetailInfo();
+                    orderDetailInfo.setID(cursor.getInt(0));
+                    orderDetailInfo.setOrderDetailsID(cursor.getString(1));
+                    orderDetailInfo.setOrderID(cursor.getString(2));
+                    orderDetailInfo.setItemID(cursor.getString(3));
+                    orderDetailInfo.setQuantity(cursor.getInt(4));
+                    orderDetailInfo.setPrice(cursor.getInt(5));
+                    listOrderDetails.add(orderDetailInfo);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            db.close();
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
         }
-        cursor.close();
-        db.close();
-        return listOrderDetails;
-    }
-    public ArrayList<OrderDetailInfo> getOrderDetailsByCustomerID(String customerID){
-        ArrayList<OrderDetailInfo> listOrderDetails = new ArrayList<>();
-
-        // Select All Query
-        String selectQuery = "SELECT OrderDetails.* FROM Items, Orders, OrderDetails WHERE Orders.Status = 1 AND Orders.customerID = '"+customerID+"' AND Orders.orderID = OrderDetails.orderID AND OrderDetails.itemID = Items.itemID";
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-
-                OrderDetailInfo orderDetailInfo = new OrderDetailInfo();
-                orderDetailInfo.setID(cursor.getInt(0));
-                orderDetailInfo.setOrderDetailsID(cursor.getString(1));
-                orderDetailInfo.setOrderID(cursor.getString(2));
-                orderDetailInfo.setItemID(cursor.getString(3));
-                orderDetailInfo.setQuantity(cursor.getInt(4));
-                orderDetailInfo.setPrice(cursor.getInt(5));
-
-                listOrderDetails.add(orderDetailInfo);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        db.close();
         return listOrderDetails;
     }
 
-    public ArrayList<OrderDetailInfo> getOrderDetailsByCustomerIDAndItemID(String customerID, String itemID){
+    public ArrayList<OrderDetailInfo> getOrderDetailsByCustomerID(String customerID) {
         ArrayList<OrderDetailInfo> listOrderDetails = new ArrayList<>();
+        try {
+            // Select All Query
+            String selectQuery = "SELECT OrderDetails.* FROM Items, Orders, OrderDetails WHERE Orders.Status = 1 AND Orders.customerID = '" + customerID + "' AND Orders.orderID = OrderDetails.orderID AND OrderDetails.itemID = Items.itemID";
 
-        // Select All Query
-        String selectQuery = "SELECT OrderDetails.* FROM Items, Orders, OrderDetails WHERE Orders.Status = 1 AND Orders.customerID = '"+customerID+"' AND Orders.orderID = OrderDetails.orderID AND OrderDetails.itemID = Items.itemID AND OrderDetails.itemID = '" +itemID +"'";
+            SQLiteDatabase db = this.getWritableDatabase();
+            Cursor cursor = db.rawQuery(selectQuery, null);
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
 
-        if (cursor.moveToFirst()) {
-            do {
+                    OrderDetailInfo orderDetailInfo = new OrderDetailInfo();
+                    orderDetailInfo.setID(cursor.getInt(0));
+                    orderDetailInfo.setOrderDetailsID(cursor.getString(1));
+                    orderDetailInfo.setOrderID(cursor.getString(2));
+                    orderDetailInfo.setItemID(cursor.getString(3));
+                    orderDetailInfo.setQuantity(cursor.getInt(4));
+                    orderDetailInfo.setPrice(cursor.getInt(5));
 
-                OrderDetailInfo orderDetailInfo = new OrderDetailInfo();
-                orderDetailInfo.setID(cursor.getInt(0));
-                orderDetailInfo.setOrderDetailsID(cursor.getString(1));
-                orderDetailInfo.setOrderID(cursor.getString(2));
-                orderDetailInfo.setItemID(cursor.getString(3));
-                orderDetailInfo.setQuantity(cursor.getInt(4));
-                orderDetailInfo.setPrice(cursor.getInt(5));
-
-                listOrderDetails.add(orderDetailInfo);
-            } while (cursor.moveToNext());
+                    listOrderDetails.add(orderDetailInfo);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            db.close();
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
         }
-        cursor.close();
-        db.close();
         return listOrderDetails;
     }
 
-    public void addOrderDetails(OrderDetailInfo orderDetailInfo){
+    public ArrayList<OrderDetailInfo> getOrderDetailsByCustomerIDAndItemID(String customerID, String itemID) {
+        ArrayList<OrderDetailInfo> listOrderDetails = new ArrayList<>();
+        try {
+            // Select All Query
+            String selectQuery = "SELECT OrderDetails.* FROM Items, Orders, OrderDetails WHERE Orders.Status = 1 AND Orders.customerID = '" + customerID + "' AND Orders.orderID = OrderDetails.orderID AND OrderDetails.itemID = Items.itemID AND OrderDetails.itemID = '" + itemID + "'";
 
+            SQLiteDatabase db = this.getWritableDatabase();
+            Cursor cursor = db.rawQuery(selectQuery, null);
+
+            if (cursor.moveToFirst()) {
+                do {
+
+                    OrderDetailInfo orderDetailInfo = new OrderDetailInfo();
+                    orderDetailInfo.setID(cursor.getInt(0));
+                    orderDetailInfo.setOrderDetailsID(cursor.getString(1));
+                    orderDetailInfo.setOrderID(cursor.getString(2));
+                    orderDetailInfo.setItemID(cursor.getString(3));
+                    orderDetailInfo.setQuantity(cursor.getInt(4));
+                    orderDetailInfo.setPrice(cursor.getInt(5));
+
+                    listOrderDetails.add(orderDetailInfo);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            db.close();
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
+        }
+        return listOrderDetails;
+    }
+
+    public void addOrderDetails(OrderDetailInfo orderDetailInfo) {
+        try {
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(ORDERDETAILS_ID, orderDetailInfo.getOrderDetailsID());
+            contentValues.put(ORDERDETAILS_ORDER_ID, orderDetailInfo.getOrderID());
+            contentValues.put(ORDERDETAILS_ITEM_ID, orderDetailInfo.getItemID());
+            contentValues.put(ORDERDETAILS_QUANTITY, orderDetailInfo.getQuantity());
+            contentValues.put(ORDERDETAILS_PRICE, orderDetailInfo.getPrice());
+
+            db.insert(TABLE_ORDERDETAILS_NAME, null, contentValues);
+            db.close();
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
+        }
+    }
+
+    public int updateOrderDetails(OrderDetailInfo orderDetailInfo) {
         SQLiteDatabase db = this.getWritableDatabase();
+
         ContentValues contentValues = new ContentValues();
-        contentValues.put(ORDERDETAILS_ID, orderDetailInfo.getOrderDetailsID());
-        contentValues.put(ORDERDETAILS_ORDER_ID, orderDetailInfo.getOrderID());
-        contentValues.put(ORDERDETAILS_ITEM_ID, orderDetailInfo.getItemID());
-        contentValues.put(ORDERDETAILS_QUANTITY, orderDetailInfo.getQuantity());
-        contentValues.put(ORDERDETAILS_PRICE, orderDetailInfo.getPrice());
-
-        db.insert(TABLE_ORDERDETAILS_NAME, null, contentValues);
-        db.close();
+        try {
+            contentValues.put(ORDERDETAILS_ID, orderDetailInfo.getOrderDetailsID());
+            contentValues.put(ORDERDETAILS_ORDER_ID, orderDetailInfo.getOrderID());
+            contentValues.put(ORDERDETAILS_ITEM_ID, orderDetailInfo.getItemID());
+            contentValues.put(ORDERDETAILS_QUANTITY, orderDetailInfo.getQuantity());
+            contentValues.put(ORDERDETAILS_PRICE, orderDetailInfo.getPrice());
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
+        }
+        return db.update(TABLE_ORDERDETAILS_NAME, contentValues, ID + "=?", new String[]{String.valueOf(orderDetailInfo.getID())});
     }
 
-    public int updateOrderDetails(OrderDetailInfo orderDetailInfo){
+    public int deleteOrderDetails(int ID) {
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(ORDERDETAILS_ID, orderDetailInfo.getOrderDetailsID());
-        contentValues.put(ORDERDETAILS_ORDER_ID, orderDetailInfo.getOrderID());
-        contentValues.put(ORDERDETAILS_ITEM_ID, orderDetailInfo.getItemID());
-        contentValues.put(ORDERDETAILS_QUANTITY, orderDetailInfo.getQuantity());
-        contentValues.put(ORDERDETAILS_PRICE, orderDetailInfo.getPrice());
-        return db.update(TABLE_ORDERDETAILS_NAME,contentValues,ID +"=?",new String[] { String.valueOf(orderDetailInfo.getID())});
+        return db.delete(TABLE_ORDERDETAILS_NAME, ID + "=?", new String[]{String.valueOf(String.valueOf(ID))});
     }
-    public int deleteOrderDetails(int ID){
-        SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(TABLE_ORDERDETAILS_NAME,ID+"=?", new String[]{String.valueOf(String.valueOf(ID))});
-    }
-    public void deleteOrderDetailsSQL(int ID){
-        String sqlQuery = "DELETE FROM OrderDetails WHERE OrderDetails.ID = " +ID;
+
+    public void deleteOrderDetailsSQL(int ID) {
+        String sqlQuery = "DELETE FROM OrderDetails WHERE OrderDetails.ID = " + ID;
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL(sqlQuery);
         db.close();

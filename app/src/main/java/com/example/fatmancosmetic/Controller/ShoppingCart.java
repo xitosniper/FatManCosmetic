@@ -94,17 +94,18 @@ public class ShoppingCart extends Fragment {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_shopping_cart, container, false);
-        //Hooks
-        recyclerView = view.findViewById(R.id.shoppingCart_recyclerView);
-        //backBtn = view.findViewById(R.id.back_pressed);
-        numberOfItemsInCart = view.findViewById(R.id.shoppingCart_numberOfItems);
-        shoppingCart_Amount = view.findViewById(R.id.shoppingCart_Amount);
-        checkOutBtn = view.findViewById(R.id.checkOutBtn);
+        try {
+            //Hooks
+            recyclerView = view.findViewById(R.id.shoppingCart_recyclerView);
+            //backBtn = view.findViewById(R.id.back_pressed);
+            numberOfItemsInCart = view.findViewById(R.id.shoppingCart_numberOfItems);
+            shoppingCart_Amount = view.findViewById(R.id.shoppingCart_Amount);
+            checkOutBtn = view.findViewById(R.id.checkOutBtn);
 
-        //Recycle View Function Calls
-        recyclerView();
+            //Recycle View Function Calls
+            recyclerView();
 
-        //Set handle
+            //Set handle
 //        backBtn.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -113,33 +114,36 @@ public class ShoppingCart extends Fragment {
 //                manager.beginTransaction().replace(R.id.fragment, home, home.getTag()).commit();
 //            }
 //        });
-        checkOutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CheckOut checkOut = new CheckOut();
-                Bundle bundle =  new Bundle();
-                OrderModel orderModel = new OrderModel(getContext());
-                OrderDetailsModel orderDetailsModel = new OrderDetailsModel(getContext());
+            checkOutBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CheckOut checkOut = new CheckOut();
+                    Bundle bundle = new Bundle();
+                    OrderModel orderModel = new OrderModel(getContext());
+                    OrderDetailsModel orderDetailsModel = new OrderDetailsModel(getContext());
 
-                ArrayList<OrderInfo> orderInfos = orderModel.getOrderByCustomerID(customerID);
-                ArrayList<OrderDetailInfo> listOrderDetails = new ArrayList<>();
+                    ArrayList<OrderInfo> orderInfos = orderModel.getOrderByCustomerID(customerID);
+                    ArrayList<OrderDetailInfo> listOrderDetails = new ArrayList<>();
 
-                String orderID = orderInfos.get(0).getOrderID();
-                listOrderDetails = orderDetailsModel.getOrderDetailsByCustomerID(customerID);
+                    String orderID = orderInfos.get(0).getOrderID();
+                    listOrderDetails = orderDetailsModel.getOrderDetailsByCustomerID(customerID);
 
-                int amount = 0;
-                for (OrderDetailInfo orderDetailInfo:listOrderDetails) {
-                    amount += orderDetailInfo.getQuantity() * orderDetailInfo.getPrice();
+                    int amount = 0;
+                    for (OrderDetailInfo orderDetailInfo : listOrderDetails) {
+                        amount += orderDetailInfo.getQuantity() * orderDetailInfo.getPrice();
+                    }
+
+                    bundle.putString("orderID", orderID);
+                    bundle.putString("amount", amount + "");
+                    checkOut.setArguments(bundle);
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.fragment, checkOut, checkOut.getTag()).commit();
                 }
-
-                bundle.putString("orderID", orderID);
-                bundle.putString("amount", amount+"");
-                checkOut.setArguments(bundle);
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.fragment, checkOut, checkOut.getTag()).commit();
-            }
-        });
-
+            });
+        } catch (
+                Exception e) {
+            Log.e("Exception: ", e.getMessage());
+        }
         return view;
     }
 
@@ -147,7 +151,7 @@ public class ShoppingCart extends Fragment {
     private void recyclerView() {
         recyclerView.setHasFixedSize(true);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         ItemModel itemModel = new ItemModel(getContext());
         OrderDetailsModel orderDetailsModel = new OrderDetailsModel(getContext());
 
@@ -160,20 +164,20 @@ public class ShoppingCart extends Fragment {
         listOrderDetails = orderDetailsModel.getOrderDetailsByCustomerID(customerID);
 
         int amount = 0;
-        for (OrderDetailInfo orderDetailInfo:listOrderDetails) {
+        for (OrderDetailInfo orderDetailInfo : listOrderDetails) {
             amount += orderDetailInfo.getQuantity() * orderDetailInfo.getPrice();
         }
 
         //Set count items in shopping cart
-        numberOfItemsInCart.setText(listItems.size()+"");
+        numberOfItemsInCart.setText(listItems.size() + "");
         //Format price vnd
         NumberFormat formatter = new DecimalFormat("#,###");
         double myNumber = amount;
         String formattedNumber = formatter.format(myNumber);
-        shoppingCart_Amount.setText(formattedNumber +"₫");
+        shoppingCart_Amount.setText(formattedNumber + "₫");
 
         FragmentManager fragmentManager = getFragmentManager();
-        adapter = new ShoppingCartAdapter(listItems, getContext(),fragmentManager);
+        adapter = new ShoppingCartAdapter(listItems, getContext(), fragmentManager);
 
         recyclerView.setAdapter(adapter);
 
