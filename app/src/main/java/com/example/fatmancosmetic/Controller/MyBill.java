@@ -5,12 +5,14 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.fatmancosmetic.Adapter.BillAdapter;
@@ -43,6 +45,7 @@ public class MyBill extends Fragment {
     TextView title;
     RecyclerView.Adapter adapter;
     ArrayList<OrderInfo> listOrder;
+    ImageView backBtn;
 
     public MyBill() {
         // Required empty public constructor
@@ -82,6 +85,7 @@ public class MyBill extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_bill, container, false);
         try {
             recyclerView = view.findViewById(R.id.bill_recyclerView);
+            backBtn = view.findViewById(R.id.back_pressed);
             recyclerView();
 //
 //        title  = view.findViewById(R.id.bill_title);
@@ -92,7 +96,15 @@ public class MyBill extends Fragment {
 //                View view = inflater.inflate(R.layout.fragment_bills_detail, container, false);
 //            }
 //        });
-
+            //Set handle
+            backBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Account account = new Account();
+                    FragmentManager manager = getFragmentManager();
+                    manager.beginTransaction().replace(R.id.fragment, account, account.getTag()).commit();
+                }
+            });
 
         } catch (Exception e) {
             Log.e("Exception: ", e.getMessage());
@@ -104,7 +116,7 @@ public class MyBill extends Fragment {
     private void recyclerView() {
         recyclerView.setHasFixedSize(true);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
         String customerID = "000001";
         OrderModel orderModel = new OrderModel(getContext());

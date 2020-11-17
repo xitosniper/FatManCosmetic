@@ -23,6 +23,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.fatmancosmetic.Info.CustomerInfo;
+import com.example.fatmancosmetic.Model.CustomerModel;
 import com.example.fatmancosmetic.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -34,6 +36,7 @@ import com.squareup.picasso.Picasso;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.concurrent.Executor;
 
 /**
@@ -48,9 +51,11 @@ public class Account extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     GoogleSignInClient mGoogleSignInClient;
-    Button sign_out;
-    TextView profile_name, my_bill;
-    ImageView profile_image;
+    private Button sign_out;
+    private TextView profile_name, my_bill, address,phone;
+    private ImageView profile_image;
+    private CustomerModel customerModel;
+    private String customerID = "000001";
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -90,9 +95,9 @@ public class Account extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_account, container, false);
+
         try {
             GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getActivity());
             if (acct != null) {
@@ -103,6 +108,16 @@ public class Account extends Fragment {
                 String personId = acct.getId();
                 Uri personPhoto = acct.getPhotoUrl();
 
+
+                customerModel = new CustomerModel(getContext());
+
+                ArrayList<CustomerInfo> customerInfos = customerModel.getCustomerByCustomerID(customerID);
+
+                address = view.findViewById(R.id.address);
+                address.setText(customerInfos.get(0).getAddress());
+
+                phone = view.findViewById(R.id.phone);
+                phone.setText(customerInfos.get(0).getPhone());
                 profile_image = view.findViewById(R.id.profile_image);
                 Glide.with(this).load(String.valueOf(personPhoto)).into(profile_image);
 
@@ -129,7 +144,7 @@ public class Account extends Fragment {
                         switch (v.getId()) {
                             // ...
                             case R.id.btnSignOut:
-                                signOut();
+                                //signOut();
                                 break;
                             // ...
                         }
@@ -137,11 +152,10 @@ public class Account extends Fragment {
                 });
 
             }
-        } catch (Exception e) {
+        } catch(Exception e){
             Log.e("Exception: ", e.getMessage());
         }
         return view;
-
     }
 
     private void signOut() {

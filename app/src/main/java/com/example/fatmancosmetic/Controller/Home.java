@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -51,14 +52,14 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
     //Variables
     static final float END_SCALE = 0.7f;
     private MainActivity mainActivity;
-    ConstraintLayout contentView;
-    DrawerLayout drawerLayout;
-    NavigationView navigationView;
-    RecyclerView flashsafe_recyclerView, amazingFatman_recyclerView, bestsale_recyclerView, newitems_recyclerView;
-    RecyclerView.Adapter flashsafe_adapter, amazingFatmat_adapter, bestsale_adapter, newitems_adapter;
-    ImageView menuIcon, skinCareBtn, bodyCareBtn, makeUpBtn;
-    TextView lbSeeMoreFlashSale, lbSeeMoreNewItems, lbSeeMoreBestSeller;
-
+    private ConstraintLayout contentView;
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+    private RecyclerView flashsafe_recyclerView, amazingFatman_recyclerView, bestsale_recyclerView, newitems_recyclerView;
+    private RecyclerView.Adapter flashsafe_adapter, amazingFatmat_adapter, bestsale_adapter, newitems_adapter;
+    private ImageView menuIcon, skinCareBtn, bodyCareBtn, makeUpBtn;
+    private TextView lbSeeMoreFlashSale, lbSeeMoreNewItems, lbSeeMoreBestSeller;
+    private EditText btnSearch;
 
     public Home() {
         // Required empty public constructor
@@ -97,94 +98,104 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         try {
-        //Animation banner Slider Image
-        ImageView imageViewBanner = view.findViewById(R.id.imageViewBanner);
-        AnimationDrawable animationDrawable = (AnimationDrawable) imageViewBanner.getDrawable();
-        animationDrawable.start();
-        //Hooks
-        flashsafe_recyclerView = view.findViewById(R.id.flashsafe_recyclerView);
-        amazingFatman_recyclerView = view.findViewById(R.id.amazing_fatman_recyclerView);
-        newitems_recyclerView = view.findViewById(R.id.newitems_recyclerView);
-        bestsale_recyclerView = view.findViewById(R.id.bestsale_fatman_recyclerView);
-        contentView = view.findViewById(R.id.content);
-        skinCareBtn = view.findViewById(R.id.nav_all_skincare);
-        bodyCareBtn = view.findViewById(R.id.nav_all_bodyCare);
-        makeUpBtn = view.findViewById(R.id.nav_all_makeUp);
+            //Animation banner Slider Image
+            ImageView imageViewBanner = view.findViewById(R.id.imageViewBanner);
+            AnimationDrawable animationDrawable = (AnimationDrawable) imageViewBanner.getDrawable();
+            animationDrawable.start();
+            //Hooks
+            flashsafe_recyclerView = view.findViewById(R.id.flashsafe_recyclerView);
+            amazingFatman_recyclerView = view.findViewById(R.id.amazing_fatman_recyclerView);
+            newitems_recyclerView = view.findViewById(R.id.newitems_recyclerView);
+            bestsale_recyclerView = view.findViewById(R.id.bestsale_fatman_recyclerView);
+            contentView = view.findViewById(R.id.content);
+            skinCareBtn = view.findViewById(R.id.nav_all_skincare);
+            bodyCareBtn = view.findViewById(R.id.nav_all_bodyCare);
+            makeUpBtn = view.findViewById(R.id.nav_all_makeUp);
+            btnSearch = view.findViewById(R.id.search_bar);
+            //Menu Hooks
+            drawerLayout = view.findViewById(R.id.draw_layout);
+            navigationView = view.findViewById(R.id.navigation_view);
+            menuIcon = view.findViewById(R.id.menuIcon);
+            lbSeeMoreFlashSale = view.findViewById(R.id.lbSeeMoreFlashSale);
+            lbSeeMoreNewItems = view.findViewById(R.id.lbSeeMoreNewItems);
+            lbSeeMoreBestSeller = view.findViewById(R.id.lbSeeMoreBestSeller);
 
-        //Menu Hooks
-        drawerLayout = view.findViewById(R.id.draw_layout);
-        navigationView = view.findViewById(R.id.navigation_view);
-        menuIcon = view.findViewById(R.id.menuIcon);
-        lbSeeMoreFlashSale = view.findViewById(R.id.lbSeeMoreFlashSale);
-        lbSeeMoreNewItems = view.findViewById(R.id.lbSeeMoreNewItems);
-        lbSeeMoreBestSeller = view.findViewById(R.id.lbSeeMoreBestSeller);
-
-        //Navigation Drawer Functions Calls
-        navigationDrawer();
-
-
-        //Recycle View Function Calls
-        amazingFatman_recyclerView();
-
-        newitems_recyclerView();
-        flashsafe_recyclerView();
-        bestsale_recyclerView();
+            //Navigation Drawer Functions Calls
+            navigationDrawer();
 
 
-        //Set Handel
-        skinCareBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CategorySkinCare categorySkinCare = new CategorySkinCare();
-                FragmentManager manager = getFragmentManager();
-                manager.beginTransaction().replace(R.id.fragment, categorySkinCare, categorySkinCare.getTag()).commit();
-            }
-        });
+            //Recycle View Function Calls
+            amazingFatman_recyclerView();
 
-        bodyCareBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CategoryBodyCare categoryBodyCare = new CategoryBodyCare();
-                FragmentManager manager = getFragmentManager();
-                manager.beginTransaction().replace(R.id.fragment, categoryBodyCare, categoryBodyCare.getTag()).commit();
-            }
-        });
+            newitems_recyclerView();
+            flashsafe_recyclerView();
+            bestsale_recyclerView();
 
-        makeUpBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CategoryMakeUp categoryMakeUp = new CategoryMakeUp();
-                FragmentManager manager = getFragmentManager();
-                manager.beginTransaction().replace(R.id.fragment, categoryMakeUp, categoryMakeUp.getTag()).commit();
-            }
-        });
 
-        lbSeeMoreFlashSale.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FlashSaleItems flashSaleItems = new FlashSaleItems();
-                FragmentManager manager = getFragmentManager();
-                manager.beginTransaction().replace(R.id.fragment, flashSaleItems, flashSaleItems.getTag()).commit();
-            }
-        });
+            //Set Handel
+            btnSearch.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Search search = new Search();
+                    FragmentManager manager = getFragmentManager();
+                    manager.beginTransaction().replace(R.id.fragment, search, search.getTag()).commit();
+                }
+            });
 
-        lbSeeMoreNewItems.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NewItems newItems = new NewItems();
-                FragmentManager manager = getFragmentManager();
-                manager.beginTransaction().replace(R.id.fragment, newItems, newItems.getTag()).commit();
-            }
-        });
 
-        lbSeeMoreBestSeller.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BestSellerItems bestSellerItems = new BestSellerItems();
-                FragmentManager manager = getFragmentManager();
-                manager.beginTransaction().replace(R.id.fragment, bestSellerItems, bestSellerItems.getTag()).commit();
-            }
-        });
+            skinCareBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CategorySkinCare categorySkinCare = new CategorySkinCare();
+                    FragmentManager manager = getFragmentManager();
+                    manager.beginTransaction().replace(R.id.fragment, categorySkinCare, categorySkinCare.getTag()).commit();
+                }
+            });
+
+            bodyCareBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CategoryBodyCare categoryBodyCare = new CategoryBodyCare();
+                    FragmentManager manager = getFragmentManager();
+                    manager.beginTransaction().replace(R.id.fragment, categoryBodyCare, categoryBodyCare.getTag()).commit();
+                }
+            });
+
+            makeUpBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CategoryMakeUp categoryMakeUp = new CategoryMakeUp();
+                    FragmentManager manager = getFragmentManager();
+                    manager.beginTransaction().replace(R.id.fragment, categoryMakeUp, categoryMakeUp.getTag()).commit();
+                }
+            });
+
+            lbSeeMoreFlashSale.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FlashSaleItems flashSaleItems = new FlashSaleItems();
+                    FragmentManager manager = getFragmentManager();
+                    manager.beginTransaction().replace(R.id.fragment, flashSaleItems, flashSaleItems.getTag()).commit();
+                }
+            });
+
+            lbSeeMoreNewItems.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    NewItems newItems = new NewItems();
+                    FragmentManager manager = getFragmentManager();
+                    manager.beginTransaction().replace(R.id.fragment, newItems, newItems.getTag()).commit();
+                }
+            });
+
+            lbSeeMoreBestSeller.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    BestSellerItems bestSellerItems = new BestSellerItems();
+                    FragmentManager manager = getFragmentManager();
+                    manager.beginTransaction().replace(R.id.fragment, bestSellerItems, bestSellerItems.getTag()).commit();
+                }
+            });
 
         } catch (Exception e) {
             Log.e("Exception: ", e.getMessage());
@@ -248,7 +259,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         FragmentManager manager = getFragmentManager();
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.introduce:
                 MenuIntrodure menuIntrodure = new MenuIntrodure();
                 manager.beginTransaction().replace(R.id.fragment, menuIntrodure, menuIntrodure.getTag()).commit();
@@ -301,7 +312,7 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
     private void newitems_recyclerView() {
         newitems_recyclerView.setHasFixedSize(true);
 
-        newitems_recyclerView.setLayoutManager(new GridLayoutManager(this.mainActivity, 2, GridLayoutManager.VERTICAL,false));
+        newitems_recyclerView.setLayoutManager(new GridLayoutManager(this.mainActivity, 2, GridLayoutManager.VERTICAL, false));
         ArrayList<ItemInfo> bestSaleLocation = new ArrayList<>();
         ItemModel itemModel = new ItemModel(this.mainActivity);
 
@@ -309,14 +320,14 @@ public class Home extends Fragment implements NavigationView.OnNavigationItemSel
         listItems = itemModel.get4NewItems();
 
         FragmentManager fragmentManager = getFragmentManager();
-        newitems_adapter = new ItemsAdapter(listItems, this.mainActivity,fragmentManager, "Home");
+        newitems_adapter = new ItemsAdapter(listItems, this.mainActivity, fragmentManager, "Home");
         newitems_recyclerView.setAdapter(newitems_adapter);
     }
 
     private void bestsale_recyclerView() {
         bestsale_recyclerView.setHasFixedSize(true);
 
-        bestsale_recyclerView.setLayoutManager(new GridLayoutManager(this.mainActivity, 2, GridLayoutManager.VERTICAL,false));
+        bestsale_recyclerView.setLayoutManager(new GridLayoutManager(this.mainActivity, 2, GridLayoutManager.VERTICAL, false));
         ItemModel itemModel = new ItemModel(this.mainActivity);
 
         ArrayList<ItemInfo> listItems = new ArrayList<>();

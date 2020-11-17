@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Controller.Account"
-    android:layout_marginTop="55dp">
+    android:layout_marginTop="55dp"
+    tools:context=".Controller.Account">
 
     <LinearLayout
 
@@ -43,64 +43,157 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Pham Truong Anh Tu"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:textSize="20dp" />
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Chưa có số điện thoại" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Chưa có số điện thoại" />
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
-
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="500dp"
+        android:layout_marginTop="20dp"
         android:elevation="8dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.034">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="5dp"
-            android:layout_marginLeft="25dp"
-            android:text="Số địa chỉ"
-            android:textColor="@android:color/black" />
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
 
-        <TextView
+            <TextView
+                android:layout_width="160dp"
+                android:layout_height="match_parent"
+                android:layout_marginVertical="5dp"
+                android:layout_marginLeft="25dp"
+                android:text="Địa chỉ"
+                android:textColor="@android:color/black"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginVertical="5dp"
+                android:paddingLeft="5dp"
+                android:text="Ninh Kiều, Cần Thơ"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="5dp"
-            android:layout_marginLeft="25dp"
-            android:text="Nhận xét của tôi"
-            android:textColor="@android:color/black" />
+            android:src="@drawable/shap_round_solid" />
 
-        <TextView
-            android:id="@+id/donhangcuatoi"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="5dp"
-            android:layout_marginLeft="25dp"
-            android:text="Đơn hàng của tôi"
-            android:textColor="@android:color/black" />
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="160dp"
+                android:layout_height="match_parent"
+                android:layout_marginVertical="5dp"
+                android:layout_marginLeft="25dp"
+                android:text="Nhận xét của tôi"
+                android:textColor="@android:color/black"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginVertical="5dp"
+                android:layout_marginLeft="35dp"
+                android:background="@drawable/radius_button_shoppingcart"
+                android:gravity="center"
+                android:text="Bình luận"
+                android:textColor="#ffffff"
+                android:textSize="15dp" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/shap_round_solid" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="160dp"
+                android:layout_height="match_parent"
+                android:layout_marginVertical="5dp"
+                android:layout_marginLeft="25dp"
+                android:text="Đơn hàng của tôi"
+                android:textColor="@android:color/black"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/donhangcuatoi"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:layout_marginVertical="5dp"
+                android:layout_marginLeft="35dp"
+                android:background="@drawable/radius_button_shoppingcart"
+                android:gravity="center"
+                android:text="Đơn hàng"
+                android:textColor="#ffffff"
+                android:textSize="15dp" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/shap_round_solid" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="330dp">
+<!--            <Button-->
+<!--                android:id="@+id/btnSignIn"-->
+<!--                android:layout_width="150dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:text="Sign In"-->
+<!--                android:paddingRight="10dp"-->
+<!--                android:textSize="20dp" />-->
+            <Button
+                android:id="@+id/btnSignOut"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Sign Out"
+                android:textSize="20dp" />
+        </LinearLayout>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnSignOut"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="320dp"
-        android:text="Sign Out"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

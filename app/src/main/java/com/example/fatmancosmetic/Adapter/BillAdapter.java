@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filterable;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,7 +27,7 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillViewHolder
     ArrayList<OrderInfo> listOrder;
     FragmentManager fragmentManager;
     Context context;
-
+    int i = 0;
     public BillAdapter(ArrayList<OrderInfo> listorder, FragmentManager fragmentManager, Context context) {
         this.listOrder = listorder;
         this.fragmentManager = fragmentManager;
@@ -46,20 +47,21 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillViewHolder
     public void onBindViewHolder(@NonNull BillAdapter.BillViewHolder holder, int position) {
         try {
             OrderInfo orderInfo = listOrder.get(position);
-            holder.bill_title.setText(orderInfo.getOrderID());
+            holder.bill_code.setText(orderInfo.getOrderID());
             holder.bill_date.setText(orderInfo.getOrderDate());
-
-            holder.bill_title.setOnClickListener(new View.OnClickListener() {
+            i++;
+            holder.bill_number.setText(holder.bill_number.getText() + " " + i);
+            holder.bill_card.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                BillsDetail billsDetail = new BillsDetail();
-                Bundle bundle = new Bundle();
-                bundle.putString("customerID", "000001");
-                bundle.putString("codeBill",orderInfo.getOrderID());
-                //set Fragmentclass Arguments
-                billsDetail.setArguments(bundle);
-                fragmentManager.beginTransaction().replace(R.id.fragment, billsDetail, billsDetail.getTag()).commit();
+                    BillsDetail billsDetail = new BillsDetail();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("customerID", "000001");
+                    bundle.putString("codeBill", orderInfo.getOrderID());
+                    //set Fragmentclass Arguments
+                    billsDetail.setArguments(bundle);
+                    fragmentManager.beginTransaction().replace(R.id.fragment, billsDetail, billsDetail.getTag()).commit();
 
                 }
             });
@@ -73,18 +75,17 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillViewHolder
         return listOrder.size();
     }
 
-    public class BillViewHolder extends RecyclerView.ViewHolder{
-
-        TextView bill_title, bill_date;
+    public class BillViewHolder extends RecyclerView.ViewHolder {
+        LinearLayout bill_card;
+        TextView bill_code, bill_date,bill_number;
 
         public BillViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            bill_title = itemView.findViewById(R.id.bill_title);
-
+            bill_code = itemView.findViewById(R.id.bill_code);
             bill_date = itemView.findViewById(R.id.date_bill);
-
-
+            bill_card = itemView.findViewById(R.id.bill_card);
+            bill_number = itemView.findViewById(R.id.bill_number);
         }
     }
 }

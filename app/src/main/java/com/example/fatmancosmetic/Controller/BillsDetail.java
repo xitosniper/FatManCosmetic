@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.fatmancosmetic.Adapter.BillAdapter;
@@ -46,6 +47,7 @@ public class BillsDetail extends Fragment {
     TextView title_detail, name, amountProduct, billTotal;
     RecyclerView.Adapter adapter;
     ArrayList<OrderInfo> listOrder;
+    ImageView backBtn;
 
     public BillsDetail() {
         // Required empty public constructor
@@ -85,29 +87,36 @@ public class BillsDetail extends Fragment {
         View view = inflater.inflate(R.layout.fragment_bills_detail, container, false);
         try {
             recyclerView = view.findViewById(R.id.billsDetail_Recyclerview);
+
             title_detail = view.findViewById(R.id.bill_code);
+            amountProduct = view.findViewById(R.id.bill_SoLuong);
+            billTotal = view.findViewById(R.id.bill_Amount);
             name = view.findViewById(R.id.bill_customer);
+            backBtn = view.findViewById(R.id.back_pressed);
+
             recyclerView();
-        } catch (Exception e) {
+
+
+            //Set handle
+            backBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MyBill myBill = new MyBill();
+                    FragmentManager manager = getFragmentManager();
+                    manager.beginTransaction().replace(R.id.fragment, myBill, myBill.getTag()).commit();
+                }
+            });
+        } catch (
+                Exception e) {
             Log.e("Exception: ", e.getMessage());
         }
-
-        recyclerView = view.findViewById(R.id.billsDetail_Recyclerview);
-
-        title_detail = view.findViewById(R.id.bill_code);
-        amountProduct = view.findViewById(R.id.bill_SoLuong);
-        billTotal = view.findViewById(R.id.bill_Amount);
-        name = view.findViewById(R.id.bill_customer);
-
-
-        recyclerView();
         return view;
     }
 
     private void recyclerView() {
         recyclerView.setHasFixedSize(true);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL,false));
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL, false));
 
         String customerID = "000001";
 
@@ -125,9 +134,9 @@ public class BillsDetail extends Fragment {
         ArrayList<OrderDetailInfo> listOrderDetailInfo = new ArrayList<>();
         listOrderDetailInfo = orderDetailsModel.getOrderDetailsBillByOrderID(orderId);
         int amountItem = listOrderDetailInfo.size();
-        amountProduct.setText(amountItem+"");
+        amountProduct.setText(amountItem + "");
         String totalPrice = listOrder.get(0).getAmount();
-        billTotal.setText(totalPrice+"₫");
+        billTotal.setText(totalPrice + "₫");
 
 
         FragmentManager fragmentManager = getFragmentManager();

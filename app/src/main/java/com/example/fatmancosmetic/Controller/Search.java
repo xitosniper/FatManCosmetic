@@ -146,7 +146,7 @@ public class Search extends Fragment {
         ItemModel itemModel = new ItemModel(getContext());
 
         listItems = new ArrayList<>();
-        listItems = itemModel.get4NewItems();
+        listItems = itemModel.getAllItems();
 
         FragmentManager fragmentManager = getFragmentManager();
         adapter = new ItemsAdapter(listItems, getContext(), fragmentManager, "Search");

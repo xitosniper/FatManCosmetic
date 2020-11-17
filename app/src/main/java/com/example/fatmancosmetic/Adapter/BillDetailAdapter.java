@@ -45,7 +45,7 @@ public class BillDetailAdapter extends RecyclerView.Adapter<BillDetailAdapter.Bi
     String customerID = "000001";
     String orderID = "";
 
-    public BillDetailAdapter(ArrayList<ItemInfo> skinCareItemsLocations, Context context, FragmentManager fragmentManager,String orderID) {
+    public BillDetailAdapter(ArrayList<ItemInfo> skinCareItemsLocations, Context context, FragmentManager fragmentManager, String orderID) {
         this.skinCareItemsLocations = skinCareItemsLocations;
         this.context = context;
         this.fragmentManager = fragmentManager;
@@ -71,45 +71,49 @@ public class BillDetailAdapter extends RecyclerView.Adapter<BillDetailAdapter.Bi
 
     @Override
     public void onBindViewHolder(@NonNull BillDetailViewHolder holder, int position) {
-        orderDetailsModel = new OrderDetailsModel(context);
+        try {
+            orderDetailsModel = new OrderDetailsModel(context);
 
-        ItemInfo itemInfo = skinCareItemsLocations.get(position);
-        Bitmap bmp = BitmapFactory.decodeByteArray(itemInfo.getImage(), 0, itemInfo.getImage().length);
-        holder.imageView.setImageBitmap(bmp);
-        holder.bill_title.setText(itemInfo.getName());
-        //Format price vnd
-        NumberFormat formatter = new DecimalFormat("#,###");
-        double myNumber = itemInfo.getPrice();
-        String formattedNumber = formatter.format(myNumber);
-        holder.price.setText(formattedNumber + "₫");
-        String itemID = itemInfo.getItemID();
-        orderDetailList = orderDetailsModel.getOrderDetailsBillByOrderID(orderID);
+            ItemInfo itemInfo = skinCareItemsLocations.get(position);
+            Bitmap bmp = BitmapFactory.decodeByteArray(itemInfo.getImage(), 0, itemInfo.getImage().length);
+            holder.imageView.setImageBitmap(bmp);
+            holder.bill_title.setText(itemInfo.getName());
+            //Format price vnd
+            NumberFormat formatter = new DecimalFormat("#,###");
+            double myNumber = itemInfo.getPrice();
+            String formattedNumber = formatter.format(myNumber);
+            holder.price.setText(formattedNumber + "₫");
+            String itemID = itemInfo.getItemID();
+            orderDetailList = orderDetailsModel.getOrderDetailsBillByOrderID(orderID);
 
-        String amount = "0";
-        for (int i=0; i<orderDetailList.size(); i++) {
-            if(orderDetailList.get(i).getItemID().equals(itemID)) {
-                amount = orderDetailList.get(i).getQuantity()+"";
-                Log.e("SoLuong", amount);
+            String amount = "0";
+            for (int i = 0; i < orderDetailList.size(); i++) {
+                if (orderDetailList.get(i).getItemID().equals(itemID)) {
+                    amount = orderDetailList.get(i).getQuantity() + "";
+                    //Log.e("SoLuong", amount);
+                }
             }
+
+            holder.amount.setText(amount);
+            //holder.bill_total.setText("0");
+            //int sizeList = orderDetailList.size();
+            //holder.size.setText(sizeList+"");
+            // event click to see detail
+            holder.imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ItemDetails itemDetails = new ItemDetails("bill");
+                    Bundle bundle = new Bundle();
+                    bundle.putString("itemID", itemID);
+                    //set Fragmentclass Arguments
+                    itemDetails.setArguments(bundle);
+                    fragmentManager.beginTransaction().replace(R.id.fragment, itemDetails, itemDetails.getTag()).commit();
+
+                }
+            });
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
         }
-
-        holder.amount.setText(amount);
-        //holder.bill_total.setText("0");
-        //int sizeList = orderDetailList.size();
-        //holder.size.setText(sizeList+"");
-        // event click to see detail
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ItemDetails itemDetails = new ItemDetails("bill");
-                Bundle bundle = new Bundle();
-                bundle.putString("itemID", itemID);
-                //set Fragmentclass Arguments
-                itemDetails.setArguments(bundle);
-                fragmentManager.beginTransaction().replace(R.id.fragment, itemDetails, itemDetails.getTag()).commit();
-
-            }
-        });
     }
 
 
@@ -121,7 +125,7 @@ public class BillDetailAdapter extends RecyclerView.Adapter<BillDetailAdapter.Bi
 
     public class BillDetailViewHolder extends RecyclerView.ViewHolder {
 
-        TextView bill_title, bill_total, price, amount,size;
+        TextView bill_title, bill_total, price, amount, size;
         ImageView imageView;
 
         public BillDetailViewHolder(@NonNull View itemView) {

@@ -30,13 +30,14 @@
                 android:layout_height="?actionBarSize"
                 android:background="@color/colorMenuNavigation">
 
-                <!--                <ImageView-->
-                <!--                    android:id="@+id/back_pressed"-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_centerVertical="true"-->
-                <!--                    android:padding="15dp"-->
-                <!--                    android:src="@drawable/general_back_icon" />-->
+                <ImageView
+                    android:id="@+id/back_pressed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:padding="15dp"
+                    android:src="@drawable/general_back_icon" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -58,14 +59,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayoutTitle">
 
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/billsDetail_Recyclerview"
+            <ScrollView
+                android:id="@+id/orders_items_list"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp">
+                android:layout_height="470dp">
 
-            </androidx.recyclerview.widget.RecyclerView>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/billsDetail_Recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp">
+
+                </androidx.recyclerview.widget.RecyclerView>
+            </ScrollView>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -74,16 +80,16 @@
 
                 <TextView
                     android:id="@+id/bill_customer"
-                    android:layout_marginLeft="20dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
                     android:text="Mã hóa đơn" />
 
                 <TextView
                     android:id="@+id/bill_code"
-                    android:layout_marginLeft="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
                     android:text="Mã hóa đơn" />
 
             </LinearLayout>
@@ -130,7 +136,7 @@
 
                 <TextView
                     android:id="@+id/bill_Amount"
-                    android:layout_width="140dp"
+                    android:layout_width="130dp"
                     android:layout_height="match_parent"
                     android:gravity="center|right"
                     android:text="129,000đ"
@@ -139,11 +145,6 @@
                     android:textStyle="bold" />
 
             </LinearLayout>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/shap_round_solid" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
