@@ -53,12 +53,13 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillViewHolder
                 @Override
                 public void onClick(View v) {
 
-                    BillsDetail billsDetail = new BillsDetail();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("customerID", "000001");
-                    //set Fragmentclass Arguments
-                    billsDetail.setArguments(bundle);
-                    fragmentManager.beginTransaction().replace(R.id.fragment, billsDetail, billsDetail.getTag()).commit();
+                BillsDetail billsDetail = new BillsDetail();
+                Bundle bundle = new Bundle();
+                bundle.putString("customerID", "000001");
+                bundle.putString("codeBill",orderInfo.getOrderID());
+                //set Fragmentclass Arguments
+                billsDetail.setArguments(bundle);
+                fragmentManager.beginTransaction().replace(R.id.fragment, billsDetail, billsDetail.getTag()).commit();
 
                 }
             });
@@ -72,7 +73,7 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillViewHolder
         return listOrder.size();
     }
 
-    public class BillViewHolder extends RecyclerView.ViewHolder {
+    public class BillViewHolder extends RecyclerView.ViewHolder{
 
         TextView bill_title, bill_date;
 

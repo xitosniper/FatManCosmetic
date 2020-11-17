@@ -42,24 +42,24 @@ public class OrderModel extends DBManager {
             SQLiteDatabase db = this.getWritableDatabase();
             Cursor cursor = db.rawQuery(selectQuery, null);
 
-            if (cursor.moveToFirst()) {
-                do {
-                    OrderInfo orderInfo = new OrderInfo();
-                    orderInfo.setID(cursor.getInt(0));
-                    orderInfo.setOrderID(cursor.getString(1));
-                    orderInfo.setCustomerID(cursor.getString(2));
-                    orderInfo.setOrderDate(cursor.getString(3));
-                    orderInfo.setShipDate(cursor.getString(4));
-                    orderInfo.setAddress(cursor.getString(5));
-                    orderInfo.setPhone(cursor.getString(6));
-                    orderInfo.setNote(cursor.getString(7));
-                    orderInfo.setAmount(cursor.getString(7));
-                    orderInfo.setStatus(cursor.getInt(8));
-                    listOrders.add(orderInfo);
-                } while (cursor.moveToNext());
-            }
-            cursor.close();
-            db.close();
+        if (cursor.moveToFirst()) {
+            do {
+                OrderInfo orderInfo = new OrderInfo();
+                orderInfo.setID(cursor.getInt(0));
+                orderInfo.setOrderID(cursor.getString(1));
+                orderInfo.setCustomerID(cursor.getString(2));
+                orderInfo.setOrderDate(cursor.getString(3));
+                orderInfo.setShipDate(cursor.getString(4));
+                orderInfo.setAddress(cursor.getString(5));
+                orderInfo.setPhone(cursor.getString(6));
+                orderInfo.setNote(cursor.getString(7));
+                orderInfo.setAmount(cursor.getString(8));
+                orderInfo.setStatus(cursor.getInt(9));
+                listOrders.add(orderInfo);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
         } catch (Exception e) {
             Log.e("Exception: ", e.getMessage());
         }
@@ -75,24 +75,24 @@ public class OrderModel extends DBManager {
             SQLiteDatabase db = this.getWritableDatabase();
             Cursor cursor = db.rawQuery(selectQuery, null);
 
-            if (cursor.moveToFirst()) {
-                do {
-                    OrderInfo orderInfo = new OrderInfo();
-                    orderInfo.setID(cursor.getInt(0));
-                    orderInfo.setOrderID(cursor.getString(1));
-                    orderInfo.setCustomerID(cursor.getString(2));
-                    orderInfo.setOrderDate(cursor.getString(3));
-                    orderInfo.setShipDate(cursor.getString(4));
-                    orderInfo.setAddress(cursor.getString(5));
-                    orderInfo.setPhone(cursor.getString(6));
-                    orderInfo.setNote(cursor.getString(7));
-                    orderInfo.setAmount(cursor.getString(7));
-                    orderInfo.setStatus(cursor.getInt(8));
-                    listOrders.add(orderInfo);
-                } while (cursor.moveToNext());
-            }
-            cursor.close();
-            db.close();
+        if (cursor.moveToFirst()) {
+            do {
+                OrderInfo orderInfo = new OrderInfo();
+                orderInfo.setID(cursor.getInt(0));
+                orderInfo.setOrderID(cursor.getString(1));
+                orderInfo.setCustomerID(cursor.getString(2));
+                orderInfo.setOrderDate(cursor.getString(3));
+                orderInfo.setShipDate(cursor.getString(4));
+                orderInfo.setAddress(cursor.getString(5));
+                orderInfo.setPhone(cursor.getString(6));
+                orderInfo.setNote(cursor.getString(7));
+                orderInfo.setAmount(cursor.getString(8));
+                orderInfo.setStatus(cursor.getInt(9));
+                listOrders.add(orderInfo);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
         } catch (Exception e) {
             Log.e("Exception: ", e.getMessage());
         }
@@ -108,27 +108,85 @@ public class OrderModel extends DBManager {
             SQLiteDatabase db = this.getWritableDatabase();
             Cursor cursor = db.rawQuery(selectQuery, null);
 
-            if (cursor.moveToFirst()) {
-                do {
-                    OrderInfo orderInfo = new OrderInfo();
-                    orderInfo.setID(cursor.getInt(0));
-                    orderInfo.setOrderID(cursor.getString(1));
-                    orderInfo.setCustomerID(cursor.getString(2));
-                    orderInfo.setOrderDate(cursor.getString(3));
-                    orderInfo.setShipDate(cursor.getString(4));
-                    orderInfo.setAddress(cursor.getString(5));
-                    orderInfo.setPhone(cursor.getString(6));
-                    orderInfo.setNote(cursor.getString(7));
-                    orderInfo.setAmount(cursor.getString(7));
-                    orderInfo.setStatus(cursor.getInt(8));
-                    listOrders.add(orderInfo);
-                } while (cursor.moveToNext());
-            }
-            cursor.close();
-            db.close();
+        if (cursor.moveToFirst()) {
+            do {
+                OrderInfo orderInfo = new OrderInfo();
+                orderInfo.setID(cursor.getInt(0));
+                orderInfo.setOrderID(cursor.getString(1));
+                orderInfo.setCustomerID(cursor.getString(2));
+                orderInfo.setOrderDate(cursor.getString(3));
+                orderInfo.setShipDate(cursor.getString(4));
+                orderInfo.setAddress(cursor.getString(5));
+                orderInfo.setPhone(cursor.getString(6));
+                orderInfo.setNote(cursor.getString(7));
+                orderInfo.setAmount(cursor.getString(8));
+                orderInfo.setStatus(cursor.getInt(9));
+                listOrders.add(orderInfo);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
         } catch (Exception e) {
             Log.e("Exception: ", e.getMessage());
         }
+        return listOrders;
+    }
+
+    public ArrayList<OrderInfo> getOrderByCustomerIDBill2(String customerID){
+        ArrayList<OrderInfo> listOrders = new ArrayList<>();
+        // Select All Query
+        String selectQuery = "SELECT Orders.* FROM Orders WHERE Orders.Status = 2 AND Orders.customerID = '" + customerID + "'" ;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                OrderInfo orderInfo = new OrderInfo();
+                orderInfo.setID(cursor.getInt(0));
+                orderInfo.setOrderID(cursor.getString(1));
+                orderInfo.setCustomerID(cursor.getString(2));
+                orderInfo.setOrderDate(cursor.getString(3));
+                orderInfo.setShipDate(cursor.getString(4));
+                orderInfo.setAddress(cursor.getString(5));
+                orderInfo.setPhone(cursor.getString(6));
+                orderInfo.setNote(cursor.getString(7));
+                orderInfo.setAmount(cursor.getString(8));
+                orderInfo.setStatus(cursor.getInt(9));
+                listOrders.add(orderInfo);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return listOrders;
+    }
+
+    public ArrayList<OrderInfo> getOrderByCustomerIDBill(String customerID,String orderId){
+        ArrayList<OrderInfo> listOrders = new ArrayList<>();
+        // Select All Query
+        String selectQuery = "SELECT Orders.* FROM Orders WHERE Orders.Status = 2 AND Orders.orderID = '"+ orderId + "'  AND Orders.customerID = '" + customerID + "'" ;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                OrderInfo orderInfo = new OrderInfo();
+                orderInfo.setID(cursor.getInt(0));
+                orderInfo.setOrderID(cursor.getString(1));
+                orderInfo.setCustomerID(cursor.getString(2));
+                orderInfo.setOrderDate(cursor.getString(3));
+                orderInfo.setShipDate(cursor.getString(4));
+                orderInfo.setAddress(cursor.getString(5));
+                orderInfo.setPhone(cursor.getString(6));
+                orderInfo.setNote(cursor.getString(7));
+                orderInfo.setAmount(cursor.getString(8));
+                orderInfo.setStatus(cursor.getInt(9));
+                listOrders.add(orderInfo);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
         return listOrders;
     }
 

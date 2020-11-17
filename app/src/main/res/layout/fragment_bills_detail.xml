@@ -73,18 +73,18 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/bill_code"
+                    android:id="@+id/bill_customer"
                     android:layout_marginLeft="20dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Mã hóa đơn" />
 
                 <TextView
-                    android:id="@+id/bill_customer"
+                    android:id="@+id/bill_code"
                     android:layout_marginLeft="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Tên khách hàng" />
+                    android:text="Mã hóa đơn" />
 
             </LinearLayout>
 
@@ -100,13 +100,13 @@
                 android:layout_height="63dp">
 
                 <TextView
-                    android:id="@+id/shoppingCart_numberOfItems"
+                    android:id="@+id/bill_SoLuong"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="5dp"
                     android:gravity="center|start"
-                    android:text="1"
+                    android:text="100"
                     android:textColor="@android:color/black"
                     android:textSize="20dp"
                     android:textStyle="bold" />
@@ -124,12 +124,12 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:paddingHorizontal="25dp"
-                    android:text="Tạm tính:"
+                    android:text="Tổng tiền:"
                     android:textColor="@android:color/black"
                     android:textSize="15dp" />
 
                 <TextView
-                    android:id="@+id/shoppingCart_Amount"
+                    android:id="@+id/bill_Amount"
                     android:layout_width="140dp"
                     android:layout_height="match_parent"
                     android:gravity="center|right"

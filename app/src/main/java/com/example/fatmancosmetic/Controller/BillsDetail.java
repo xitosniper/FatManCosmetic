@@ -14,7 +14,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.fatmancosmetic.Adapter.BillAdapter;
+import com.example.fatmancosmetic.Adapter.BillDetailAdapter;
+import com.example.fatmancosmetic.Info.ItemInfo;
+import com.example.fatmancosmetic.Info.OrderDetailInfo;
 import com.example.fatmancosmetic.Info.OrderInfo;
+import com.example.fatmancosmetic.Model.ItemModel;
+import com.example.fatmancosmetic.Model.OrderDetailsModel;
 import com.example.fatmancosmetic.Model.OrderModel;
 import com.example.fatmancosmetic.R;
 
@@ -36,8 +41,9 @@ public class BillsDetail extends Fragment {
     private String mParam1;
     private String mParam2;
 
+
     RecyclerView recyclerView;
-    TextView title_detail, name;
+    TextView title_detail, name, amountProduct, billTotal;
     RecyclerView.Adapter adapter;
     ArrayList<OrderInfo> listOrder;
 
@@ -85,24 +91,48 @@ public class BillsDetail extends Fragment {
         } catch (Exception e) {
             Log.e("Exception: ", e.getMessage());
         }
+
+        recyclerView = view.findViewById(R.id.billsDetail_Recyclerview);
+
+        title_detail = view.findViewById(R.id.bill_code);
+        amountProduct = view.findViewById(R.id.bill_SoLuong);
+        billTotal = view.findViewById(R.id.bill_Amount);
+        name = view.findViewById(R.id.bill_customer);
+
+
+        recyclerView();
         return view;
     }
 
     private void recyclerView() {
-        Log.e("Testtttt", "Success");
         recyclerView.setHasFixedSize(true);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL, false));
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL,false));
 
         String customerID = "000001";
+
         OrderModel orderModel = new OrderModel(getContext());
         listOrder = new ArrayList<>();
-        listOrder = orderModel.getOrderByCustomerID(customerID);
-        title_detail.setText(listOrder.get(0).getCustomerID().toString());
+
+        String orderId = getArguments().getString("codeBill");
+
+        listOrder = orderModel.getOrderByCustomerIDBill(customerID, orderId);
+        title_detail.setText(orderId);
+        ItemModel itemModel = new ItemModel(getContext());
+        ArrayList<ItemInfo> itemList = new ArrayList<>();
+        itemList = itemModel.getItemsByCodeBill(orderId);
+        OrderDetailsModel orderDetailsModel = new OrderDetailsModel(getContext());
+        ArrayList<OrderDetailInfo> listOrderDetailInfo = new ArrayList<>();
+        listOrderDetailInfo = orderDetailsModel.getOrderDetailsBillByOrderID(orderId);
+        int amountItem = listOrderDetailInfo.size();
+        amountProduct.setText(amountItem+"₫");
+        String totalPrice = listOrder.get(0).getAmount();
+        billTotal.setText(totalPrice);
 
 
         FragmentManager fragmentManager = getFragmentManager();
-        adapter = new BillAdapter(listOrder, fragmentManager, getContext());
+        adapter = new BillDetailAdapter(itemList, getContext(), fragmentManager, orderId);
+        //adapter = new BillDetailAdapter(listOrder, fragmentManager, getContext());
         recyclerView.setAdapter(adapter);
 
     }

@@ -165,4 +165,32 @@ public class OrderDetailsModel extends DBManager {
         db.execSQL(sqlQuery);
         db.close();
     }
+
+    public ArrayList<OrderDetailInfo> getOrderDetailsBillByOrderID(String orderID){
+        ArrayList<OrderDetailInfo> listOrderDetails = new ArrayList<>();
+
+        // Select All Query
+        String selectQuery = "SELECT OrderDetails.* FROM Items, Orders, OrderDetails WHERE Orders.Status = 2 AND Orders.orderID = '"+orderID+"' AND Orders.orderID = OrderDetails.orderID AND OrderDetails.itemID = Items.itemID";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                OrderDetailInfo orderDetailInfo = new OrderDetailInfo();
+                orderDetailInfo.setID(cursor.getInt(0));
+                orderDetailInfo.setOrderDetailsID(cursor.getString(1));
+                orderDetailInfo.setOrderID(cursor.getString(2));
+                orderDetailInfo.setItemID(cursor.getString(3));
+                orderDetailInfo.setQuantity(cursor.getInt(4));
+                orderDetailInfo.setPrice(cursor.getInt(5));
+
+                listOrderDetails.add(orderDetailInfo);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return listOrderDetails;
+    }
 }
