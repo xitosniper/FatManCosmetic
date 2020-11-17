@@ -117,9 +117,9 @@ public class BillsDetail extends Fragment {
         ArrayList<OrderDetailInfo> listOrderDetailInfo = new ArrayList<>();
         listOrderDetailInfo = orderDetailsModel.getOrderDetailsBillByOrderID(orderId);
         int amountItem = listOrderDetailInfo.size();
-        amountProduct.setText(amountItem+"₫");
+        amountProduct.setText(amountItem+"");
         String totalPrice = listOrder.get(0).getAmount();
-        billTotal.setText(totalPrice);
+        billTotal.setText(totalPrice+"₫");
 
 
         FragmentManager fragmentManager = getFragmentManager();
