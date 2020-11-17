@@ -77,7 +77,7 @@ public class BillsDetail extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_bills_detail, container, false);
-        recyclerView = view.findViewById(R.id.itemDetails_recyclerView);
+        recyclerView = view.findViewById(R.id.billsDetail_Recyclerview);
         title_detail = view.findViewById(R.id.bill_code);
         name = view.findViewById(R.id.bill_customer);
         recyclerView();
@@ -86,21 +86,20 @@ public class BillsDetail extends Fragment {
 
     private void recyclerView() {
         Log.e("Testtttt", "Success");
-        //recyclerView.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(true);
 
-//        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL,false));
-//
-//        String customerID = "000001";
-//        OrderModel orderModel = new OrderModel(getContext());
-//        listOrder = new ArrayList<>();
-//        listOrder = orderModel.getOrderByCustomerID(customerID);
-//        title_detail.setText(listOrder.get(0).getID());
-//
-//        Log.e("Logggggggggggg", listOrder.get(0).getCustomerID());
-//
-//        FragmentManager fragmentManager = getFragmentManager();
-//        adapter = new BillAdapter(listOrder,fragmentManager, getContext());
-//        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL,false));
+
+        String customerID = "000001";
+        OrderModel orderModel = new OrderModel(getContext());
+        listOrder = new ArrayList<>();
+        listOrder = orderModel.getOrderByCustomerID(customerID);
+        title_detail.setText(listOrder.get(0).getCustomerID().toString());
+
+
+        FragmentManager fragmentManager = getFragmentManager();
+        adapter = new BillAdapter(listOrder,fragmentManager, getContext());
+        recyclerView.setAdapter(adapter);
 
     }
 }
