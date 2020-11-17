@@ -69,15 +69,21 @@
 <!--                        android:layout_width="wrap_content"-->
 <!--                        android:layout_height="match_parent"-->
 <!--                        android:src="@drawable/icon_add" />-->
-                        <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
-                            android:id="@+id/number_button"
-                            android:layout_width="100dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            app:initialNumber="0"
-                            app:finalNumber="20">
-                        </com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
+<!--                        <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton-->
+<!--                            android:id="@+id/number_button"-->
+<!--                            android:layout_width="100dp"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:gravity="center"-->
+<!--                            app:initialNumber="0"-->
+<!--                            app:finalNumber="20">-->
+<!--                        </com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
+-->
 
+                    <TextView
+                        android:id="@+id/amount"
+                        android:text="Amount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
                 </LinearLayout>
 
             </LinearLayout>

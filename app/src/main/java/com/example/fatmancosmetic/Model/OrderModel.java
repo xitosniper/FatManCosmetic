@@ -51,8 +51,8 @@ public class OrderModel extends DBManager {
                 orderInfo.setAddress(cursor.getString(5));
                 orderInfo.setPhone(cursor.getString(6));
                 orderInfo.setNote(cursor.getString(7));
-                orderInfo.setAmount(cursor.getString(7));
-                orderInfo.setStatus(cursor.getInt(8));
+                orderInfo.setAmount(cursor.getString(8));
+                orderInfo.setStatus(cursor.getInt(9));
                 listOrders.add(orderInfo);
             } while (cursor.moveToNext());
         }
@@ -80,8 +80,8 @@ public class OrderModel extends DBManager {
                 orderInfo.setAddress(cursor.getString(5));
                 orderInfo.setPhone(cursor.getString(6));
                 orderInfo.setNote(cursor.getString(7));
-                orderInfo.setAmount(cursor.getString(7));
-                orderInfo.setStatus(cursor.getInt(8));
+                orderInfo.setAmount(cursor.getString(8));
+                orderInfo.setStatus(cursor.getInt(9));
                 listOrders.add(orderInfo);
             } while (cursor.moveToNext());
         }
@@ -109,8 +109,8 @@ public class OrderModel extends DBManager {
                 orderInfo.setAddress(cursor.getString(5));
                 orderInfo.setPhone(cursor.getString(6));
                 orderInfo.setNote(cursor.getString(7));
-                orderInfo.setAmount(cursor.getString(7));
-                orderInfo.setStatus(cursor.getInt(8));
+                orderInfo.setAmount(cursor.getString(8));
+                orderInfo.setStatus(cursor.getInt(9));
                 listOrders.add(orderInfo);
             } while (cursor.moveToNext());
         }
@@ -138,8 +138,8 @@ public class OrderModel extends DBManager {
                 orderInfo.setAddress(cursor.getString(5));
                 orderInfo.setPhone(cursor.getString(6));
                 orderInfo.setNote(cursor.getString(7));
-                orderInfo.setAmount(cursor.getString(7));
-                orderInfo.setStatus(cursor.getInt(8));
+                orderInfo.setAmount(cursor.getString(8));
+                orderInfo.setStatus(cursor.getInt(9));
                 listOrders.add(orderInfo);
             } while (cursor.moveToNext());
         }
@@ -167,8 +167,8 @@ public class OrderModel extends DBManager {
                 orderInfo.setAddress(cursor.getString(5));
                 orderInfo.setPhone(cursor.getString(6));
                 orderInfo.setNote(cursor.getString(7));
-                orderInfo.setAmount(cursor.getString(7));
-                orderInfo.setStatus(cursor.getInt(8));
+                orderInfo.setAmount(cursor.getString(8));
+                orderInfo.setStatus(cursor.getInt(9));
                 listOrders.add(orderInfo);
             } while (cursor.moveToNext());
         }
